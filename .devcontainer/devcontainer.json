@@ -3,11 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/base:jammy",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/curl:1": {},
-    "ghcr.io/devcontainers/features/gh-release:1": {
-      "repo": "gohugoio/hugo",
-      "version": "latest",
-      "assetRegex": "hugo_extended_.*_Linux-64bit\\.tar\\.gz"
-    }
-  }
+    "ghcr.io/devcontainers/features/curl:1": {}
+  },
+  "postCreateCommand": "curl -LO https://github.com/gohugoio/hugo/releases/latest/download/hugo_extended_Linux-64bit.tar.gz && tar -xzf hugo_extended_Linux-64bit.tar.gz && mv hugo /usr/local/bin/hugo && rm hugo_extended_Linux-64bit.tar.gz"
 }
