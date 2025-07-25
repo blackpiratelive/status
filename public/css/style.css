@@ -39,7 +39,10 @@ body {
     font-size: 1.1rem;
     margin: 0;
     color: white;
-    background-color: black;
+    background-image: url('/bg3.jpg');
+  background-repeat: repeat; /* repeats both horizontally and vertically */
+  background-size: auto; /* original image size */
+  background-position: top left;
     padding: 0;
     font-display: optional;
     font-family: "sf-ui-text-regular", sans-serif;
@@ -98,7 +101,6 @@ h6 {
 .all-content {
     max-width: 900px;
     margin: auto;
-    background-color: black;
     padding: 1rem;
 }
 .author {
@@ -127,13 +129,18 @@ a:hover,
 .nav-bar {
     display: flex;
     font-family: sans-serif;
-    background-color: var(--bg-ios-darkest);
+    background: rgba(255, 255, 255, 0.1); /* semi-transparent white */
+  backdrop-filter: blur(10px);          /* glass blur effect */
+  -webkit-backdrop-filter: blur(10px);  /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  border-radius: 12px;                  /* optional rounded corners */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* soft shadow */
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
     margin-top: 0rem;
     padding: 1rem;
-    top: 0;
+    top: 0rem;
 }
 .nav-item > a {
     color: white;
@@ -147,7 +154,16 @@ a:hover,
 @media (min-width: 600px) {
     .nav-bar {
         position: sticky;
+        z-index: 2;
     }
+    .buttons {
+          position: fixed;
+            right: 0;           
+            top: 50%;          
+        transform: translateY(-50%); 
+  z-index: 999; 
+    } 
+
 }
 
 
@@ -220,8 +236,15 @@ pre {
     padding: 0.15rem 1rem;
     margin: 0;
     border-radius: 16px;
-    background-color: var(--bg-ios-darkest);
     color: white;
+    background: rgba(255, 255, 255, 0.1); /* semi-transparent white */
+backdrop-filter: blur(10px);          /* glass blur effect */
+-webkit-backdrop-filter: blur(10px);  /* Safari support */
+border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+border-radius: 12px;                  /* rounded corners */
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* soft shadow */
+
+    
 }
 .timeam {
     font-size: 1rem;
@@ -429,4 +452,76 @@ a[href^="https:"]::after {
 .head-of-post {
     display: flex;
     justify-content: space-between;
+}
+
+
+
+/* Popup */
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(40px);
+  background: rgba(0, 0, 0, 0.3); /* semi-transparent dark background */
+  z-index: 1000;
+}
+
+.popup-content {
+      background: rgba(255, 255, 255, 0.1); /* semi-transparent white */
+  backdrop-filter: blur(10px);          /* glass blur effect */
+  -webkit-backdrop-filter: blur(10px);  /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  border-radius: 12px;                  /* optional rounded corners */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* soft shadow */
+  color: white;
+  margin: 10% auto;
+  padding: 20px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.buttons > button {
+          background: rgba(255, 255, 255, 0.1); /* semi-transparent white */
+  backdrop-filter: blur(10px);          /* glass blur effect */
+  -webkit-backdrop-filter: blur(10px);  /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  border-radius: 12px;                  /* optional rounded corners */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* soft shadow */
+  color: white;
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.buttons > button:hover {
+      background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+.close {
+              background: rgba(255, 255, 255, 0.1); /* semi-transparent white */
+  backdrop-filter: blur(10px);          /* glass blur effect */
+  -webkit-backdrop-filter: blur(10px);  /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  border-radius: 12px;                  /* optional rounded corners */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* soft shadow */
+  padding: 0.25rem;
+}
+.buttons {
+    margin: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

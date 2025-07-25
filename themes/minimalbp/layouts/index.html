@@ -13,15 +13,6 @@
 
 
 <br>
-<h4 class="description choose-theme-text" id="accent-clr">Choose one of the accent color</h4>
-        <div class="theme-buttons">
-            <button onclick="myfunctionPurple()" class="theme-btn btn-purple"></button>
-        <button onclick="myfunctionGreen()" class="theme-btn btn-green"></button>
-        <button onclick="myfunctionRed()" class="theme-btn btn-red"></button>
-        <button onclick="myfunctionWhite()" class="theme-btn btn-white"></button>
-        <button onclick="myfunctionCyan()" class="theme-btn btn-cyan"></button>
-        <button onclick="myfunctionYellow()" class="theme-btn btn-yellow"></button>
-    </div>
             {{ range (.Paginator 20).Pages }}
             {{ $lastmodDateFormatted := .Lastmod.Format "02 Jan 2006 at 15:04" }}
             {{ $lastmodTimeFormatted := .Lastmod.Format "15:04" }}
