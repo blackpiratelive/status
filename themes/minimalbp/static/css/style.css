@@ -127,7 +127,7 @@ a:hover,
 .nav-bar {
     display: flex;
     font-family: sans-serif;
-    background-color: var(--accent);
+    background-color: var(--bg-ios-darkest);
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
@@ -136,13 +136,13 @@ a:hover,
     top: 0;
 }
 .nav-item > a {
-    color: var(--bg-ios-darkest);
+    color: white;
     font-weight: 700;
 }
 
 .nav-item > a:hover {
-    background-color: var(--bg-ios-darkest);
     color: var(--accent);
+    background-color: var(--bg-ios-darkest);
 }
 @media (min-width: 600px) {
     .nav-bar {
