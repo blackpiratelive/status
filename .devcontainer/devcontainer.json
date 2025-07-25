@@ -1,9 +1,8 @@
 {
-  "name": "Ubuntu + Hugo Extended",
-  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "name": "Hugo Extended Devcontainer",
   "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/curl:1": {}
+    "ghcr.io/devcontainers/features/hugo:1": { "extended": true }
   },
-  "postCreateCommand": "curl -LO https://github.com/gohugoio/hugo/releases/latest/download/hugo_extended_Linux-64bit.tar.gz && tar -xzf hugo_extended_Linux-64bit.tar.gz && mv hugo /usr/local/bin/hugo && rm hugo_extended_Linux-64bit.tar.gz"
+  "forwardPorts": [1313],
+  "postStartCommand": "hugo server"
 }
