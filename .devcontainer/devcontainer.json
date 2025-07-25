@@ -3,7 +3,8 @@
   "image": "mcr.microsoft.com/devcontainers/base:jammy",
   "features": {
     "ghcr.io/devcontainers/features/hugo:1": {
-      "extended": true
+      "version": "latest",
+      "hugoExtended": true
     }
   }
 }
