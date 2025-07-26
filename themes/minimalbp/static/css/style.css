@@ -40,6 +40,7 @@ body {
     margin: 0;
     color: white;
     background-image: url('/bg4.webp');
+    background-attachment: fixed;
   background-repeat: repeat; /* repeats both horizontally and vertically */
   background-size: auto; /* original image size */
   background-position: top left;
