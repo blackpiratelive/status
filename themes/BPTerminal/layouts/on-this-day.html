@@ -113,12 +113,8 @@
     {{ $now := now }}
     {{ $currentMonthDay := $now.Format "01-02" }}
     {{ $currentYear := $now.Format "2006" }}
-    {{ $onThisDayPosts := slice }}
-    {{ range .Site.RegularPages }}
-        {{ if and (eq (.Date.Format "01-02") $currentMonthDay) (ne (.Date.Format "2006") $currentYear) }}
-            {{ $onThisDayPosts = $onThisDayPosts | append . }}
-        {{ end }}
-    {{ end }}
+    {{ $onThisDayPosts := where .Site.RegularPages "Date.Format" "01-02" $currentMonthDay }}
+    {{ $pastPosts := where $onThisDayPosts ".Date.Year" "!=" $currentYear }}
 
     <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
         <header class="mb-12 text-center">
@@ -131,12 +127,18 @@
         </header>
 
         <main class="archive-container">
-            {{ if gt (len $onThisDayPosts) 0 }}
-                {{ $postsByYear := ($onThisDayPosts | sort .Date "desc").GroupByDate "2006" }}
+            {{ if gt (len $pastPosts) 0 }}
+                {{/* 1. Group all found posts by their year. */}}
+                {{/* 2. Reverse the groups so the most recent year appears first. */}}
+                {{ $postsByYear := ($pastPosts.GroupByDate "2006").Reverse }}
+
+                {{/* Loop through each year's group (e.g., 2023, then 2022) */}}
                 {{ range $index, $yearGroup := $postsByYear }}
                 <section class="archive-year-section" style="--animation-delay: {{ mul $index 150 }}ms;">
+                    {{/* Display the year as a heading */}}
                     <h2 class="archive-year-heading">{{ .Key }}</h2>
                     <div class="archive-post-list">
+                        {{/* Now, loop through all the posts ONLY from that year's group */}}
                         {{ range .Pages.ByDate.Reverse }}
                         <div class="log-card p-5 rounded-lg border-l-4">
                             <div class="flex items-center justify-between mb-3">
