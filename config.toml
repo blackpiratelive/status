@@ -33,3 +33,13 @@ notAlternative = true
 
 [outputs]
 home = [ "HTML", "RSS", "SearchIndex" ]
+
+# In your config.toml file
+
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
