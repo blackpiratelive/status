@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "build": {
+    "env": {
+      "TZ": "Asia/Kolkata"
+    }
+  },
   "crons": [
     {
       "path": "/",
