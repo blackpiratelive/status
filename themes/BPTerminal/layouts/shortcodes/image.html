@@ -1,0 +1,85 @@
+{{/*
+  Image Shortcode with Modal Popup
+  Usage: {{< image src="/path/to/image.jpg" alt="Description of the image" >}}
+*/}}
+
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $id := delimit (shuffle (split (printf "img-%s" (md5 $src)) "" )) "" }}
+
+{{/* The button that will be visible on the page */}}
+<div class="image-shortcode-container">
+    <button class="btn-show-image" data-modal-id="{{ $id }}">
+        <span class="icon icon-image"></span>
+        <span>Show Image: {{ $alt | default "Attachment" }}</span>
+    </button>
+</div>
+
+{{/* The hidden modal popup that contains the image */}}
+<div id="{{ $id }}" class="image-modal-overlay">
+    <div class="image-modal">
+        <button class="image-modal-close">&times;</button>
+        <img src="{{ $src | absURL }}" alt="{{ $alt }}" loading="lazy">
+        {{ if $alt }}
+        <div class="image-modal-caption">{{ $alt }}</div>
+        {{ end }}
+    </div>
+</div>
+
+{{/*
+  This script is included with the shortcode.
+  The `if (!window.imageModalInitialized)` check ensures the event listeners
+  are only added to the page ONCE, even if you use this shortcode
+  multiple times on the same page. This is very efficient.
+*/}}
+{{ if not (.Page.Scratch.Get "imageModalScript") }}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // This flag ensures the setup code runs only once.
+        if (!window.imageModalInitialized) {
+            
+            // Function to open a modal
+            const openModal = (modalId) => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('visible');
+                }
+            };
+
+            // Function to close any visible modal
+            const closeModal = () => {
+                const visibleModal = document.querySelector('.image-modal-overlay.visible');
+                if (visibleModal) {
+                    visibleModal.classList.remove('visible');
+                }
+            };
+
+            // Add click listeners to all "Show Image" buttons
+            document.body.addEventListener('click', (event) => {
+                if (event.target.closest('.btn-show-image')) {
+                    const button = event.target.closest('.btn-show-image');
+                    openModal(button.dataset.modalId);
+                }
+            });
+
+            // Add click listeners for closing the modal
+            document.body.addEventListener('click', (event) => {
+                // If the close button or the dark overlay is clicked
+                if (event.target.matches('.image-modal-close, .image-modal-overlay')) {
+                    closeModal();
+                }
+            });
+            
+            // Add keyboard listener to close modal with the Escape key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
+            });
+            
+            window.imageModalInitialized = true;
+        }
+    });
+</script>
+{{ .Page.Scratch.Set "imageModalScript" true }}
+{{ end }}
