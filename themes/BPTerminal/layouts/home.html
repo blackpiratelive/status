@@ -36,35 +36,15 @@
         </header>
 
         <!-- On This Day Section -->
-        <div class="on-this-day-section mb-12">
-            <h3 class="on-this-day-title">
-                <span class="icon icon-zap"></span>
-                <span>On This Day...</span>
-            </h3>
-            {{ if gt (len $onThisDayPosts) 0 }}
-                <div class="space-y-6 mt-4">
-                {{ range $onThisDayPosts }}
-                    <div class="p-5 rounded-lg border-l-4 log-card">
-                        <div class="flex items-center justify-between mb-3">
-                             <p class="font-fira text-sm subtle-text">
-                                From <span class="log-number">{{ .Date.Format "2006" }}</span>
-                            </p>
-                             <a href="{{ .RelPermalink }}" class="text-xs subtle-text flex items-center gap-2 hover:underline" title="Go to original post">
-                                <span>{{ .Date.Format "02 Jan" }}</span>
-                                <span class="arrow">&rarr;</span>
-                            </a>
-                        </div>
-                        <div class="body-text text-lg prose log-content">
-                            {{ .Content }}
-                        </div>
-                    </div>
-                {{ end }}
-                </div>
-            {{ else }}
-                <p class="subtle-text text-center mt-4">No memories from this day in the past.</p>
-            {{ end }}
+       
+<!-- START: New Button Snippet -->
+        <div class="mt-4 sm:mt-0">
+            <a href="/on-this-day/" class="btn-glow">
+                <span class="icon icon-rewind"></span>
+                On This Day
+            </a>
         </div>
-
+        <!-- END: New Button Snippet -->
 
         <!-- Status Log Feed -->
         <main class="space-y-6">
