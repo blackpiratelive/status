@@ -10,6 +10,20 @@
         {{ $logNumbers = merge $logNumbers (dict $page.RelPermalink (add $index 1)) }}
     {{ end }}
 
+    {{/*
+        This block finds posts from previous years written on the same day.
+    */}}
+    {{ $now := now }}
+    {{ $currentMonthDay := $now.Format "01-02" }}
+    {{ $currentYear := $now.Format "2006" }}
+    {{ $onThisDayPosts := slice }}
+    {{ range .Site.RegularPages }}
+        {{ if and (eq (.Date.Format "01-02") $currentMonthDay) (ne (.Date.Format "2006") $currentYear) }}
+            {{ $onThisDayPosts = $onThisDayPosts | append . }}
+        {{ end }}
+    {{ end }}
+
+
     <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
 
         <!-- Header -->
@@ -20,6 +34,37 @@
             </h1>
             <p class="subtle-text mt-2">{{ .Site.Params.description }}</p>
         </header>
+
+        <!-- On This Day Section -->
+        <div class="on-this-day-section mb-12">
+            <h3 class="on-this-day-title">
+                <span class="icon icon-zap"></span>
+                <span>On This Day...</span>
+            </h3>
+            {{ if gt (len $onThisDayPosts) 0 }}
+                <div class="space-y-6 mt-4">
+                {{ range $onThisDayPosts }}
+                    <div class="p-5 rounded-lg border-l-4 log-card">
+                        <div class="flex items-center justify-between mb-3">
+                             <p class="font-fira text-sm subtle-text">
+                                From <span class="log-number">{{ .Date.Format "2006" }}</span>
+                            </p>
+                             <a href="{{ .RelPermalink }}" class="text-xs subtle-text flex items-center gap-2 hover:underline" title="Go to original post">
+                                <span>{{ .Date.Format "02 Jan" }}</span>
+                                <span class="arrow">&rarr;</span>
+                            </a>
+                        </div>
+                        <div class="body-text text-lg prose log-content">
+                            {{ .Content }}
+                        </div>
+                    </div>
+                {{ end }}
+                </div>
+            {{ else }}
+                <p class="subtle-text text-center mt-4">No memories from this day in the past.</p>
+            {{ end }}
+        </div>
+
 
         <!-- Status Log Feed -->
         <main class="space-y-6">
