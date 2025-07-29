@@ -2,388 +2,221 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Website on Status By BlackPirateX</title>
-    <link>http://localhost:1313/tags/website/</link>
+    <link>http://localhost:43921/tags/website/</link>
     <description>Recent content in Website on Status By BlackPirateX</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Jul 2025 00:10:59 +0530</lastBuildDate><atom:link href="http://localhost:1313/tags/website/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Jul 2025 00:11:33 +0530</lastBuildDate>
+    <atom:link href="http://localhost:43921/tags/website/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://localhost:1313/2025-07-07-00-10-59/</link>
+      <link>http://localhost:43921/2025-07-07-00-10-59/</link>
       <pubDate>Mon, 07 Jul 2025 00:10:59 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2025-07-07-00-10-59/</guid>
-      <description>&lt;p&gt;Added gallery functionality to this website. Im so sleepy bye&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2025-07-07-00-10-59/</guid>
+      <description>&lt;p&gt;Added gallery functionality to this website. Im so sleepy bye&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2025-03-27-17-16-28/</link>
+      <link>http://localhost:43921/2025-03-27-17-16-28/</link>
       <pubDate>Thu, 27 Mar 2025 17:16:28 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2025-03-27-17-16-28/</guid>
-      <description>&lt;p&gt;Hugo version of this website has been updated.
-Now runs on 0.145.0&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2025-03-27-17-16-28/</guid>
+      <description>&lt;p&gt;Hugo version of this website has been updated.&#xA;Now runs on 0.145.0&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2024-12-04-17-42-06/</link>
+      <link>http://localhost:43921/2024-12-04-17-42-06/</link>
       <pubDate>Wed, 04 Dec 2024 17:42:06 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2024-12-04-17-42-06/</guid>
-      <description>&lt;p&gt;I made a website to list my study notes. It&amp;rsquo;s at its infancy. Check here &lt;a href=&#34;https://english.sn.blackpiratex.com/&#34;&gt;https://english.sn.blackpiratex.com/&lt;/a&gt;
-The SSL cert should be working few mins later.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2024-12-04-17-42-06/</guid>
+      <description>&lt;p&gt;I made a website to list my study notes. It&amp;rsquo;s at its infancy. Check here &lt;a href=&#34;https://english.sn.blackpiratex.com/&#34;&gt;https://english.sn.blackpiratex.com/&lt;/a&gt;&#xA;The SSL cert should be working few mins later.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2024-11-03-01-41-10/</link>
+      <link>http://localhost:43921/2024-11-03-01-41-10/</link>
       <pubDate>Sun, 03 Nov 2024 01:41:10 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2024-11-03-01-41-10/</guid>
-      <description>&lt;p&gt;I was depressed so I revamed the home website. &lt;a href=&#34;https://blackpiratex.com/bookmarks&#34;&gt;Bookmarks&lt;/a&gt; now has more links.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2024-11-03-01-41-10/</guid>
+      <description>&lt;p&gt;I was depressed so I revamed the home website. &lt;a href=&#34;https://blackpiratex.com/bookmarks&#34;&gt;Bookmarks&lt;/a&gt; now has more links.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2024-03-08-09-11-38/</link>
+      <link>http://localhost:43921/2024-03-08-09-11-38/</link>
       <pubDate>Fri, 08 Mar 2024 09:11:38 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2024-03-08-09-11-38/</guid>
-      <description>&lt;p&gt;Added:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Chatbox for visitors&lt;/li&gt;
-&lt;li&gt;Featured gallery section on front page.&lt;/li&gt;
-&lt;li&gt;Favourite blogs in bookmarks section&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Minor fixes also.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2024-03-08-09-11-38/</guid>
+      <description>&lt;p&gt;Added:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Chatbox for visitors&lt;/li&gt;&#xA;&lt;li&gt;Featured gallery section on front page.&lt;/li&gt;&#xA;&lt;li&gt;Favourite blogs in bookmarks section&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Minor fixes also.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2024-01-22-02-27-16/</link>
+      <link>http://localhost:43921/2024-01-22-02-27-16/</link>
       <pubDate>Mon, 22 Jan 2024 02:27:16 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2024-01-22-02-27-16/</guid>
-      <description>&lt;p&gt;Added 4 more books in notes website. Total books 16. The hugo version of notes website has been upgraded to version 0.121.2. latest features are used. The book page now has book cover, background has a oval shape which matches the cover image color. Book title background also matches the book cover color. Good night.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2024-01-22-02-27-16/</guid>
+      <description>&lt;p&gt;Added 4 more books in notes website. Total books 16. The hugo version of notes website has been upgraded to version 0.121.2. latest features are used. The book page now has book cover, background has a oval shape which matches the cover image color. Book title background also matches the book cover color. Good night.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-07-02-01-07-12/</link>
+      <link>http://localhost:43921/2023-07-02-01-07-12/</link>
       <pubDate>Sun, 02 Jul 2023 01:07:12 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-07-02-01-07-12/</guid>
-      <description>&lt;p&gt;New blog post: &lt;a href=&#34;https://blog.blackpiratex.com/the-hyprland-experience/&#34;&gt;The Hyprland Experience&lt;/a&gt;.
-Also blog website got a redesign.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-07-02-01-07-12/</guid>
+      <description>&lt;p&gt;New blog post: &lt;a href=&#34;https://blog.blackpiratex.com/the-hyprland-experience/&#34;&gt;The Hyprland Experience&lt;/a&gt;.&#xA;Also blog website got a redesign.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-05-06-20-44-45/</link>
+      <link>http://localhost:43921/2023-05-06-20-44-45/</link>
       <pubDate>Sat, 06 May 2023 20:44:45 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-05-06-20-44-45/</guid>
-      <description>&lt;p&gt;Revamped my whole gallery website. Can&amp;rsquo;t figure out how to remove the extra margin on mobile.&lt;/p&gt;
-
-
-&lt;div class=&#34;all-images&#34;&gt;
-&lt;a href=&#34;http://localhost:1313/img/1dcc15862603d884095b57b553c753b7.png&#34; id=&#34;img-link&#34;&gt;
-    &lt;img src=&#34;http://localhost:1313/img/1dcc15862603d884095b57b553c753b7_hu_73b7c30f462610e4.webp&#34;&gt;
-&lt;/a&gt;
-&lt;div class=&#34;view-original-div&#34;&gt;
-    &lt;a href=&#34;http://localhost:1313/img/1dcc15862603d884095b57b553c753b7.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <guid>http://localhost:43921/2023-05-06-20-44-45/</guid>
+      <description>&lt;p&gt;Revamped my whole gallery website. Can&amp;rsquo;t figure out how to remove the extra margin on mobile.&lt;/p&gt;&#xA;&#xA;&#xA;&lt;div class=&#34;all-images&#34;&gt;&#xA;&lt;a href=&#34;http://localhost:43921/img/1dcc15862603d884095b57b553c753b7.png&#34; id=&#34;img-link&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:43921/img/1dcc15862603d884095b57b553c753b7_hu_73b7c30f462610e4.webp&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;div class=&#34;view-original-div&#34;&gt;&#xA;    &lt;a href=&#34;http://localhost:43921/img/1dcc15862603d884095b57b553c753b7.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-05-06-20-16-32/</link>
+      <link>http://localhost:43921/2023-05-06-20-16-32/</link>
       <pubDate>Sat, 06 May 2023 20:16:32 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-05-06-20-16-32/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m getting so pro, used a JavaScript library to make my gallery look sexy&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-05-06-20-16-32/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m getting so pro, used a JavaScript library to make my gallery look sexy&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-04-11-21-17-48/</link>
+      <link>http://localhost:43921/2023-04-11-21-17-48/</link>
       <pubDate>Tue, 11 Apr 2023 21:17:48 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-04-11-21-17-48/</guid>
-      <description>&lt;p&gt;Updated my website theme(1 day ago), it now follows newcss.net css framework.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-04-11-21-17-48/</guid>
+      <description>&lt;p&gt;Updated my website theme(1 day ago), it now follows newcss.net css framework.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-03-19-08-40-47/</link>
+      <link>http://localhost:43921/2023-03-19-08-40-47/</link>
       <pubDate>Sun, 19 Mar 2023 08:40:47 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-03-19-08-40-47/</guid>
-      <description>&lt;p&gt;Going to seperate book notes from my blog website.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-03-19-08-40-47/</guid>
+      <description>&lt;p&gt;Going to seperate book notes from my blog website.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-03-15-16-15-21/</link>
+      <link>http://localhost:43921/2023-03-15-16-15-21/</link>
       <pubDate>Wed, 15 Mar 2023 16:15:21 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-03-15-16-15-21/</guid>
-      <description>&lt;p&gt;Redesigned blog to make it more minimalistic. Added option to change theme in status page.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-03-15-16-15-21/</guid>
+      <description>&lt;p&gt;Redesigned blog to make it more minimalistic. Added option to change theme in status page.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-03-12-15-19-15/</link>
+      <link>http://localhost:43921/2023-03-12-15-19-15/</link>
       <pubDate>Sun, 12 Mar 2023 15:19:15 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-03-12-15-19-15/</guid>
-      <description>&lt;p&gt;Did a whole website redesign as I was bored of previous color scheme.
-
-
-&lt;div class=&#34;all-images&#34;&gt;
-&lt;a href=&#34;http://localhost:1313/img/1d3ae56dc7ac7c9a6ea73356edd7680f.png&#34; id=&#34;img-link&#34;&gt;
-    &lt;img src=&#34;http://localhost:1313/img/1d3ae56dc7ac7c9a6ea73356edd7680f_hu_a8a11c1f4c792c9e.webp&#34;&gt;
-&lt;/a&gt;
-&lt;div class=&#34;view-original-div&#34;&gt;
-    &lt;a href=&#34;http://localhost:1313/img/1d3ae56dc7ac7c9a6ea73356edd7680f.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-03-12-15-19-15/</guid>
+      <description>&lt;p&gt;Did a whole website redesign as I was bored of previous color scheme.&#xA;&#xA;&#xA;&lt;div class=&#34;all-images&#34;&gt;&#xA;&lt;a href=&#34;http://localhost:43921/img/1d3ae56dc7ac7c9a6ea73356edd7680f.png&#34; id=&#34;img-link&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:43921/img/1d3ae56dc7ac7c9a6ea73356edd7680f_hu_a8a11c1f4c792c9e.webp&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;div class=&#34;view-original-div&#34;&gt;&#xA;    &lt;a href=&#34;http://localhost:43921/img/1d3ae56dc7ac7c9a6ea73356edd7680f.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-03-11-20-38-57/</link>
+      <link>http://localhost:43921/2023-03-11-20-38-57/</link>
       <pubDate>Sat, 11 Mar 2023 20:38:57 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-03-11-20-38-57/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m getting bored of this green black color scheme of my website, want something new.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-03-11-20-38-57/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m getting bored of this green black color scheme of my website, want something new.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2023-02-09-18-49-11/</link>
+      <link>http://localhost:43921/2023-02-09-18-49-11/</link>
       <pubDate>Thu, 09 Feb 2023 18:49:11 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2023-02-09-18-49-11/</guid>
-      <description>&lt;p&gt;Tried to make a page for hobbies (it&amp;rsquo;s halfway done), I&amp;rsquo;m getting rusty.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2023-02-09-18-49-11/</guid>
+      <description>&lt;p&gt;Tried to make a page for hobbies (it&amp;rsquo;s halfway done), I&amp;rsquo;m getting rusty.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-11-27-18-44-22/</link>
+      <link>http://localhost:43921/2022-11-27-18-44-22/</link>
       <pubDate>Sun, 27 Nov 2022 18:44:22 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-11-27-18-44-22/</guid>
-      <description>&lt;p&gt;Verified two of my websites on mastodon. It&amp;rsquo;s so flawless.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-11-27-18-44-22/</guid>
+      <description>&lt;p&gt;Verified two of my websites on mastodon. It&amp;rsquo;s so flawless.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-10-22-22-09-19/</link>
+      <link>http://localhost:43921/2022-10-22-22-09-19/</link>
       <pubDate>Sat, 22 Oct 2022 22:09:19 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-10-22-22-09-19/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m thinking about making my gallery page as so that I would be able to add images from my phone. Right now it&amp;rsquo;s possible but bit hacky way of doing things.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-10-22-22-09-19/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m thinking about making my gallery page as so that I would be able to add images from my phone. Right now it&amp;rsquo;s possible but bit hacky way of doing things.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-10-08-10-36-17/</link>
+      <link>http://localhost:43921/2022-10-08-10-36-17/</link>
       <pubDate>Sat, 08 Oct 2022 10:36:17 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-10-08-10-36-17/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Website changelog:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Added font display (still need to fix more)&lt;/li&gt;
-&lt;li&gt;added fallback font on body&lt;/li&gt;
-&lt;li&gt;added defer to the js required for icons. Main content should now load faster, then those icons will show up.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>http://localhost:43921/2022-10-08-10-36-17/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Website changelog:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Added font display (still need to fix more)&lt;/li&gt;&#xA;&lt;li&gt;added fallback font on body&lt;/li&gt;&#xA;&lt;li&gt;added defer to the js required for icons. Main content should now load faster, then those icons will show up.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-10-08-09-54-08/</link>
+      <link>http://localhost:43921/2022-10-08-09-54-08/</link>
       <pubDate>Sat, 08 Oct 2022 09:54:08 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-10-08-09-54-08/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Website changelog:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Status Website:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;No more big fat images, all images are small and in webp format.&lt;/li&gt;
-&lt;li&gt;huge performance improvement&lt;/li&gt;
-&lt;li&gt;Clicking on images will show original quality image.&lt;/li&gt;
-&lt;li&gt;added &lt;em&gt;show original&lt;/em&gt; button below images.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Website ToDo:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Make texts visible while fonts are loading.&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; explicit width and height to the images&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>http://localhost:43921/2022-10-08-09-54-08/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Website changelog:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Status Website:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;No more big fat images, all images are small and in webp format.&lt;/li&gt;&#xA;&lt;li&gt;huge performance improvement&lt;/li&gt;&#xA;&lt;li&gt;Clicking on images will show original quality image.&lt;/li&gt;&#xA;&lt;li&gt;added &lt;em&gt;show original&lt;/em&gt; button below images.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Website ToDo:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Make texts visible while fonts are loading.&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; explicit width and height to the images&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-10-06-22-35-46/</link>
+      <link>http://localhost:43921/2022-10-06-22-35-46/</link>
       <pubDate>Thu, 06 Oct 2022 22:35:46 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-10-06-22-35-46/</guid>
-      <description>&lt;p&gt;I seriously need to find a way to optimize images. 3-4 megabytes of images are totally unacceptable on web. 3g network or even 4g would have a hard time loading it. If you think you can help me with that I&amp;rsquo;ll appreciate it. &lt;a href=&#34;https://blackpiratex.com/contact&#34;&gt;Contact here&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-10-06-22-35-46/</guid>
+      <description>&lt;p&gt;I seriously need to find a way to optimize images. 3-4 megabytes of images are totally unacceptable on web. 3g network or even 4g would have a hard time loading it. If you think you can help me with that I&amp;rsquo;ll appreciate it. &lt;a href=&#34;https://blackpiratex.com/contact&#34;&gt;Contact here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-09-30-19-24-49/</link>
+      <link>http://localhost:43921/2022-09-30-19-24-49/</link>
       <pubDate>Fri, 30 Sep 2022 19:24:49 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-09-30-19-24-49/</guid>
-      <description>&lt;p&gt;Website changelog:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Blog and Status website now has total post counter.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>http://localhost:43921/2022-09-30-19-24-49/</guid>
+      <description>&lt;p&gt;Website changelog:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Blog and Status website now has total post counter.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-09-30-19-07-37/</link>
+      <link>http://localhost:43921/2022-09-30-19-07-37/</link>
       <pubDate>Fri, 30 Sep 2022 19:07:37 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-09-30-19-07-37/</guid>
-      <description>&lt;p&gt;New post on my blog:
-&lt;a href=&#34;https://blog.blackpiratex.com/streaming-on-spotify-vs-using-mp3s/&#34;&gt;https://blog.blackpiratex.com/streaming-on-spotify-vs-using-mp3s/&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-09-30-19-07-37/</guid>
+      <description>&lt;p&gt;New post on my blog:&#xA;&lt;a href=&#34;https://blog.blackpiratex.com/streaming-on-spotify-vs-using-mp3s/&#34;&gt;https://blog.blackpiratex.com/streaming-on-spotify-vs-using-mp3s/&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-09-27-20-38-57/</link>
+      <link>http://localhost:43921/2022-09-27-20-38-57/</link>
       <pubDate>Tue, 27 Sep 2022 20:38:57 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-09-27-20-38-57/</guid>
-      <description>&lt;p&gt;I did some UI/UX tweaks on this status website.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;website now loads faster. It will now load 20 posts only, instead of 50 like previously.&lt;/li&gt;
-&lt;li&gt;fixed position of &amp;ldquo;Newer posts&amp;rdquo; and &amp;ldquo;older posts&amp;rdquo; button at the end of the page.&lt;/li&gt;
-&lt;li&gt;added new &amp;ldquo;go to top&amp;rdquo; button.&lt;/li&gt;
-&lt;li&gt;new &amp;ldquo;sort by tags&amp;rdquo; option at the end of the page.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;That&amp;rsquo;s all.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-09-27-20-38-57/</guid>
+      <description>&lt;p&gt;I did some UI/UX tweaks on this status website.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;website now loads faster. It will now load 20 posts only, instead of 50 like previously.&lt;/li&gt;&#xA;&lt;li&gt;fixed position of &amp;ldquo;Newer posts&amp;rdquo; and &amp;ldquo;older posts&amp;rdquo; button at the end of the page.&lt;/li&gt;&#xA;&lt;li&gt;added new &amp;ldquo;go to top&amp;rdquo; button.&lt;/li&gt;&#xA;&lt;li&gt;new &amp;ldquo;sort by tags&amp;rdquo; option at the end of the page.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;That&amp;rsquo;s all.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-09-22-19-28-08/</link>
+      <link>http://localhost:43921/2022-09-22-19-28-08/</link>
       <pubDate>Thu, 22 Sep 2022 19:28:08 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-09-22-19-28-08/</guid>
-      <description>&lt;p&gt;This website is now hosted on Vercel. I can&amp;rsquo;t host it on netlify because my repo is private. :-;&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-09-22-19-28-08/</guid>
+      <description>&lt;p&gt;This website is now hosted on Vercel. I can&amp;rsquo;t host it on netlify because my repo is private. :-;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-09-14-09-32-12/</link>
+      <link>http://localhost:43921/2022-09-14-09-32-12/</link>
       <pubDate>Wed, 14 Sep 2022 09:32:12 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-09-14-09-32-12/</guid>
-      <description>&lt;p&gt;Translating my website into Bengali is way too much hassle, and feels a bit cringe. I am not sure if I should translate or not.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-09-14-09-32-12/</guid>
+      <description>&lt;p&gt;Translating my website into Bengali is way too much hassle, and feels a bit cringe. I am not sure if I should translate or not.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-09-13-21-42-38/</link>
+      <link>http://localhost:43921/2022-09-13-21-42-38/</link>
       <pubDate>Tue, 13 Sep 2022 21:42:38 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-09-13-21-42-38/</guid>
-      <description>&lt;p&gt;Translating my website into bengali. So far did two pages. Check out one here:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://bn.blackpiratex.com/about/&#34;&gt;https://bn.blackpiratex.com/about/&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-09-13-21-42-38/</guid>
+      <description>&lt;p&gt;Translating my website into bengali. So far did two pages. Check out one here:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bn.blackpiratex.com/about/&#34;&gt;https://bn.blackpiratex.com/about/&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-09-02-00-21-04/</link>
+      <link>http://localhost:43921/2022-09-02-00-21-04/</link>
       <pubDate>Fri, 02 Sep 2022 00:21:04 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-09-02-00-21-04/</guid>
-      <description>&lt;p&gt;This website is more than one month old!! It feels like just YESTERDAY I made this!&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-09-02-00-21-04/</guid>
+      <description>&lt;p&gt;This website is more than one month old!! It feels like just YESTERDAY I made this!&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-08-28-14-58-11/</link>
+      <link>http://localhost:43921/2022-08-28-14-58-11/</link>
       <pubDate>Sun, 28 Aug 2022 14:58:11 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-08-28-14-58-11/</guid>
-      <description>&lt;p&gt;Changed theme of my website again. Here is how it looks.&lt;/p&gt;
-
-
-&lt;div class=&#34;all-images&#34;&gt;
-&lt;a href=&#34;http://localhost:1313/img/052cde320bc8a85c64ac39c39018c865.png&#34; id=&#34;img-link&#34;&gt;
-    &lt;img src=&#34;http://localhost:1313/img/052cde320bc8a85c64ac39c39018c865_hu_da4b1e6707fbfa82.webp&#34;&gt;
-&lt;/a&gt;
-&lt;div class=&#34;view-original-div&#34;&gt;
-    &lt;a href=&#34;http://localhost:1313/img/052cde320bc8a85c64ac39c39018c865.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-
-&lt;div class=&#34;all-images&#34;&gt;
-&lt;a href=&#34;http://localhost:1313/img/eee84ff2e6a1f539d17f3caee50a90cf.png&#34; id=&#34;img-link&#34;&gt;
-    &lt;img src=&#34;http://localhost:1313/img/eee84ff2e6a1f539d17f3caee50a90cf_hu_5c24fa92f5293d62.webp&#34;&gt;
-&lt;/a&gt;
-&lt;div class=&#34;view-original-div&#34;&gt;
-    &lt;a href=&#34;http://localhost:1313/img/eee84ff2e6a1f539d17f3caee50a90cf.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <guid>http://localhost:43921/2022-08-28-14-58-11/</guid>
+      <description>&lt;p&gt;Changed theme of my website again. Here is how it looks.&lt;/p&gt;&#xA;&#xA;&#xA;&lt;div class=&#34;all-images&#34;&gt;&#xA;&lt;a href=&#34;http://localhost:43921/img/052cde320bc8a85c64ac39c39018c865.png&#34; id=&#34;img-link&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:43921/img/052cde320bc8a85c64ac39c39018c865_hu_da4b1e6707fbfa82.webp&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;div class=&#34;view-original-div&#34;&gt;&#xA;    &lt;a href=&#34;http://localhost:43921/img/052cde320bc8a85c64ac39c39018c865.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&#xA;&lt;div class=&#34;all-images&#34;&gt;&#xA;&lt;a href=&#34;http://localhost:43921/img/eee84ff2e6a1f539d17f3caee50a90cf.png&#34; id=&#34;img-link&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:43921/img/eee84ff2e6a1f539d17f3caee50a90cf_hu_5c24fa92f5293d62.webp&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;div class=&#34;view-original-div&#34;&gt;&#xA;    &lt;a href=&#34;http://localhost:43921/img/eee84ff2e6a1f539d17f3caee50a90cf.png&#34; id=&#34;view-original-link&#34; class=&#34;view-original-link&#34;&gt;View Original&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-08-21-16-18-21/</link>
+      <link>http://localhost:43921/2022-08-21-16-18-21/</link>
       <pubDate>Sun, 21 Aug 2022 16:18:21 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-08-21-16-18-21/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m so bad at choosing colors. Anyway, my website uses hugo now.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-08-21-16-18-21/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m so bad at choosing colors. Anyway, my website uses hugo now.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>http://localhost:1313/2022-08-20-17-06-07/</link>
+      <link>http://localhost:43921/2022-08-20-17-06-07/</link>
       <pubDate>Sat, 20 Aug 2022 17:06:07 +0530</pubDate>
-      
-      <guid>http://localhost:1313/2022-08-20-17-06-07/</guid>
-      <description>&lt;p&gt;Website V3.0 is live now!! Consistent design and more minimal. Check: &lt;a href=&#34;https://blackpiratex.com&#34;&gt;https://blackpiratex.com&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/2022-08-20-17-06-07/</guid>
+      <description>&lt;p&gt;Website V3.0 is live now!! Consistent design and more minimal. Check: &lt;a href=&#34;https://blackpiratex.com&#34;&gt;https://blackpiratex.com&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

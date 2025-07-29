@@ -1,7 +1,7 @@
 baseURL = 'https://status.blackpiratex.com/'
 languageCode = 'en-us'
 title = 'Status By BlackPirateX'
-theme = 'minimalbp'
+theme = 'BPTerminal'
 
 
 [imaging]

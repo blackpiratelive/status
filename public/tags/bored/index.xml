@@ -2,20 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bored on Status By BlackPirateX</title>
-    <link>http://localhost:1313/tags/bored/</link>
+    <link>http://localhost:43921/tags/bored/</link>
     <description>Recent content in Bored on Status By BlackPirateX</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jul 2022 17:04:57 +0530</lastBuildDate><atom:link href="http://localhost:1313/tags/bored/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jul 2022 17:04:57 +0530</lastBuildDate>
+    <atom:link href="http://localhost:43921/tags/bored/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Content</title>
-      <link>http://localhost:1313/new-content/</link>
+      <link>http://localhost:43921/new-content/</link>
       <pubDate>Tue, 26 Jul 2022 17:04:57 +0530</pubDate>
-      
-      <guid>http://localhost:1313/new-content/</guid>
-      <description>&lt;p&gt;Oooh hoo, I am going to make a website for statuses.&lt;/p&gt;
-</description>
+      <guid>http://localhost:43921/new-content/</guid>
+      <description>&lt;p&gt;Oooh hoo, I am going to make a website for statuses.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
