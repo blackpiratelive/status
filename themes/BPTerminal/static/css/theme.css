@@ -360,12 +360,12 @@ body.light-theme {
 
 /* --- NEW: Image Shortcode & Modal Styles --- */
 
-/* --- UPDATED: Image Shortcode & Modal Styles --- */
-/* --- NEW: Image Shortcode & Modal Styles --- */
 
-/* New class to prevent background scrolling when modal is open */
-body.body-modal-open {
-    overflow: hidden;
+/* --- NEW: Pure CSS Image Modal Styles --- */
+
+/* Hide the checkbox itself */
+.modal-toggle {
+    display: none;
 }
 
 /* The container for the button */
@@ -373,7 +373,7 @@ body.body-modal-open {
     margin: 1.5rem 0;
 }
 
-/* The "Show Image" button */
+/* The "Show Image" button (which is a label) */
 .btn-show-image {
     background-color: transparent;
     border: 1px solid #3f3f46;
@@ -412,7 +412,7 @@ body.body-modal-open {
     --icon-color: var(--accent-color-light);
 }
 
-/* The full-screen modal overlay with blur */
+/* The modal overlay with blur */
 .image-modal-overlay {
     position: fixed;
     top: 0;
@@ -431,11 +431,6 @@ body.body-modal-open {
     transition: opacity 0.3s, visibility 0.3s;
 }
 
-.image-modal-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
 /* The modal content container */
 .image-modal {
     position: relative;
@@ -446,16 +441,22 @@ body.body-modal-open {
     text-align: center;
 }
 
-.image-modal-overlay.visible .image-modal {
-    transform: scale(1);
+.image-modal-content {
+    background-color: #111; /* Dark background behind image */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.light-theme .image-modal-content {
+    background-color: #fff;
 }
 
 .image-modal img {
     max-width: 100%;
-    max-height: 85vh;
+    max-height: 80vh; /* A bit smaller to leave room for caption */
     height: auto;
-    border-radius: 8px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: block; /* Removes extra space below image */
 }
 
 .image-modal-caption {
@@ -464,22 +465,25 @@ body.body-modal-open {
     font-style: italic;
 }
 
+/* The close button (which is a label that covers the whole background) */
 .image-modal-close {
     position: absolute;
-    top: -40px;
-    right: -10px;
-    background: none;
-    border: none;
-    font-size: 2.5rem;
-    color: #ffffff;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     cursor: pointer;
-    line-height: 1;
-    opacity: 0.8;
-    transition: opacity 0.2s;
+    z-index: -1; /* Sits behind the image content */
 }
 
-.image-modal-close:hover {
+/* The Magic: When the checkbox is checked, show the modal */
+.modal-toggle:checked ~ .image-modal-overlay {
     opacity: 1;
+    visibility: visible;
+}
+
+.modal-toggle:checked ~ .image-modal-overlay .image-modal {
+    transform: scale(1);
 }
 
 /* New icon for the button */
