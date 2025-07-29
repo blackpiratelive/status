@@ -285,3 +285,74 @@ body.light-theme {
 .theme-icon .icon-sun { display: none; }
 .light-theme .theme-icon .icon-sun { display: block; }
 
+
+
+/* --- New Glowing Button for "On This Day" --- */
+.btn-glow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--accent-color-dark);
+    border-radius: 8px;
+    color: var(--accent-color-dark);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    text-decoration: none;
+    transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    
+    /* The animation magic */
+    box-shadow: 0 0 5px var(--accent-color-dark), 0 0 10px var(--accent-color-dark);
+    animation: glow-animation 2.5s ease-in-out infinite;
+}
+
+.light-theme .btn-glow {
+    border-color: var(--accent-color-light);
+    color: var(--accent-color-light);
+    box-shadow: 0 0 5px var(--accent-color-light), 0 0 10px var(--accent-color-light);
+}
+
+.btn-glow:hover {
+    color: #ffffff;
+    box-shadow: 0 0 15px var(--accent-color-dark), 0 0 25px var(--accent-color-dark);
+}
+
+.light-theme .btn-glow:hover {
+    color: #000000;
+    box-shadow: 0 0 15px var(--accent-color-light), 0 0 25px var(--accent-color-light);
+}
+
+.btn-glow .icon {
+    --icon-color: var(--accent-color-dark);
+}
+
+.light-theme .btn-glow .icon {
+    --icon-color: var(--accent-color-light);
+}
+
+@keyframes glow-animation {
+    0% {
+        box-shadow: 0 0 5px var(--accent-color-dark), 0 0 10px var(--accent-color-dark);
+    }
+    50% {
+        box-shadow: 0 0 15px var(--accent-color-dark), 0 0 25px var(--accent-color-dark);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--accent-color-dark), 0 0 10px var(--accent-color-dark);
+    }
+}
+
+.light-theme .btn-glow {
+    animation-name: glow-animation-light;
+}
+
+@keyframes glow-animation-light {
+    0% {
+        box-shadow: 0 0 5px var(--accent-color-light), 0 0 10px var(--accent-color-light);
+    }
+    50% {
+        box-shadow: 0 0 15px var(--accent-color-light), 0 0 25px var(--accent-color-light);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--accent-color-light), 0 0 10px var(--accent-color-light);
+    }
+}
