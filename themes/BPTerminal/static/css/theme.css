@@ -492,6 +492,8 @@ body.light-theme {
 
 
 
+
+
 /* Lightbox Trigger */
 .lightbox-trigger {
     display: inline-block;
@@ -504,33 +506,41 @@ body.light-theme {
     z-index: 1000; /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Enable scroll if needed */
+    width: 100vw;   /* Changed: Use viewport width */
+    height: 100vh;  /* Changed: Use viewport height */
+    overflow: hidden; /* Changed: Hide scrollbars on the modal itself */
     background-color: rgba(0, 0, 0, 0.9);
     -webkit-animation: fadeIn 0.5s;
     animation: fadeIn 0.5s;
-}
-
-/* Modal Content (the image) */
-.lightbox-content {
-    position: relative;
-    margin: auto;
-    width: 85%;
-    max-width: 800px;
-    height: 100%;
+    /* Added for flexbox centering if not already present from the JS */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Modal Content (the image container) */
+.lightbox-content {
+    position: relative;
+    /* Changed: Remove fixed width/max-width to let it expand */
+    width: 100vw; /* Changed: Content container takes full viewport width */
+    height: 100vh; /* Changed: Content container takes full viewport height */
+    display: flex; /* Keep flexbox for image centering */
+    align-items: center;
+    justify-content: center;
+    /* Removed: margin: auto; as flexbox will center */
+    /* Removed: max-width: 800px; - this was the main constraint */
+    /* Removed: width: 85%; - this was also a constraint */
+}
+
 .lightbox-image {
-    max-width: 100%;
-    max-height: 80vh;
+    max-width: 100vw;   /* Changed: Max width to 100% of viewport width */
+    max-height: 100vh;  /* Changed: Max height to 100% of viewport height */
     display: block;
-    margin: auto;
+    margin: auto; /* Still useful for fallbacks or non-flex containers */
     -webkit-animation: zoomIn 0.5s;
     animation: zoomIn 0.5s;
+    /* Added: Ensures image itself scales down correctly within the full screen */
+    object-fit: contain; /* Ensures the image is fully visible without cropping */
 }
 
 .lightbox-image.hidden {
@@ -546,6 +556,8 @@ body.light-theme {
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
+    cursor: pointer; /* Added for explicit cursor change */
+    z-index: 1001; /* Ensure it's above content */
 }
 
 .lightbox-close:hover,
@@ -563,7 +575,7 @@ body.light-theme {
     top: 50%;
     width: auto;
     padding: 16px;
-    margin-top: -50px;
+    margin-top: -50px; /* Adjusts vertical centering */
     color: white;
     font-weight: bold;
     font-size: 20px;
@@ -571,6 +583,7 @@ body.light-theme {
     border-radius: 0 3px 3px 0;
     user-select: none;
     -webkit-user-select: none;
+    z-index: 1001; /* Ensure they are above content */
 }
 
 .lightbox-next {
@@ -589,21 +602,21 @@ body.light-theme {
 
 /* Animations */
 @-webkit-keyframes fadeIn {
-  from {opacity: 0}
-  to {opacity: 1}
+    from {opacity: 0}
+    to {opacity: 1}
 }
 
 @keyframes fadeIn {
-  from {opacity: 0}
-  to {opacity: 1}
+    from {opacity: 0}
+    to {opacity: 1}
 }
 
 @-webkit-keyframes zoomIn {
-  from {transform: scale(0)}
-  to {transform: scale(1)}
+    from {transform: scale(0)}
+    to {transform: scale(1)}
 }
 
 @keyframes zoomIn {
-  from {transform: scale(0)}
-  to {transform: scale(1)}
+    from {transform: scale(0)}
+    to {transform: scale(1)}
 }
