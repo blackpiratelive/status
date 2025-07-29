@@ -53,9 +53,6 @@
             </div>
             {{ end }}
         </main>
-
-        <!-- Footer -->
-        <footer class="text-center mt-16 space-y-8">
             <!-- Pagination -->
             <div class="flex justify-center items-center space-x-4">
                 {{ if $paginator.HasPrev }}
@@ -71,17 +68,6 @@
             </div>
 
             <!-- All Tags Section -->
-            <div class="mt-12">
-                <h3 class="tags-heading subtle-text">Browse by Tag</h3>
-                <div class="all-tags-container">
-                    {{ $tags := .Site.Taxonomies.tags.ByCount.Reverse }}
-                    {{ range $i, $tag := $tags }}
-                        <a href="{{ $tag.Page.RelPermalink }}" class="tag-badge tag-color-{{ mod $i 5 }}">
-                            #{{ $tag.Name }} <sup>({{ $tag.Count }})</sup>
-                        </a>
-                    {{ end }}
-                </div>
-            </div>
 
             <!-- Theme Options -->
             
