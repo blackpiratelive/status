@@ -1,30 +1,78 @@
 {{- partial "head.html" . -}}
 <body class="bg-black">
 
+    {{/*
+        This block creates the permanent log numbers in a reliable way.
+        It needs to be included here as well to be available on tag pages.
+    */}}
+    {{ $logNumbers := dict }}
+    {{ range $index, $page := .Site.RegularPages.ByDate }}
+        {{ $logNumbers = merge $logNumbers (dict $page.RelPermalink (add $index 1)) }}
+    {{ end }}
+
     <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
 
-        <!-- Header for the Terms Page -->
+        <!-- Header for the Tag Page -->
         <header class="mb-12 text-center md:text-left">
+            <p class="subtle-text mb-2">Browsing Tag</p>
             <h1 class="text-3xl md:text-4xl font-bold font-fira header-text">
-                All Tags
+                #{{ .Title }}
             </h1>
             <a href="{{ .Site.BaseURL }}" class="subtle-text mt-4 inline-block hover:underline">&larr; Back to all posts</a>
         </header>
 
-        <!-- Main Content: The Tag Cloud -->
-        <main>
-            <div class="all-tags-container">
-                {{ $tags := .Data.Terms.ByCount.Reverse }}
-                {{ range $i, $tag := $tags }}
-                    <a href="{{ $tag.Page.RelPermalink }}" class="tag-badge tag-color-{{ mod $i 5 }}">
-                        #{{ $tag.Name }} <sup>({{ $tag.Count }})</sup>
-                    </a>
+        <!-- Status Log Feed -->
+        <main class="space-y-6">
+            {{/*
+                The key fix is here. We paginate the pages associated *with this term*.
+                Hugo automatically scopes `.Paginator` to the current page's context.
+            */}}
+            {{ $paginator := .Paginator 50 }}
+            {{ range $paginator.Pages }}
+            <!-- Log Entry Item -->
+            <div class="p-5 rounded-lg border-l-4 log-card">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="font-fira text-sm subtle-text">
+                        {{/* Look up the hardcoded number from the map we created above */}}
+                        {{ $logNumber := index $logNumbers .RelPermalink }}
+                        Log Entry <span class="log-number">#{{ $logNumber }}</span>
+                    </p>
+                    <p class="text-xs subtle-text">{{ .Date.Format "02 Jan 2006, 15:04 IST" }}</p>
+                </div>
+                <div class="body-text text-lg prose">
+                    {{ .Content }}
+                </div>
+
+                <!-- Tags Section -->
+                {{ if .Params.tags }}
+                <div class="tags-list">
+                    {{ range $i, $tag := .Params.tags }}
+                        {{ with $.Site.GetPage (printf "/tags/%s" $tag) }}
+                            <a href="{{ .RelPermalink }}" class="tag-badge tag-color-{{ mod $i 5 }}">#{{ .LinkTitle }}</a>
+                        {{ end }}
+                    {{ end }}
+                </div>
                 {{ end }}
             </div>
+            {{ end }}
         </main>
 
         <!-- Footer -->
         <footer class="text-center mt-16 space-y-8">
+            <!-- Pagination -->
+            <div class="flex justify-center items-center space-x-4">
+                {{ if $paginator.HasPrev }}
+                    <a href="{{ $paginator.Prev.URL }}" class="font-fira py-2 px-4 rounded-lg transition-colors text-sm theme-button">
+                        &larr; Newer
+                    </a>
+                {{ end }}
+                {{ if $paginator.HasNext }}
+                    <a href="{{ $paginator.Next.URL }}" class="font-fira py-2 px-4 rounded-lg transition-colors text-sm theme-button">
+                        Older &rarr;
+                    </a>
+                {{ end }}
+            </div>
+
             <!-- Theme Options -->
             <div class="space-y-4 pt-8">
                 <div class="flex justify-center items-center space-x-4">
