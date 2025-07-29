@@ -10,20 +10,9 @@
 {{ $id := delimit (shuffle (split (printf "img-%s" (md5 $src)) "" )) "" }}
 
 {{ $imagePermalink := "" }}
-{{/*
-  Try to find the image in the assets directory first.
-  This allows for Hugo's image processing.
-  Note: Paths for resources.Get are relative to the assets directory.
-  e.g., "images/my-photo.jpg"
-*/}}
 {{ with resources.Get $src }}
     {{ $imagePermalink = .RelPermalink }}
 {{ else }}
-    {{/*
-      If the image is not found in assets, assume it's in the static directory.
-      Note: Paths for static files usually start with a /.
-      e.g., "/images/my-photo.jpg"
-    */}}
     {{ $imagePermalink = $src | absURL }}
 {{ end }}
 
@@ -49,9 +38,7 @@
 
 {{/*
   This script is included with the shortcode.
-  The `if (!window.imageModalInitialized)` check ensures the event listeners
-  are only added to the page ONCE, even if you use this shortcode
-  multiple times on the same page. This is very efficient.
+  It now adds a class to the body to prevent scrolling when a modal is open.
 */}}
 {{ if not (.Page.Scratch.Get "imageModalScript") }}
 <script>
@@ -59,11 +46,14 @@
         // This flag ensures the setup code runs only once.
         if (!window.imageModalInitialized) {
             
+            const body = document.body;
+
             // Function to open a modal
             const openModal = (modalId) => {
                 const modal = document.getElementById(modalId);
                 if (modal) {
                     modal.classList.add('visible');
+                    body.classList.add('body-modal-open'); // Prevent background scrolling
                 }
             };
 
@@ -72,6 +62,7 @@
                 const visibleModal = document.querySelector('.image-modal-overlay.visible');
                 if (visibleModal) {
                     visibleModal.classList.remove('visible');
+                    body.classList.remove('body-modal-open'); // Allow background scrolling again
                 }
             };
 
