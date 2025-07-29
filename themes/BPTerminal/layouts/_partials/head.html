@@ -1,9 +1,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .Site.Title }}</title>
+    <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-        <script src="{{ "/js/theme.js" | relURL }}" defer></script>
-
+    
+    <!-- Main theme stylesheet -->
     <link rel="stylesheet" href="{{ "css/theme.css" | relURL }}">
+    
+    <!-- New stylesheet for animations -->
+    <link rel="stylesheet" href="{{ "css/animations.css" | relURL }}">
+    
+    <!-- Main theme javascript -->
+    <script src="{{ "js/theme.js" | relURL }}" defer></script>
+    
+    <!-- New javascript for animations -->
+    <script src="{{ "js/animations.js" | relURL }}" defer></script>
 </head>
