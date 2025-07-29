@@ -1,0 +1,140 @@
+{{- partial "head.html" . -}}
+<body class="bg-black">
+
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
+
+        <!-- Header for the Terms Page -->
+        <header class="mb-12 text-center md:text-left">
+            <h1 class="text-3xl md:text-4xl font-bold font-fira header-text">
+                All Tags
+            </h1>
+            <a href="{{ .Site.BaseURL }}" class="subtle-text mt-4 inline-block hover:underline">&larr; Back to all posts</a>
+        </header>
+
+        <!-- Main Content: The Tag Cloud -->
+        <main>
+            <div class="all-tags-container">
+                {{ $tags := .Data.Terms.ByCount.Reverse }}
+                {{ range $i, $tag := $tags }}
+                    <a href="{{ $tag.Page.RelPermalink }}" class="tag-badge tag-color-{{ mod $i 5 }}">
+                        #{{ $tag.Name }} <sup>({{ $tag.Count }})</sup>
+                    </a>
+                {{ end }}
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 space-y-8">
+            <!-- Theme Options -->
+            <div class="space-y-4 pt-8">
+                <div class="flex justify-center items-center space-x-4">
+                    <button id="theme-switcher" class="font-fira py-2 px-4 rounded-lg transition-colors text-sm theme-button">
+                        Toggle Theme
+                    </button>
+                    <div id="color-palette" class="flex items-center space-x-3">
+                        <div class="color-swatch" data-color-dark="#a3e635" data-color-light="#007acc" style="background-color: #a3e635;"></div>
+                        <div class="color-swatch" data-color-dark="#f97316" data-color-light="#db2777" style="background-color: #f97316;"></div>
+                        <div class="color-swatch" data-color-dark="#ec4899" data-color-light="#6d28d9" style="background-color: #ec4899;"></div>
+                        <div class="color-swatch" data-color-dark="#8b5cf6" data-color-light="#059669" style="background-color: #8b5cf6;"></div>
+                        <div class="color-swatch" data-color-dark="#38bdf8" data-color-light="#d97706" style="background-color: #38bdf8;"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-xs subtle-text pt-4">&copy; {{ now.Year }} {{ .Site.Author.name }}. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- Cookie Helper Functions ---
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // --- DOM Elements ---
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const body = document.body;
+        const colorSwatches = document.querySelectorAll('.color-swatch');
+        const root = document.documentElement;
+
+        // --- Theme Switching Logic ---
+        themeSwitcher.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            const currentTheme = body.classList.contains('light-theme') ? 'light' : 'dark';
+            setCookie('theme', currentTheme, 365);
+            updateActiveSwatch();
+        });
+
+        // --- Accent Color Logic ---
+        colorSwatches.forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                const darkColor = swatch.dataset.colorDark;
+                const lightColor = swatch.dataset.colorLight;
+                
+                setAccentColors(darkColor, lightColor);
+
+                setCookie('accent_dark', darkColor, 365);
+                setCookie('accent_light', lightColor, 365);
+                updateActiveSwatch();
+            });
+        });
+
+        function setAccentColors(darkColor, lightColor) {
+             root.style.setProperty('--accent-color-dark', darkColor);
+             root.style.setProperty('--accent-color-light', lightColor);
+        }
+
+        function updateActiveSwatch() {
+            const currentDark = getComputedStyle(root).getPropertyValue('--accent-color-dark').trim();
+            colorSwatches.forEach(s => {
+                if (s.dataset.colorDark === currentDark) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        }
+
+        // --- On Page Load ---
+        function applyInitialSettings() {
+            // Apply Theme
+            const savedTheme = getCookie('theme');
+            if (savedTheme === 'light') {
+                body.classList.add('light-theme');
+            }
+
+            // Apply Accent Colors
+            const savedAccentDark = getCookie('accent_dark');
+            const savedAccentLight = getCookie('accent_light');
+            if (savedAccentDark && savedAccentLight) {
+                setAccentColors(savedAccentDark, savedAccentLight);
+            }
+            
+            updateActiveSwatch();
+        }
+        
+        // --- Run on load ---
+        window.onload = function() {
+            applyInitialSettings();
+        };
+    </script>
+
+</body>
+</html>
