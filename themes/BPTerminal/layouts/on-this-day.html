@@ -6,7 +6,7 @@
     <title>{{ .Title }} | {{ .Site.Title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* All CSS from theme.css and animations.css is now inlined here */
+        /* --- ALL CSS IS NOW INLINED IN THIS FILE --- */
         :root {
             --accent-color-dark: #a3e635;
             --accent-color-light: #007acc;
@@ -19,9 +19,7 @@
             color: #e5e5e5;
             transition: background-color 0.3s, color 0.3s;
         }
-        .font-fira {
-            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-        }
+        .font-fira { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
         .header-text { color: #ffffff; }
         .body-text { color: #e5e5e5; }
         .subtle-text { color: #a1a1aa; }
@@ -29,6 +27,7 @@
         .prose img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 1rem; margin-bottom: 1rem; }
         .prose a { color: var(--link-color); text-decoration: underline; transition: opacity 0.2s; }
         .prose a:hover { opacity: 0.8; }
+        
         body.light-theme {
             background-color: #f4f4f5;
             color: #18181b;
@@ -39,7 +38,7 @@
         .light-theme .body-text { color: #27272a; }
         .light-theme .subtle-text { color: #52525b; }
 
-        /* Polaroid Animation Styles */
+        /* Polaroid & Animation Styles */
         .polaroid-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -91,7 +90,19 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Include other styles from theme.css as needed */
+
+        /* Footer & Icon Styles */
+        .site-footer { border-top: 1px solid #3f3f46; padding-top: 3rem; }
+        .light-theme .site-footer { border-top-color: #d4d4d8; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 400px; margin: 0 auto 3rem auto; text-align: left; }
+        .footer-heading { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: #ffffff; }
+        .light-theme .footer-heading { color: #000000; }
+        .footer-links { list-style: none; padding: 0; margin: 0; space-y: 0.5rem; }
+        .footer-link { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .footer-link:hover { opacity: 0.8; text-decoration: underline; }
+        .icon { display: inline-block; width: 1em; height: 1em; background-color: var(--icon-color); transition: background-color 0.2s; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+        .icon-rewind { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='11 19 2 12 11 5 11 19'%3E%3C/polygon%3E%3Cpolygon points='22 19 13 12 22 5 22 19'%3E%3C/polygon%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='11 19 2 12 11 5 11 19'%3E%3C/polygon%3E%3Cpolygon points='22 19 13 12 22 5 22 19'%3E%3C/polygon%3E%3C/svg%3E"); }
+        /* Add other icon styles here if needed */
     </style>
 </head>
 <body class="bg-black">
@@ -108,7 +119,10 @@
 
     <div class="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
         <header class="mb-12 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold font-fira header-text">A Look Back in Time</h1>
+            <h1 class="text-3xl md:text-4xl font-bold font-fira header-text flex items-center justify-center gap-3">
+                <span class="icon icon-rewind"></span>
+                A Look Back in Time
+            </h1>
             <p class="subtle-text mt-2">Memories from {{ $now.Format "January 2" }}</p>
             <a href="{{ .Site.BaseURL }}" class="subtle-text mt-4 inline-block hover:underline">&larr; Back to all posts</a>
         </header>
@@ -139,7 +153,7 @@
     </div>
 
     <script>
-        // All JavaScript from theme.js and animations.js is now inlined here
+        // --- ALL JAVASCRIPT IS NOW INLINED IN THIS FILE ---
         document.addEventListener('DOMContentLoaded', () => {
             // --- Cookie Helpers & Theme Logic ---
             function setCookie(name, value, days) {
