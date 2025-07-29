@@ -360,6 +360,13 @@ body.light-theme {
 
 /* --- NEW: Image Shortcode & Modal Styles --- */
 
+/* --- UPDATED: Image Shortcode & Modal Styles --- */
+
+/* New class to prevent background scrolling when modal is open */
+body.body-modal-open {
+    overflow: hidden;
+}
+
 /* The container for the button */
 .image-shortcode-container {
     margin: 1.5rem 0;
@@ -404,14 +411,14 @@ body.light-theme {
     --icon-color: var(--accent-color-light);
 }
 
-/* The full-screen modal overlay */
+/* The full-screen modal overlay with blur */
 .image-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     display: flex;
