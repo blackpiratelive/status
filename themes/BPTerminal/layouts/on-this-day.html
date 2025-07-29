@@ -38,56 +38,60 @@
         .light-theme .body-text { color: #27272a; }
         .light-theme .subtle-text { color: #52525b; }
 
-        /* Polaroid & Animation Styles */
-        .polaroid-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .polaroid-card {
-            background-color: #1a1a1a;
-            padding: 1rem;
-            border-radius: 4px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
+        /* Archive & Timeline Styles */
+        .archive-year-section {
+            margin-bottom: 3rem;
+            opacity: 0; /* Initially hidden for animation */
+            transform: translateY(20px);
             animation-fill-mode: forwards;
-            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .light-theme .polaroid-card {
-            background-color: #ffffff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e5e5e5;
-        }
-        .polaroid-card:hover {
-            transform: translateY(-5px) rotate(2deg);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
-        }
-        .polaroid-content {
-            background-color: #0a0a0a;
-            padding: 1rem;
-            min-height: 150px;
-        }
-        .light-theme .polaroid-content {
-            background-color: #f4f4f5;
-        }
-        .polaroid-caption {
-            padding-top: 1rem;
-            text-align: center;
-            font-size: 1.25rem;
+        .archive-year-heading {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 2rem;
+            font-weight: 700;
             color: var(--accent-color-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3f3f46;
         }
-        .light-theme .polaroid-caption {
+        .light-theme .archive-year-heading {
             color: var(--accent-color-light);
+            border-bottom-color: #d4d4d8;
         }
+        .archive-post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .log-card {
+            background-color: #121212;
+            border-left-color: #3f3f46;
+            transition: all 0.2s ease-in-out;
+        }
+        .log-card:hover {
+            border-left-color: var(--accent-color-dark);
+            transform: translateY(-2px);
+            background-color: #1c1c1c;
+        }
+        .light-theme .log-card {
+            background-color: #ffffff;
+            border-left-color: #d4d4d8;
+        }
+        .light-theme .log-card:hover {
+            border-left-color: var(--accent-color-light);
+            background-color: #fafafa;
+        }
+        .log-number { color: var(--accent-color-dark); }
+        .light-theme .log-number { color: var(--accent-color-light); }
+
+        /* Animation for Year Sections */
         .animate-in {
             animation-name: fadeInSlideUp;
-            animation-duration: 0.7s;
+            animation-duration: 0.6s;
             animation-delay: var(--animation-delay, 0s);
         }
         @keyframes fadeInSlideUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -102,7 +106,6 @@
         .footer-link:hover { opacity: 0.8; text-decoration: underline; }
         .icon { display: inline-block; width: 1em; height: 1em; background-color: var(--icon-color); transition: background-color 0.2s; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
         .icon-rewind { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='11 19 2 12 11 5 11 19'%3E%3C/polygon%3E%3Cpolygon points='22 19 13 12 22 5 22 19'%3E%3C/polygon%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='11 19 2 12 11 5 11 19'%3E%3C/polygon%3E%3Cpolygon points='22 19 13 12 22 5 22 19'%3E%3C/polygon%3E%3C/svg%3E"); }
-        /* Add other icon styles here if needed */
     </style>
 </head>
 <body class="bg-black">
@@ -117,7 +120,7 @@
         {{ end }}
     {{ end }}
 
-    <div class="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
         <header class="mb-12 text-center">
             <h1 class="text-3xl md:text-4xl font-bold font-fira header-text flex items-center justify-center gap-3">
                 <span class="icon icon-rewind"></span>
@@ -127,20 +130,31 @@
             <a href="{{ .Site.BaseURL }}" class="subtle-text mt-4 inline-block hover:underline">&larr; Back to all posts</a>
         </header>
 
-        <main>
+        <main class="archive-container">
             {{ if gt (len $onThisDayPosts) 0 }}
-                <div class="polaroid-grid">
-                {{ range $index, $page := $onThisDayPosts }}
-                    <div class="polaroid-card" style="--animation-delay: {{ mul $index 150 }}ms;">
-                        <div class="polaroid-content prose">
-                            {{ .Content }}
+                {{ $postsByYear := ($onThisDayPosts | sort .Date "desc").GroupByDate "2006" }}
+                {{ range $index, $yearGroup := $postsByYear }}
+                <section class="archive-year-section" style="--animation-delay: {{ mul $index 150 }}ms;">
+                    <h2 class="archive-year-heading">{{ .Key }}</h2>
+                    <div class="archive-post-list">
+                        {{ range .Pages.ByDate.Reverse }}
+                        <div class="log-card p-5 rounded-lg border-l-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <p class="font-fira text-sm subtle-text">
+                                    Posted at <span class="log-number">{{ .Date.Format "15:04 IST" }}</span>
+                                </p>
+                                <a href="{{ .RelPermalink }}" class="text-xs subtle-text hover:underline" title="Go to original post">
+                                    View Original Post &rarr;
+                                </a>
+                            </div>
+                            <div class="body-text text-lg prose log-content">
+                               {{ .Content }}
+                            </div>
                         </div>
-                        <div class="polaroid-caption">
-                           <span class="font-fira">{{ .Date.Format "2006" }}</span>
-                        </div>
+                        {{ end }}
                     </div>
+                </section>
                 {{ end }}
-                </div>
             {{ else }}
                 <div class="text-center subtle-text py-16">
                     <p>No memories from this day in the past.</p>
@@ -153,7 +167,6 @@
     </div>
 
     <script>
-        // --- ALL JAVASCRIPT IS NOW INLINED IN THIS FILE ---
         document.addEventListener('DOMContentLoaded', () => {
             // --- Cookie Helpers & Theme Logic ---
             function setCookie(name, value, days) {
@@ -190,7 +203,7 @@
             }
 
             // --- Animation Logic ---
-            const animatedElements = document.querySelectorAll('.polaroid-card');
+            const animatedElements = document.querySelectorAll('.archive-year-section');
             if (animatedElements.length > 0) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
