@@ -1,0 +1,58 @@
+{{- partial "head.html" . -}}
+<body class="bg-black">
+
+    {{/*
+        This block finds posts from previous years written on the same day.
+    */}}
+    {{ $now := now }}
+    {{ $currentMonthDay := $now.Format "01-02" }}
+    {{ $currentYear := $now.Format "2006" }}
+    {{ $onThisDayPosts := slice }}
+    {{ range .Site.RegularPages }}
+        {{ if and (eq (.Date.Format "01-02") $currentMonthDay) (ne (.Date.Format "2006") $currentYear) }}
+            {{ $onThisDayPosts = $onThisDayPosts | append . }}
+        {{ end }}
+    {{ end }}
+
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
+
+        <!-- Header for the On This Day Page -->
+        <header class="mb-12 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold font-fira header-text flex items-center justify-center gap-3">
+                <span class="icon icon-rewind"></span>
+                A Look Back in Time
+            </h1>
+            <p class="subtle-text mt-2">Memories from {{ $now.Format "January 2" }}</p>
+            <a href="{{ .Site.BaseURL }}" class="subtle-text mt-4 inline-block hover:underline">&larr; Back to all posts</a>
+        </header>
+
+        <!-- Main Content: The Polaroid Memories -->
+        <main>
+            {{ if gt (len $onThisDayPosts) 0 }}
+                <div class="polaroid-grid">
+                {{ range $index, $page := $onThisDayPosts }}
+                    <div class="polaroid-card" style="--animation-delay: {{ mul $index 150 }}ms;">
+                        <div class="polaroid-content prose">
+                            {{ .Content }}
+                        </div>
+                        <div class="polaroid-caption">
+                           <span class="font-fira">{{ .Date.Format "2006" }}</span>
+                        </div>
+                    </div>
+                {{ end }}
+                </div>
+            {{ else }}
+                <div class="text-center subtle-text py-16">
+                    <p>No memories from this day in the past.</p>
+                    <p class="text-xs mt-2">Come back tomorrow!</p>
+                </div>
+            {{ end }}
+        </main>
+
+        <!-- Footer -->
+        {{- partial "footer.html" . -}}
+
+    </div>
+
+</body>
+</html>
