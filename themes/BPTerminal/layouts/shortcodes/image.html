@@ -1,11 +1,32 @@
 {{/*
   Image Shortcode with Modal Popup
-  Usage: {{< image src="/path/to/image.jpg" alt="Description of the image" >}}
+  Usage:
+  - For images in /assets: {{< image src="images/my-photo.jpg" alt="Description" >}}
+  - For images in /static: {{< image src="/images/my-photo.jpg" alt="Description" >}}
 */}}
 
 {{ $src := .Get "src" }}
 {{ $alt := .Get "alt" | default "" }}
 {{ $id := delimit (shuffle (split (printf "img-%s" (md5 $src)) "" )) "" }}
+
+{{ $imagePermalink := "" }}
+{{/*
+  Try to find the image in the assets directory first.
+  This allows for Hugo's image processing.
+  Note: Paths for resources.Get are relative to the assets directory.
+  e.g., "images/my-photo.jpg"
+*/}}
+{{ with resources.Get $src }}
+    {{ $imagePermalink = .RelPermalink }}
+{{ else }}
+    {{/*
+      If the image is not found in assets, assume it's in the static directory.
+      Note: Paths for static files usually start with a /.
+      e.g., "/images/my-photo.jpg"
+    */}}
+    {{ $imagePermalink = $src | absURL }}
+{{ end }}
+
 
 {{/* The button that will be visible on the page */}}
 <div class="image-shortcode-container">
@@ -19,7 +40,7 @@
 <div id="{{ $id }}" class="image-modal-overlay">
     <div class="image-modal">
         <button class="image-modal-close">&times;</button>
-        <img src="{{ $src | absURL }}" alt="{{ $alt }}" loading="lazy">
+        <img src="{{ $imagePermalink }}" alt="{{ $alt }}" loading="lazy">
         {{ if $alt }}
         <div class="image-modal-caption">{{ $alt }}</div>
         {{ end }}
