@@ -1,5 +1,5 @@
 {{- partial "head.html" . -}}
-            {{ range (.Paginator 20).Pages }}
+            {{ range (.Paginator 50).Pages }}
             {{ $lastmodDateFormatted := .Lastmod.Format "02 Jan 2006 at 15:04" }}
             {{ $lastmodTimeFormatted := .Lastmod.Format "15:04" }}
             {{ $date := .Params.date.Format "02.01.2006" }}

@@ -1,9 +1,8 @@
 {
-  "name": "Ubuntu + Hugo Extended",
-  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "name": "Hugo Extended Devcontainer",
   "features": {
-    "ghcr.io/devcontainers/features/hugo:1": {
-      "extended": true
-    }
-  }
+    "ghcr.io/devcontainers/features/hugo:1": { "extended": true }
+  },
+  "forwardPorts": [1313],
+  "postStartCommand": "hugo server"
 }
