@@ -2,30 +2,24 @@
 <body class="bg-black">
 
     {{/*
-        This block creates the permanent log numbers in a more reliable way.
-        1. It gets all pages and sorts them by date, oldest first.
-        2. It creates a map where the key is the page's link and the value is its number.
-        This avoids using .Scratch, which can fail during deployment.
+        This block creates the permanent log numbers in a reliable way
+        that works during deployment.
     */}}
     {{ $logNumbers := dict }}
     {{ range $index, $page := .Site.RegularPages.ByDate }}
         {{ $logNumbers = merge $logNumbers (dict $page.RelPermalink (add $index 1)) }}
     {{ end }}
 
-
     <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
 
         <!-- Header -->
-        <!-- In themes/BPTerminal/layouts/home.html -->
-
-<!-- Header -->
-<header class="mb-12 text-center md:text-left">
-    <!-- This H1 tag MUST have these exact IDs and attributes -->
-    <h1 id="header-title-container" data-title="{{ .Site.Title }}" class="text-3xl md:text-4xl font-bold font-fira header-text">
-        <span id="header-title"></span><span class="terminal-header-cursor"></span>
-    </h1>
-    <p class="subtle-text mt-2">{{ .Site.Params.description }}</p>
-</header>
+        <header class="mb-12 text-center md:text-left">
+            <!-- The data-title attribute is required for the JS animation -->
+            <h1 id="header-title-container" data-title="{{ .Site.Title }}" class="text-3xl md:text-4xl font-bold font-fira header-text">
+                <span id="header-title"></span><span class="terminal-header-cursor"></span>
+            </h1>
+            <p class="subtle-text mt-2">{{ .Site.Params.description }}</p>
+        </header>
 
         <!-- Status Log Feed -->
         <main class="space-y-6">
@@ -38,9 +32,12 @@
                         {{ $logNumber := index $logNumbers .RelPermalink }}
                         Log Entry <span class="log-number">#{{ $logNumber }}</span>
                     </p>
-                    <p class="text-xs subtle-text">{{ .Date.Format "02 Jan 2006, 15:04 IST" }}</p>
+                    <p class="text-xs subtle-text flex items-center gap-2">
+                        <span class="icon icon-calendar"></span>
+                        <span>{{ .Date.Format "02 Jan 2006, 15:04 IST" }}</span>
+                    </p>
                 </div>
-                <div class="body-text text-lg prose">
+                <div class="body-text text-lg prose log-content">
                     {{ .Content }}
                 </div>
 
@@ -57,130 +54,13 @@
             </div>
             {{ end }}
         </main>
-            <!-- Pagination -->
-            <div class="flex justify-center items-center space-x-4">
-                {{ if $paginator.HasPrev }}
-                    <a href="{{ $paginator.Prev.URL }}" class="font-fira py-2 px-4 rounded-lg transition-colors text-sm theme-button">
-                        &larr; Newer
-                    </a>
-                {{ end }}
-                {{ if $paginator.HasNext }}
-                    <a href="{{ $paginator.Next.URL }}" class="font-fira py-2 px-4 rounded-lg transition-colors text-sm theme-button">
-                        Older &rarr;
-                    </a>
-                {{ end }}
-            </div>
 
-            <!-- All Tags Section -->
+        <!-- Footer -->
+        {{- partial "footer.html" . -}}
 
-            <!-- Theme Options -->
-            
+    </div>
 
-    <script>
-        // --- Cookie Helper Functions ---
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
-
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
-
-        // --- DOM Elements ---
-        const themeSwitcher = document.getElementById('theme-switcher');
-        const body = document.body;
-        const colorSwatches = document.querySelectorAll('.color-swatch');
-        const root = document.documentElement;
-
-        // --- Theme Switching Logic ---
-        themeSwitcher.addEventListener('click', () => {
-            body.classList.toggle('light-theme');
-            const currentTheme = body.classList.contains('light-theme') ? 'light' : 'dark';
-            setCookie('theme', currentTheme, 365);
-            updateActiveSwatch();
-        });
-
-        // --- Accent Color Logic ---
-        colorSwatches.forEach(swatch => {
-            swatch.addEventListener('click', () => {
-                const darkColor = swatch.dataset.colorDark;
-                const lightColor = swatch.dataset.colorLight;
-                
-                setAccentColors(darkColor, lightColor);
-
-                setCookie('accent_dark', darkColor, 365);
-                setCookie('accent_light', lightColor, 365);
-                updateActiveSwatch();
-            });
-        });
-
-        function setAccentColors(darkColor, lightColor) {
-             root.style.setProperty('--accent-color-dark', darkColor);
-             root.style.setProperty('--accent-color-light', lightColor);
-        }
-
-        function updateActiveSwatch() {
-            const currentDark = getComputedStyle(root).getPropertyValue('--accent-color-dark').trim();
-            colorSwatches.forEach(s => {
-                if (s.dataset.colorDark === currentDark) {
-                    s.classList.add('active');
-                } else {
-                    s.classList.remove('active');
-                }
-            });
-        }
-
-        // --- On Page Load ---
-        function applyInitialSettings() {
-            // Apply Theme
-            const savedTheme = getCookie('theme');
-            if (savedTheme === 'light') {
-                body.classList.add('light-theme');
-            }
-
-            // Apply Accent Colors
-            const savedAccentDark = getCookie('accent_dark');
-            const savedAccentLight = getCookie('accent_light');
-            if (savedAccentDark && savedAccentLight) {
-                setAccentColors(savedAccentDark, savedAccentLight);
-            }
-            
-            updateActiveSwatch();
-        }
-        
-        // --- Typing effect for the header ---
-        const titleElement = document.getElementById('header-title');
-        const titleText = '{{ .Site.Title }}';
-        let i = 0;
-
-        function typeWriter() {
-            if (i < titleText.length) {
-                titleElement.innerHTML += titleText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80);
-            }
-        }
-        
-        // --- Run on load ---
-        window.onload = function() {
-            applyInitialSettings();
-            typeWriter();
-        };
-    </script>
-    {{- partial "footer.html" . -}}
+    <!-- All JavaScript is now in the external theme.js file, linked in head.html -->
 
 </body>
 </html>
