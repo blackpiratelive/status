@@ -501,7 +501,7 @@ body.light-theme {
 
 /* The Modal (background) */
 .lightbox-modal {
-    display: none; /* Hidden by default */
+    display: none !important; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1000; /* Sit on top */
     left: 0;
