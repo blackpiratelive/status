@@ -2,15 +2,14 @@
 <body class="bg-black">
 
     {{/*
-        This block creates the permanent log numbers.
+        This block creates the permanent log numbers in a more reliable way.
         1. It gets all pages and sorts them by date, oldest first.
         2. It creates a map where the key is the page's link and the value is its number.
-        This map is then used below to look up the correct number for each post.
+        This avoids using .Scratch, which can fail during deployment.
     */}}
-    {{ $sortedPages := .Site.RegularPages.ByDate }}
-    {{ $.Scratch.Set "logNumbers" (dict) }}
-    {{ range $index, $page := $sortedPages }}
-        {{ $.Scratch.Add "logNumbers" $page.RelPermalink (add $index 1) }}
+    {{ $logNumbers := dict }}
+    {{ range $index, $page := .Site.RegularPages.ByDate }}
+        {{ $logNumbers = merge $logNumbers (dict $page.RelPermalink (add $index 1)) }}
     {{ end }}
 
 
@@ -32,7 +31,7 @@
             <div class="p-5 rounded-lg border-l-4 log-card">
                 <div class="flex items-center justify-between mb-3">
                     <p class="font-fira text-sm subtle-text">
-                        {{ $logNumber := $.Scratch.Get "logNumbers" | index .RelPermalink }}
+                        {{ $logNumber := index $logNumbers .RelPermalink }}
                         Log Entry <span class="log-number">#{{ $logNumber }}</span>
                     </p>
                     <p class="text-xs subtle-text">{{ .Date.Format "02 Jan 2006, 15:04 IST" }}</p>
