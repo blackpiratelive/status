@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Status By BlackPirateX</title>
-    <link>http://localhost:43921/tags/linux/</link>
+    <link>http://localhost:44559/tags/linux/</link>
     <description>Recent content in Linux on Status By BlackPirateX</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 13 Mar 2023 17:55:58 +0530</lastBuildDate>
-    <atom:link href="http://localhost:43921/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:44559/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://localhost:43921/2023-03-13-17-55-32/</link>
+      <link>http://localhost:44559/2023-03-13-17-55-32/</link>
       <pubDate>Mon, 13 Mar 2023 17:55:32 +0530</pubDate>
-      <guid>http://localhost:43921/2023-03-13-17-55-32/</guid>
+      <guid>http://localhost:44559/2023-03-13-17-55-32/</guid>
       <description>&lt;p&gt;Wayland is 10x better than xorg.&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:43921/2023-03-13-16-02-49/</link>
+      <link>http://localhost:44559/2023-03-13-16-02-49/</link>
       <pubDate>Mon, 13 Mar 2023 16:02:49 +0530</pubDate>
-      <guid>http://localhost:43921/2023-03-13-16-02-49/</guid>
+      <guid>http://localhost:44559/2023-03-13-16-02-49/</guid>
       <description>&lt;p&gt;Installed Arch Linux. First time successfully on hardware. I forgot how fast Pacman is, or shall I say how slow dnf is.&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:43921/2022-10-02-09-48-51/</link>
+      <link>http://localhost:44559/2022-10-02-09-48-51/</link>
       <pubDate>Sun, 02 Oct 2022 09:48:51 +0530</pubDate>
-      <guid>http://localhost:43921/2022-10-02-09-48-51/</guid>
+      <guid>http://localhost:44559/2022-10-02-09-48-51/</guid>
       <description>&lt;p&gt;Trying out Fish shell, already I&amp;rsquo;m impressed. It&amp;rsquo;s better than Bash and Zsh.&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:43921/2022-09-28-11-10-34/</link>
+      <link>http://localhost:44559/2022-09-28-11-10-34/</link>
       <pubDate>Wed, 28 Sep 2022 11:10:34 +0530</pubDate>
-      <guid>http://localhost:43921/2022-09-28-11-10-34/</guid>
+      <guid>http://localhost:44559/2022-09-28-11-10-34/</guid>
       <description>&lt;p&gt;Appimages are better than flatpaks. Vscodium from flathub requires 500megs of dependencies, whereas vscodium appimage is only 100MB.&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:43921/2022-09-24-10-11-40/</link>
+      <link>http://localhost:44559/2022-09-24-10-11-40/</link>
       <pubDate>Sat, 24 Sep 2022 10:11:40 +0530</pubDate>
-      <guid>http://localhost:43921/2022-09-24-10-11-40/</guid>
+      <guid>http://localhost:44559/2022-09-24-10-11-40/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m distro hopping, to fedora. Archcraft is giving me some pains.&lt;/p&gt;</description>
     </item>
   </channel>

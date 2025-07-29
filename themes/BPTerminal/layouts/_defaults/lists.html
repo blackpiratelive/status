@@ -20,7 +20,7 @@
             <div class="p-5 rounded-lg border-l-4 log-card">
                 <div class="flex items-center justify-between mb-3">
                     <p class="font-fira text-sm subtle-text">
-                        {{ $pageOffset := mul (sub $paginator.PageNumber 1) $paginator.PageSize }}
+                        {{ $pageOffset := mul (sub $paginator.PageNumber 1) $paginator.PagerSize }}
                         {{ $logNumber := sub $totalPosts (add $pageOffset $index) }}
                         Log Entry <span class="log-number">#{{ $logNumber }}</span>
                     </p>
