@@ -16,12 +16,16 @@
     <div class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
 
         <!-- Header -->
-        <header class="mb-12 text-center md:text-left">
-            <h1 class="text-3xl md:text-4xl font-bold font-fira header-text">
-                <span id="header-title"></span><span class="terminal-header-cursor"></span>
-            </h1>
-            <p class="subtle-text mt-2">{{ .Site.Params.description }}</p>
-        </header>
+        <!-- In themes/BPTerminal/layouts/home.html -->
+
+<!-- Header -->
+<header class="mb-12 text-center md:text-left">
+    <!-- This H1 tag MUST have these exact IDs and attributes -->
+    <h1 id="header-title-container" data-title="{{ .Site.Title }}" class="text-3xl md:text-4xl font-bold font-fira header-text">
+        <span id="header-title"></span><span class="terminal-header-cursor"></span>
+    </h1>
+    <p class="subtle-text mt-2">{{ .Site.Params.description }}</p>
+</header>
 
         <!-- Status Log Feed -->
         <main class="space-y-6">
