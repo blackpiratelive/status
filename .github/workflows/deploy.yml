@@ -1,48 +1,36 @@
-# A descriptive name for your workflow
-name: Deploy to Vercel
+name: Deploy Hugo to Vercel
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push events to the "main" branch
-  push:
-    branches:
-      - new
-  
-  # Allows you to run this workflow manually from the Actions tab on GitHub
-  workflow_dispatch:
+  schedule:
+    - cron: '30 18 * * *' # 12:00 AM IST = 18:30 UTC
+  workflow_dispatch: # allows manual trigger
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # The "deploy" job
   deploy:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # A sequence of tasks that will be executed as part of the job
     steps:
-      # Step 1: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repository
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
-      # Step 2: Sets up the specified version of Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          # This will use the latest Long-Term Support (LTS) version of Node.js
-          node-version: 'lts/*'
+          hugo-version: 'latest'
+          extended: true
 
-      # Step 3: Installs the Vercel CLI globally, which is required by the next step
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+      - name: Build Hugo Site
+        run: hugo
 
-      # Step 4: Runs the Vercel deployment action
       - name: Deploy to Vercel
-        uses: BetaHuhn/deploy-to-vercel-action@v1
-        with:
-          # Your custom GitHub Token secret
-          GITHUB_TOKEN: ${{ secrets.GHmain }}
-          
-          # Your Vercel secrets
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: |
+          npm install -g vercel
+          vercel --prod --yes \
+            --token="$GH_PAT" \
+            --confirm \
+            --scope="$VERCEL_ORG_ID" \
+            --project="$VERCEL_PROJECT_ID" \
+            --cwd=public
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
