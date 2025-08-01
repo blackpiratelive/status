@@ -2,108 +2,115 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Status By BlackPirateX</title>
-    <link>http://localhost:44559/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Status By BlackPirateX</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Jul 2025 00:11:33 +0530</lastBuildDate>
-    <atom:link href="http://localhost:44559/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Jul 2025 21:00:01 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Website</title>
-      <link>http://localhost:44559/tags/website/</link>
-      <pubDate>Mon, 07 Jul 2025 00:10:59 +0530</pubDate>
-      <guid>http://localhost:44559/tags/website/</guid>
+      <link>http://localhost:1313/tags/website/</link>
+      <pubDate>Thu, 31 Jul 2025 20:58:30 +0530</pubDate>
+      <guid>http://localhost:1313/tags/website/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dreams</title>
+      <link>http://localhost:1313/tags/dreams/</link>
+      <pubDate>Wed, 30 Jul 2025 17:14:04 +0530</pubDate>
+      <guid>http://localhost:1313/tags/dreams/</guid>
       <description></description>
     </item>
     <item>
       <title>Quotes</title>
-      <link>http://localhost:44559/tags/quotes/</link>
+      <link>http://localhost:1313/tags/quotes/</link>
       <pubDate>Sat, 05 Jul 2025 10:30:30 +0530</pubDate>
-      <guid>http://localhost:44559/tags/quotes/</guid>
+      <guid>http://localhost:1313/tags/quotes/</guid>
       <description></description>
     </item>
     <item>
       <title>Study</title>
-      <link>http://localhost:44559/tags/study/</link>
+      <link>http://localhost:1313/tags/study/</link>
       <pubDate>Fri, 08 Nov 2024 10:47:17 +0530</pubDate>
-      <guid>http://localhost:44559/tags/study/</guid>
+      <guid>http://localhost:1313/tags/study/</guid>
       <description></description>
     </item>
     <item>
       <title>Bookmarks</title>
-      <link>http://localhost:44559/tags/bookmarks/</link>
+      <link>http://localhost:1313/tags/bookmarks/</link>
       <pubDate>Sun, 23 Jun 2024 23:45:17 +0530</pubDate>
-      <guid>http://localhost:44559/tags/bookmarks/</guid>
+      <guid>http://localhost:1313/tags/bookmarks/</guid>
       <description></description>
     </item>
     <item>
       <title>Excited</title>
-      <link>http://localhost:44559/tags/excited/</link>
+      <link>http://localhost:1313/tags/excited/</link>
       <pubDate>Tue, 13 Jun 2023 18:19:59 +0530</pubDate>
-      <guid>http://localhost:44559/tags/excited/</guid>
+      <guid>http://localhost:1313/tags/excited/</guid>
       <description></description>
     </item>
     <item>
       <title>Ideas</title>
-      <link>http://localhost:44559/tags/ideas/</link>
+      <link>http://localhost:1313/tags/ideas/</link>
       <pubDate>Sat, 13 May 2023 20:15:23 +0530</pubDate>
-      <guid>http://localhost:44559/tags/ideas/</guid>
+      <guid>http://localhost:1313/tags/ideas/</guid>
       <description></description>
     </item>
     <item>
       <title>Blue</title>
-      <link>http://localhost:44559/tags/blue/</link>
+      <link>http://localhost:1313/tags/blue/</link>
       <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>
-      <guid>http://localhost:44559/tags/blue/</guid>
+      <guid>http://localhost:1313/tags/blue/</guid>
       <description></description>
     </item>
     <item>
       <title>Green</title>
-      <link>http://localhost:44559/tags/green/</link>
+      <link>http://localhost:1313/tags/green/</link>
       <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>
-      <guid>http://localhost:44559/tags/green/</guid>
+      <guid>http://localhost:1313/tags/green/</guid>
       <description></description>
     </item>
     <item>
       <title>Red</title>
-      <link>http://localhost:44559/tags/red/</link>
+      <link>http://localhost:1313/tags/red/</link>
       <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>
-      <guid>http://localhost:44559/tags/red/</guid>
+      <guid>http://localhost:1313/tags/red/</guid>
       <description></description>
     </item>
     <item>
       <title>Proud</title>
-      <link>http://localhost:44559/tags/proud/</link>
+      <link>http://localhost:1313/tags/proud/</link>
       <pubDate>Wed, 15 Mar 2023 16:14:25 +0530</pubDate>
-      <guid>http://localhost:44559/tags/proud/</guid>
+      <guid>http://localhost:1313/tags/proud/</guid>
       <description></description>
     </item>
     <item>
       <title>Linux</title>
-      <link>http://localhost:44559/tags/linux/</link>
+      <link>http://localhost:1313/tags/linux/</link>
       <pubDate>Mon, 13 Mar 2023 17:55:32 +0530</pubDate>
-      <guid>http://localhost:44559/tags/linux/</guid>
+      <guid>http://localhost:1313/tags/linux/</guid>
       <description></description>
     </item>
     <item>
       <title>Rant</title>
-      <link>http://localhost:44559/tags/rant/</link>
+      <link>http://localhost:1313/tags/rant/</link>
       <pubDate>Sun, 22 Jan 2023 11:53:02 +0530</pubDate>
-      <guid>http://localhost:44559/tags/rant/</guid>
+      <guid>http://localhost:1313/tags/rant/</guid>
       <description></description>
     </item>
     <item>
       <title>Meta</title>
-      <link>http://localhost:44559/tags/meta/</link>
+      <link>http://localhost:1313/tags/meta/</link>
       <pubDate>Sun, 28 Aug 2022 14:58:11 +0530</pubDate>
-      <guid>http://localhost:44559/tags/meta/</guid>
+      <guid>http://localhost:1313/tags/meta/</guid>
       <description></description>
     </item>
     <item>
       <title>Bored</title>
-      <link>http://localhost:44559/tags/bored/</link>
+      <link>http://localhost:1313/tags/bored/</link>
       <pubDate>Tue, 26 Jul 2022 17:04:57 +0530</pubDate>
-      <guid>http://localhost:44559/tags/bored/</guid>
+      <guid>http://localhost:1313/tags/bored/</guid>
       <description></description>
     </item>
   </channel>

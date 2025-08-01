@@ -43,91 +43,14 @@
   <p>Website now has on this day page. It should refresh everyday.
 
 
-
-
-
-
-
-
-    
-
-
-
-
-<div class="image-shortcode-container">
-    <button class="btn-show-image" data-modal-id="e7f4975d7am368b488b66b6i4g83fdaaf-68">
-        <span class="icon icon-image"></span>
-        <span>Show Image: What this page Looks like now</span>
-    </button>
+<div class="all-images">
+<a href="/img/d1047cab6c1ce1c65f06098bb8d22fc6.png" id="img-link">
+    <img src="/img/d1047cab6c1ce1c65f06098bb8d22fc6_hu_2b737f8c7b3d09bd.webp" alt="Image posted by BlackPiratex" loading="lazy">
+</a>
+<div class="view-original-div">
+    <a href="/img/d1047cab6c1ce1c65f06098bb8d22fc6.png" id="view-original-link" class="view-original-link">View Original</a>
 </div>
-
-
-<div id="e7f4975d7am368b488b66b6i4g83fdaaf-68" class="image-modal-overlay">
-    <div class="image-modal">
-        <button class="image-modal-close">&times;</button>
-        <img src="/img/d1047cab6c1ce1c65f06098bb8d22fc6.png" alt="What this page Looks like now" loading="lazy">
-        
-        <div class="image-modal-caption">What this page Looks like now</div>
-        
-    </div>
 </div>
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        if (!window.imageModalInitialized) {
-            
-            const body = document.body;
-
-            
-            const openModal = (modalId) => {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.add('visible');
-                    body.classList.add('body-modal-open'); 
-                }
-            };
-
-            
-            const closeModal = () => {
-                const visibleModal = document.querySelector('.image-modal-overlay.visible');
-                if (visibleModal) {
-                    visibleModal.classList.remove('visible');
-                    body.classList.remove('body-modal-open'); 
-                }
-            };
-
-            
-            document.body.addEventListener('click', (event) => {
-                if (event.target.closest('.btn-show-image')) {
-                    const button = event.target.closest('.btn-show-image');
-                    openModal(button.dataset.modalId);
-                }
-            });
-
-            
-            document.body.addEventListener('click', (event) => {
-                
-                if (event.target.matches('.image-modal-close, .image-modal-overlay')) {
-                    closeModal();
-                }
-            });
-            
-            
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    closeModal();
-                }
-            });
-            
-            window.imageModalInitialized = true;
-        }
-    });
-</script>
-
-
 </p>
 
   
