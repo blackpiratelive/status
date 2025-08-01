@@ -9,6 +9,9 @@ jobs:
   redeploy:
     runs-on: ubuntu-latest
     steps:
+    - name: Print current UTC time
+        run: date -u
+        
       - name: Trigger Vercel Deploy Hook
         run: |
           curl -X POST "$VERCEL_DEPLOY_HOOK_URL"
