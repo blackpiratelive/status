@@ -150,6 +150,15 @@ header h1 {
 .log-entry {
     padding: 1rem;
     cursor: pointer;
+    /* Styles for fade-in animation */
+    opacity: 0;
+    transform: translateY(50px); /* Increased distance */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Slower transition */
+}
+
+.log-entry.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .log-entry-meta {
@@ -173,7 +182,6 @@ header h1 {
     word-wrap: break-word; /* Ensure long words don't overflow */
 }
 
-/* --- FIX: Added responsive image styles --- */
 .log-entry-content img {
     max-width: 100%;
     height: auto;

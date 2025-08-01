@@ -649,6 +649,7 @@
             const originalHeadingText = heading.textContent;
             const chars = '!<>-_\\/[]{}—=+*^?#________';
             const themeAnimationOverlay = document.getElementById('theme-animation-overlay');
+            const logEntries = document.querySelectorAll('.log-entry');
 
             const animateHeading = () => {
                 let iterations = 0;
@@ -668,6 +669,35 @@
                     iterations += 1 / 3;
                 }, 30);
             };
+            
+            
+            let observer;
+            const setupFadeInObserver = () => {
+                observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                logEntries.forEach(entry => {
+                    observer.observe(entry);
+                });
+            };
+
+            const resetCardAnimations = () => {
+                logEntries.forEach(entry => {
+                    entry.classList.remove('is-visible');
+                });
+                
+                setupFadeInObserver();
+            };
+            
+            
+            setupFadeInObserver();
+
 
             
             const setTheme = (isDark) => {
@@ -684,12 +714,12 @@
                     themeAnimationOverlay.classList.remove('is-animating');
                 }, { once: true });
 
-                
                 setTimeout(() => {
                     const isDark = body.classList.toggle('dark-mode');
                     localStorage.setItem('theme', isDark ? 'dark' : 'light');
                     animateHeading();
-                }, 500); 
+                    resetCardAnimations();
+                }, 500);
             });
 
             
@@ -720,6 +750,7 @@
                         
                         setAccentColor(newColor);
                         animateHeading();
+                        resetCardAnimations();
                         
                         curtain.style.clipPath = 'circle(0% at 0% 100%)';
                     });
@@ -730,7 +761,6 @@
             setAccentColor(savedAccent || 'blue');
 
             
-            const logEntries = document.querySelectorAll('.log-entry');
             logEntries.forEach(entry => {
                 entry.addEventListener('mousedown', () => entry.classList.add('clicked'));
                 entry.addEventListener('mouseup', () => entry.classList.remove('clicked'));
