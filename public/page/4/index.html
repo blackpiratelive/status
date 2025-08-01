@@ -21,11 +21,10 @@
                 <p class="subheading">Quick one liner thoughts, that comes to my mind.</p>
             </div>
             <div class="header-controls">
-                <a href="/index.xml" class="rss-button" title="Subscribe to RSS">
+                <a href="/index.xml" class="control-button rss-button" title="Subscribe to RSS">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
                 </a>
-                
-                <a href="/on-this-day/" class="on-this-day-button" title="On This Day">
+                <a href="/on-this-day/" class="control-button on-this-day-button" title="On This Day">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
                     <span>On This Day</span>
                 </a>
@@ -35,7 +34,7 @@
                     <span class="color-dot" data-color="yellow"><svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                     <span class="color-dot" data-color="blue"><svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                 </div>
-                <div id="theme-switcher" class="theme-switcher">
+                <div id="theme-switcher" class="control-button theme-switcher">
                     <svg id="sun-icon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <svg id="moon-icon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </div>
@@ -2705,28 +2704,14 @@ But some lines are actually very goood.</p>
             const colorDots = document.querySelectorAll('.color-dot');
             const curtain = document.getElementById('curtain');
             const heading = document.getElementById('main-heading');
-            const originalHeadingText = heading.textContent;
-            const chars = '!<>-_\\/[]{}—=+*^?#________';
             const themeAnimationOverlay = document.getElementById('theme-animation-overlay');
             const logEntries = document.querySelectorAll('.log-entry');
 
             const animateHeading = () => {
-                let iterations = 0;
-                const interval = setInterval(() => {
-                    heading.textContent = originalHeadingText.split("")
-                        .map((letter, index) => {
-                            if(index < iterations) {
-                                return originalHeadingText[index];
-                            }
-                            return chars[Math.floor(Math.random() * chars.length)];
-                        })
-                        .join("");
-
-                    if(iterations >= originalHeadingText.length) {
-                        clearInterval(interval);
-                    }
-                    iterations += 1 / 3;
-                }, 30);
+                heading.classList.add('is-animating');
+                heading.addEventListener('animationend', () => {
+                    heading.classList.remove('is-animating');
+                }, { once: true });
             };
             
             
