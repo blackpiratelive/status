@@ -164,7 +164,7 @@ header h1 {
     transform: translateY(0);
 }
 
-/* --- NEW: Post Number Styling --- */
+/* --- Post Number Styling --- */
 .post-number {
     position: absolute;
     top: 1rem;
@@ -194,7 +194,7 @@ header h1 {
     opacity: 1;
     transform: translateY(0);
 }
-.log-entry.is-visible .log-entry-meta {
+.log-entry.is-visible .meta-wrapper {
     transition-delay: 0.2s;
 }
 .log-entry.is-visible .log-entry-content {
@@ -204,22 +204,41 @@ header h1 {
     transition-delay: 0.4s;
 }
 
+/* --- Meta Wrapper and Lastmod Styling --- */
+.meta-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
 
-.log-entry-meta {
+.log-entry-meta, .log-entry-lastmod {
     display: flex;
     align-items: center;
     gap: 0.4rem;
     font-size: 0.875rem;
-    margin-bottom: 0.75rem;
     color: var(--text-secondary);
 }
 
-.log-entry-meta svg {
+.log-entry-lastmod {
+    font-style: italic;
+    font-size: 0.75rem; /* Make it smaller */
+    opacity: 0.8; /* Make it less prominent */
+}
+
+.log-entry-meta svg, .log-entry-lastmod svg {
     width: 14px;
     height: 14px;
     color: var(--accent-color);
     transition: color 0.3s;
 }
+
+.log-entry-lastmod svg {
+    width: 12px; /* Make the icon smaller */
+    height: 12px;
+}
+
 
 .log-entry-content {
     font-size: 1rem;
