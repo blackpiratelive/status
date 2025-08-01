@@ -113,6 +113,8 @@
         </div>
     </div>
 
+    {{ partial "footer.html" . }}
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const themeSwitcher = document.getElementById('theme-switcher');
@@ -157,7 +159,7 @@
             
             setupFadeInObserver();
 
-            // --- Cookie Helpers ---
+            // --- Cookie Helper ---
             function setCookie(name, value, days) {
                 let expires = "";
                 if (days) {
@@ -231,7 +233,6 @@
                 });
             });
 
-            // --- FIX: Set initial active color dot on page load ---
             const savedAccent = getCookie('accentColor');
             setAccentColor(savedAccent || 'blue');
         });

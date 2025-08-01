@@ -2,9 +2,42 @@
 <html lang="en">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>On This Day | Status By BlackPirateX</title>
-    <link rel="stylesheet" href="/css/theme.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On This Day | Status By BlackPirateX</title>
+<link rel="stylesheet" href="/css/theme.css">
+
+<script>
+    
+    
+    (function() {
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        const docElement = document.documentElement;
+        
+        
+        const savedTheme = getCookie('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            docElement.classList.add('dark-mode');
+        }
+
+        
+        const savedAccent = getCookie('accentColor');
+        if (savedAccent) {
+            docElement.classList.add(`accent-${savedAccent}`);
+        }
+    })();
+</script>
+
     <style>
          
 
@@ -2039,16 +2072,6 @@
             }, { threshold: 0.1 });
 
             animatedElements.forEach(el => observer.observe(el));
-
-            
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-            const savedAccent = localStorage.getItem('accentColor');
-            if (savedAccent) {
-                document.body.classList.add(`accent-${savedAccent}`);
-            }
         });
     </script>
 </body>

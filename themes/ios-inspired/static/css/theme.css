@@ -481,3 +481,56 @@ html.dark-mode #moon-icon { display: block; }
     50% { opacity: 1; }
     100% { opacity: 0; }
 }
+
+/* --- NEW: Footer Styles --- */
+.site-footer {
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+.footer-heading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tag-cloud {
+    text-align: center;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.tag-link {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-secondary);
+    background-color: var(--meta-bg-color);
+    transition: all 0.2s ease-in-out;
+}
+.tag-link:hover {
+    color: #fff;
+    background-color: var(--accent-color);
+}
+html.dark-mode .tag-link:hover {
+    color: #000;
+}
+
+.copyright {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 3rem;
+}

@@ -1,1 +1,15 @@
-<p>Copyright {{ now.Year }}. All rights reserved.</p>
+<footer class="site-footer">
+    <div class="main-container">
+        <div class="tag-cloud">
+            <h3 class="footer-heading">Explore Tags</h3>
+            <div class="tag-list">
+                {{ range .Site.Taxonomies.tags.ByCount }}
+                    <a href="{{ .Page.RelPermalink }}" class="tag-link">#{{ .Page.Title }} ({{ .Count }})</a>
+                {{ end }}
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; {{ now.Year }} {{ .Site.Author.name | default .Site.Title }}. All rights reserved.
+        </div>
+    </div>
+</footer>

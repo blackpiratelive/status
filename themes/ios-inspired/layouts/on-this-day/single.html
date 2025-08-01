@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>On This Day | {{ .Site.Title }}</title>
-    <link rel="stylesheet" href="/css/theme.css">
+    {{ partial "head.html" . }}
     <style>
         /* --- On This Day Specific Styles --- */
 
@@ -211,16 +208,6 @@
             }, { threshold: 0.1 });
 
             animatedElements.forEach(el => observer.observe(el));
-
-            // Apply saved theme settings from homepage if they exist
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-            const savedAccent = localStorage.getItem('accentColor');
-            if (savedAccent) {
-                document.body.classList.add(`accent-${savedAccent}`);
-            }
         });
     </script>
 </body>
