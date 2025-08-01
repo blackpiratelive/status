@@ -3,7 +3,7 @@ name: Redeploy Vercel Project
 on:
   workflow_dispatch:    # Allows manual run
   schedule:
-    - cron: '30 18 * * *' # Every day at 12:00 AM IST (UTC+5:30 → 18:30 UTC)
+    - cron: '30 6 * * *' # Every day at 12:00 AM IST (UTC+5:30 → 18:30 UTC)
 
 jobs:
   redeploy:
