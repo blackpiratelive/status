@@ -46,11 +46,22 @@ body.accent-blue { --accent-color: var(--accent-color-blue); }
     }
 }
 
+/* --- RESPONSIVE HEADER --- */
 header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Stack vertically on mobile */
     align-items: flex-start;
+    gap: 1.5rem; /* Space between title and controls */
     margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) { /* Breakpoint for larger screens */
+    header {
+        flex-direction: row; /* Horizontal layout */
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 }
 
 header h1 {
@@ -69,7 +80,16 @@ header h1 {
 .header-controls {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    flex-wrap: wrap; /* Allow controls to wrap on small screens */
+    gap: 1rem 1.5rem;
+    justify-content: flex-start; /* Align to the left on mobile */
+}
+
+@media (min-width: 640px) {
+    .header-controls {
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+        justify-content: flex-end; /* Align to the right */
+    }
 }
 
 .rss-button {
@@ -150,9 +170,18 @@ header h1 {
 
 .log-entry-content {
     font-size: 1rem;
+    word-wrap: break-word; /* Ensure long words don't overflow */
 }
 
-/* --- NEW: Style for links inside log content --- */
+/* --- FIX: Added responsive image styles --- */
+.log-entry-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem; /* Match the card's border-radius */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .log-entry-content a {
     color: var(--accent-color);
 }
