@@ -1,8 +1,9 @@
 {
   "name": "Hugo Extended Devcontainer",
   "features": {
-    "ghcr.io/devcontainers/features/hugo:1": { "extended": true }
+    "ghcr.io/devcontainers/features/curl:1": {},
+    "ghcr.io/devcontainers/features/debian:1": {}
   },
   "forwardPorts": [1313],
-  "postStartCommand": "hugo server"
+  "postStartCommand": "curl -L https://github.com/gohugoio/hugo/releases/latest/download/hugo_extended_0.126.1_Linux-64bit.tar.gz | tar -xz && sudo mv hugo /usr/local/bin/ && hugo version && hugo server"
 }
