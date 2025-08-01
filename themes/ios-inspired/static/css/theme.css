@@ -5,6 +5,7 @@
     --text-primary: #050505;
     --text-secondary: #65676b;
     --border-color: #ced0d4;
+    --meta-bg-color: #e9ecef;
     --accent-color-blue: #007aff;
     --accent-color-red: #ff3b30;
     --accent-color-green: #34c759;
@@ -18,6 +19,7 @@ body.dark-mode {
     --text-primary: #e4e6eb;
     --text-secondary: #b0b3b8;
     --border-color: #3a3a3c;
+    --meta-bg-color: #2c2c2e;
     --accent-color-blue: #0a84ff;
     --accent-color-red: #ff453a;
     --accent-color-green: #32d74b;
@@ -150,10 +152,11 @@ header h1 {
 .log-entry {
     padding: 1rem;
     cursor: pointer;
+    position: relative; /* For post number positioning */
     /* Styles for fade-in animation */
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Slower card animation */
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 
 .log-entry.is-visible {
@@ -161,7 +164,27 @@ header h1 {
     transform: translateY(0);
 }
 
-/* --- NEW: Staggered animation for card content --- */
+/* --- NEW: Post Number Styling --- */
+.post-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-secondary);
+    background-color: var(--meta-bg-color);
+    padding: 4px 8px;
+    border-radius: 9999px;
+    opacity: 0.5;
+    transition: opacity 0.3s, color 0.3s, background-color 0.3s;
+}
+.log-entry:hover .post-number {
+    opacity: 1;
+}
+
+
+/* --- Staggered animation for card content --- */
 .log-entry > * {
     opacity: 0;
     transform: translateY(20px);
