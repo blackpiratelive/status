@@ -106,6 +106,37 @@ header h1 {
     height: 24px;
 }
 
+/* --- NEW: On This Day Button --- */
+.on-this-day-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-secondary);
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease-in-out;
+}
+.on-this-day-button:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent-color);
+}
+.on-this-day-button svg {
+    width: 16px;
+    height: 16px;
+}
+/* In dark mode, the button text on hover should be dark for better contrast */
+body.dark-mode .on-this-day-button:hover {
+    color: #000;
+}
+
+
 .accent-picker {
     display: flex;
     gap: 0.75rem;
