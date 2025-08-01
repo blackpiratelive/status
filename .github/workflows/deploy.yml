@@ -1,36 +1,16 @@
-name: Deploy Hugo to Vercel
+name: Redeploy Vercel Project
 
 on:
+  workflow_dispatch:    # Allows manual run
   schedule:
-    - cron: '30 18 * * *' # 12:00 AM IST = 18:30 UTC
-  workflow_dispatch: # allows manual trigger
+    - cron: '30 18 * * *' # Every day at 12:00 AM IST (UTC+5:30 → 18:30 UTC)
 
 jobs:
-  deploy:
+  redeploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Install Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
-
-      - name: Build Hugo Site
-        run: hugo
-
-      - name: Deploy to Vercel
+      - name: Trigger Vercel Deploy Hook
         run: |
-          npm install -g vercel
-          vercel --prod --yes \
-            --token="$GH_PAT" \
-            --confirm \
-            --scope="$VERCEL_ORG_ID" \
-            --project="$VERCEL_PROJECT_ID" \
-            --cwd=public
+          curl -X POST "$VERCEL_DEPLOY_HOOK_URL"
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
