@@ -6,7 +6,7 @@ on:
   # Triggers the workflow on push events to the "main" branch
   push:
     branches:
-      - main
+      - new
   
   # Allows you to run this workflow manually from the Actions tab on GitHub
   workflow_dispatch:
@@ -40,7 +40,7 @@ jobs:
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
           # Your custom GitHub Token secret
-          GITHUB_TOKEN: ${{ secrets.Gh_PT }}
+          GITHUB_TOKEN: ${{ secrets.GHmain }}
           
           # Your Vercel secrets
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
