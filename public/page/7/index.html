@@ -3,9 +3,42 @@
 <head>
 	<meta name="generator" content="Hugo 0.148.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Status By BlackPirateX</title>
-    <link rel="stylesheet" href="/css/theme.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Status By BlackPirateX</title>
+<link rel="stylesheet" href="/css/theme.css">
+
+<script>
+    
+    
+    (function() {
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        const docElement = document.documentElement;
+        
+        
+        const savedTheme = getCookie('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            docElement.classList.add('dark-mode');
+        }
+
+        
+        const savedAccent = getCookie('accentColor');
+        if (savedAccent) {
+            docElement.classList.add(`accent-${savedAccent}`);
+        }
+    })();
+</script>
+
 </head>
 <body>
     
@@ -2795,7 +2828,7 @@ So many Bengalis also talk in Hindi when both party knows Bengali, pisses me off
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const themeSwitcher = document.getElementById('theme-switcher');
-            const body = document.body;
+            const docElement = document.documentElement;
             const colorDots = document.querySelectorAll('.color-dot');
             const curtain = document.getElementById('curtain');
             const heading = document.getElementById('main-heading');
@@ -2836,14 +2869,28 @@ So many Bengalis also talk in Hindi when both party knows Bengali, pisses me off
             
             setupFadeInObserver();
 
-
             
-            const setTheme = (isDark) => {
-                body.classList.toggle('dark-mode', isDark);
-            };
+            function setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
 
-            const savedTheme = localStorage.getItem('theme');
-            setTheme(savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
+
             
             themeSwitcher.addEventListener('click', () => {
                 themeAnimationOverlay.classList.add('is-animating');
@@ -2853,8 +2900,8 @@ So many Bengalis also talk in Hindi when both party knows Bengali, pisses me off
                 }, { once: true });
 
                 setTimeout(() => {
-                    const isDark = body.classList.toggle('dark-mode');
-                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    const isDark = docElement.classList.toggle('dark-mode');
+                    setCookie('theme', isDark ? 'dark' : 'light', 365);
                     animateHeading();
                     resetCardAnimations();
                 }, 500);
@@ -2863,19 +2910,18 @@ So many Bengalis also talk in Hindi when both party knows Bengali, pisses me off
             
             const setAccentColor = (color) => {
                 const colors = ['red', 'green', 'yellow', 'blue'];
-                colors.forEach(c => body.classList.remove(`accent-${c}`));
-                body.classList.add(`accent-${color}`);
+                colors.forEach(c => docElement.classList.remove(`accent-${c}`));
+                docElement.classList.add(`accent-${color}`);
                 
                 colorDots.forEach(dot => {
                     dot.classList.toggle('active', dot.dataset.color === color);
                 });
-                localStorage.setItem('accentColor', color);
             };
 
             colorDots.forEach(dot => {
                 dot.addEventListener('click', (e) => {
                     const newColor = e.currentTarget.dataset.color;
-                    const currentColor = localStorage.getItem('accentColor') || 'blue';
+                    const currentColor = getCookie('accentColor') || 'blue';
                     if (newColor === currentColor) return;
 
                     const colorValue = getComputedStyle(e.currentTarget).backgroundColor;
@@ -2887,6 +2933,8 @@ So many Bengalis also talk in Hindi when both party knows Bengali, pisses me off
                         curtain.removeEventListener('transitionend', wipeInHandler);
                         
                         setAccentColor(newColor);
+                        setCookie('accentColor', newColor, 365);
+                        
                         animateHeading();
                         resetCardAnimations();
                         
@@ -2895,15 +2943,9 @@ So many Bengalis also talk in Hindi when both party knows Bengali, pisses me off
                 });
             });
 
-            const savedAccent = localStorage.getItem('accentColor');
-            setAccentColor(savedAccent || 'blue');
-
             
-            logEntries.forEach(entry => {
-                entry.addEventListener('mousedown', () => entry.classList.add('clicked'));
-                entry.addEventListener('mouseup', () => entry.classList.remove('clicked'));
-                entry.addEventListener('mouseleave', () => entry.classList.remove('clicked'));
-            });
+            const savedAccent = getCookie('accentColor');
+            setAccentColor(savedAccent || 'blue');
         });
     </script>
 </body>
