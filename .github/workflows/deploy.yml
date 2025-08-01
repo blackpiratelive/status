@@ -9,7 +9,7 @@ jobs:
   redeploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Print current UTC time
+      - name: Print current UTC time
         run: date -u
         
       - name: Trigger Vercel Deploy Hook
