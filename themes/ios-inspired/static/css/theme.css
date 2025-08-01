@@ -490,42 +490,43 @@ html.dark-mode #moon-icon { display: block; }
     padding-bottom: 2rem;
 }
 
+.footer-section {
+    margin-bottom: 2.5rem;
+}
+
 .footer-heading {
-    font-size: 1.25rem;
+    font-size: 1.125rem; /* text-lg */
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 1.5rem;
     text-align: center;
 }
 
-.tag-cloud {
-    text-align: center;
-}
-
-.tag-list {
+.footer-link-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 1rem 1.5rem; /* row-gap column-gap */
 }
 
-.tag-link {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 9999px;
-    font-size: 0.875rem;
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem; /* text-sm */
     font-weight: 500;
     text-decoration: none;
     color: var(--text-secondary);
-    background-color: var(--meta-bg-color);
-    transition: all 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
 }
-.tag-link:hover {
-    color: #fff;
-    background-color: var(--accent-color);
+.footer-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
 }
-html.dark-mode .tag-link:hover {
-    color: #000;
+
+.footer-link svg {
+    width: 16px;
+    height: 16px;
 }
 
 .copyright {

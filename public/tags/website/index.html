@@ -1,119 +1,2604 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website | Status By BlackPirateX</title>
+<link rel="stylesheet" href="/css/theme.css">
 
-    <link rel="stylesheet" href="/css/main.css">
+<script>
+    
+    
+    (function() {
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
 
+        const docElement = document.documentElement;
+        
+        
+        const savedTheme = getCookie('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            docElement.classList.add('dark-mode');
+        }
 
-      <script src="/js/main.js"></script>
+        
+        const savedAccent = getCookie('accentColor');
+        if (savedAccent) {
+            docElement.classList.add(`accent-${savedAccent}`);
+        }
+    })();
+</script>
 
-
+    <style>
+         
+        .tag-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .tag-header .subheading {
+            margin-bottom: 0.5rem;
+        }
+        .tag-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 0;
+        }
+        @media (min-width: 640px) {
+            .tag-header h1 {
+                font-size: 3rem;
+            }
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Status By BlackPirateX</h1>
-
-  <nav>
-    <ul>
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-      <a href="/posts/">Posts</a>
-    </li>
-    <li>
-      <a href="/tags/">Tags</a>
-    </li>
-    </ul>
-  </nav>
-
-
-  </header>
-  <main>
     
-  <h1>Website</h1>
-  
-  
-    <h2><a href="/2025-07-31-20-58-30/"></a></h2>
-  
-    <h2><a href="/2025-07-29-20-57-53/"></a></h2>
-  
-    <h2><a href="/2025-07-26-00-03-56/"></a></h2>
-  
-    <h2><a href="/2025-07-25-23-14-58/"></a></h2>
-  
-    <h2><a href="/2025-07-25-20-41-51/"></a></h2>
-  
-    <h2><a href="/2025-07-24-00-48-00/"></a></h2>
-  
-    <h2><a href="/2025-07-07-00-10-59/"></a></h2>
-  
-    <h2><a href="/2025-03-27-17-16-28/"></a></h2>
-  
-    <h2><a href="/2024-12-04-17-42-06/"></a></h2>
-  
-    <h2><a href="/2024-11-03-01-41-10/"></a></h2>
-  
-    <h2><a href="/2024-03-08-09-11-38/"></a></h2>
-  
-    <h2><a href="/2024-01-22-02-27-16/"></a></h2>
-  
-    <h2><a href="/2023-07-02-01-07-12/"></a></h2>
-  
-    <h2><a href="/2023-05-06-20-44-45/"></a></h2>
-  
-    <h2><a href="/2023-05-06-20-16-32/"></a></h2>
-  
-    <h2><a href="/2023-04-11-21-17-48/"></a></h2>
-  
-    <h2><a href="/2023-03-19-08-40-47/"></a></h2>
-  
-    <h2><a href="/2023-03-15-16-15-21/"></a></h2>
-  
-    <h2><a href="/2023-03-12-15-19-15/"></a></h2>
-  
-    <h2><a href="/2023-03-11-20-38-57/"></a></h2>
-  
-    <h2><a href="/2023-02-09-18-49-11/"></a></h2>
-  
-    <h2><a href="/2022-11-27-18-44-22/"></a></h2>
-  
-    <h2><a href="/2022-10-22-22-09-19/"></a></h2>
-  
-    <h2><a href="/2022-10-08-10-36-17/"></a></h2>
-  
-    <h2><a href="/2022-10-08-09-54-08/"></a></h2>
-  
-    <h2><a href="/2022-10-06-22-35-46/"></a></h2>
-  
-    <h2><a href="/2022-09-30-19-24-49/"></a></h2>
-  
-    <h2><a href="/2022-09-30-19-07-37/"></a></h2>
-  
-    <h2><a href="/2022-09-27-20-38-57/"></a></h2>
-  
-    <h2><a href="/2022-09-22-19-28-08/"></a></h2>
-  
-    <h2><a href="/2022-09-14-09-32-12/"></a></h2>
-  
-    <h2><a href="/2022-09-13-21-42-38/"></a></h2>
-  
-    <h2><a href="/2022-09-02-00-21-04/"></a></h2>
-  
-    <h2><a href="/2022-08-28-14-58-11/"></a></h2>
-  
-    <h2><a href="/2022-08-21-16-18-21/"></a></h2>
-  
-    <h2><a href="/2022-08-20-17-06-07/"></a></h2>
-  
+    <div class="main-container">
 
-  </main>
-  <footer>
-    <p>Copyright 2025. All rights reserved.</p>
+        
+        <header class="tag-header">
+            <p class="subheading">Browsing Tag</p>
+            <h1>#Website</h1>
+            <a href="http://localhost:1313/" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span>Back to All Posts</span>
+            </a>
+        </header>
 
-  </footer>
+        
+        
+        
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+        <div class="log-entries">
+            
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#436</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>31 Jul 2025, 20:58 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                21:00 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Did some minor improvements that ought to speed up the website. Lowered the image quality, haha</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#428</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>29 Jul 2025, 20:57 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                20:58 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Website now looks like this. All thanks to Gemini.
+
+
+<div class="all-images">
+<a href="/img/875a6175000dab980bec2f8a51923a7b.png" id="img-link">
+    <img src="/img/875a6175000dab980bec2f8a51923a7b_hu_bfd636f6d861d4e0.webp" alt="Image posted by BlackPiratex" loading="lazy">
+</a>
+<div class="view-original-div">
+    <a href="/img/875a6175000dab980bec2f8a51923a7b.png" id="view-original-link" class="view-original-link">View Original</a>
+</div>
+</div>
+</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#424</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>26 Jul 2025, 00:03 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                29 Jul 2025, 20:44 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Uploaded some of my previous dream entries. Check it out:
+<a href="https://blog.blackpiratex.com/tags/dream/">https://blog.blackpiratex.com/tags/dream/</a></p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#423</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>25 Jul 2025, 23:14 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                29 Jul 2025, 20:44 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>New blog post: Acievements in College Life
+<a href="https://blog.blackpiratex.com/achievements-in-college-life/">https://blog.blackpiratex.com/achievements-in-college-life/</a></p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#421</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>25 Jul 2025, 20:41 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                29 Jul 2025, 20:45 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Website now uses Glassmorphic design, hehe.
+Use desktop for best experience.
+Give me feedback as where to improve.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#417</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>24 Jul 2025, 00:48 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                29 Jul 2025, 20:45 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Vote fast.
+<a href="https://strawpoll.com/embed/kjn1DmaJ2yQ">https://strawpoll.com/embed/kjn1DmaJ2yQ</a></p>
+<!-- raw HTML omitted -->
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#409</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>07 Jul 2025, 00:10 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                00:11 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Added gallery functionality to this website. Im so sleepy bye</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#380</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>27 Mar 2025, 17:16 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                17:17 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Hugo version of this website has been updated.
+Now runs on 0.145.0</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#360</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>04 Dec 2024, 17:42 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                17:43 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I made a website to list my study notes. It&rsquo;s at its infancy. Check here <a href="https://english.sn.blackpiratex.com/">https://english.sn.blackpiratex.com/</a>
+The SSL cert should be working few mins later.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#355</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>03 Nov 2024, 01:41 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                01:49 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I was depressed so I revamed the home website. <a href="https://blackpiratex.com/bookmarks">Bookmarks</a> now has more links.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#325</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>08 Mar 2024, 09:11 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                09:13 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Added:</p>
+<ul>
+<li>Chatbox for visitors</li>
+<li>Featured gallery section on front page.</li>
+<li>Favourite blogs in bookmarks section</li>
+</ul>
+<p>Minor fixes also.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#318</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>22 Jan 2024, 02:27 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                02:31 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Added 4 more books in notes website. Total books 16. The hugo version of notes website has been upgraded to version 0.121.2. latest features are used. The book page now has book cover, background has a oval shape which matches the cover image color. Book title background also matches the book cover color. Good night.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#277</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>02 Jul 2023, 01:07 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                01:08 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>New blog post: <a href="https://blog.blackpiratex.com/the-hyprland-experience/">The Hyprland Experience</a>.
+Also blog website got a redesign.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#259</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>06 May 2023, 20:44 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                20:46 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Revamped my whole gallery website. Can&rsquo;t figure out how to remove the extra margin on mobile.</p>
+
+
+<div class="all-images">
+<a href="/img/1dcc15862603d884095b57b553c753b7.png" id="img-link">
+    <img src="/img/1dcc15862603d884095b57b553c753b7_hu_18993da2a20cf581.webp" alt="Image posted by BlackPiratex" loading="lazy">
+</a>
+<div class="view-original-div">
+    <a href="/img/1dcc15862603d884095b57b553c753b7.png" id="view-original-link" class="view-original-link">View Original</a>
+</div>
+</div>
+
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#258</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>06 May 2023, 20:16 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                20:17 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I&rsquo;m getting so pro, used a JavaScript library to make my gallery look sexy</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#245</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>11 Apr 2023, 21:17 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                21:19 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Updated my website theme(1 day ago), it now follows newcss.net css framework.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#238</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>19 Mar 2023, 08:40 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                08:41 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Going to seperate book notes from my blog website.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#236</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>15 Mar 2023, 16:15 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                16:16 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Redesigned blog to make it more minimalistic. Added option to change theme in status page.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#231</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>12 Mar 2023, 15:19 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                15:21 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Did a whole website redesign as I was bored of previous color scheme.
+
+
+<div class="all-images">
+<a href="/img/1d3ae56dc7ac7c9a6ea73356edd7680f.png" id="img-link">
+    <img src="/img/1d3ae56dc7ac7c9a6ea73356edd7680f_hu_6951ce1c93ba605b.webp" alt="Image posted by BlackPiratex" loading="lazy">
+</a>
+<div class="view-original-div">
+    <a href="/img/1d3ae56dc7ac7c9a6ea73356edd7680f.png" id="view-original-link" class="view-original-link">View Original</a>
+</div>
+</div>
+</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#230</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>11 Mar 2023, 20:38 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                20:39 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I&rsquo;m getting bored of this green black color scheme of my website, want something new.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#219</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>09 Feb 2023, 18:49 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                18:50 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Tried to make a page for hobbies (it&rsquo;s halfway done), I&rsquo;m getting rusty.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#197</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>27 Nov 2022, 18:44 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                18:45 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Verified two of my websites on mastodon. It&rsquo;s so flawless.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#162</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>22 Oct 2022, 22:09 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                22:10 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I&rsquo;m thinking about making my gallery page as so that I would be able to add images from my phone. Right now it&rsquo;s possible but bit hacky way of doing things.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                    <a href="/tags/ideas" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#ideas</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#150</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>08 Oct 2022, 10:36 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                10:38 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p><strong>Website changelog:</strong></p>
+<ul>
+<li>Added font display (still need to fix more)</li>
+<li>added fallback font on body</li>
+<li>added defer to the js required for icons. Main content should now load faster, then those icons will show up.</li>
+</ul>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#149</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>08 Oct 2022, 09:54 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                10:40 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p><strong>Website changelog:</strong></p>
+<p>Status Website:</p>
+<ul>
+<li>No more big fat images, all images are small and in webp format.</li>
+<li>huge performance improvement</li>
+<li>Clicking on images will show original quality image.</li>
+<li>added <em>show original</em> button below images.</li>
+</ul>
+<p><strong>Website ToDo:</strong></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Make texts visible while fonts are loading.</li>
+<li><input disabled="" type="checkbox"> explicit width and height to the images</li>
+</ul>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#142</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>06 Oct 2022, 22:35 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                22:39 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I seriously need to find a way to optimize images. 3-4 megabytes of images are totally unacceptable on web. 3g network or even 4g would have a hard time loading it. If you think you can help me with that I&rsquo;ll appreciate it. <a href="https://blackpiratex.com/contact">Contact here</a>.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#131</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>30 Sep 2022, 19:24 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                19:25 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Website changelog:</p>
+<ul>
+<li>Blog and Status website now has total post counter.</li>
+</ul>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#130</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>30 Sep 2022, 19:07 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                19:08 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>New post on my blog:
+<a href="https://blog.blackpiratex.com/streaming-on-spotify-vs-using-mp3s/">https://blog.blackpiratex.com/streaming-on-spotify-vs-using-mp3s/</a></p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#126</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>27 Sep 2022, 20:38 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                20:44 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I did some UI/UX tweaks on this status website.</p>
+<ul>
+<li>website now loads faster. It will now load 20 posts only, instead of 50 like previously.</li>
+<li>fixed position of &ldquo;Newer posts&rdquo; and &ldquo;older posts&rdquo; button at the end of the page.</li>
+<li>added new &ldquo;go to top&rdquo; button.</li>
+<li>new &ldquo;sort by tags&rdquo; option at the end of the page.</li>
+</ul>
+<p>That&rsquo;s all.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#117</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>22 Sep 2022, 19:28 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                19:29 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>This website is now hosted on Vercel. I can&rsquo;t host it on netlify because my repo is private. :-;</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#107</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>14 Sep 2022, 09:32 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                09:33 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Translating my website into Bengali is way too much hassle, and feels a bit cringe. I am not sure if I should translate or not.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#105</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>13 Sep 2022, 21:42 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                21:43 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Translating my website into bengali. So far did two pages. Check out one here:</p>
+<p><a href="https://bn.blackpiratex.com/about/">https://bn.blackpiratex.com/about/</a></p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#086</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>02 Sep 2022, 00:21 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                07 Sep 2022, 21:54 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>This website is more than one month old!! It feels like just YESTERDAY I made this!</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#074</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>28 Aug 2022, 14:58 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                14:59 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Changed theme of my website again. Here is how it looks.</p>
+
+
+<div class="all-images">
+<a href="/img/052cde320bc8a85c64ac39c39018c865.png" id="img-link">
+    <img src="/img/052cde320bc8a85c64ac39c39018c865_hu_82df2cf0e42f93bc.webp" alt="Image posted by BlackPiratex" loading="lazy">
+</a>
+<div class="view-original-div">
+    <a href="/img/052cde320bc8a85c64ac39c39018c865.png" id="view-original-link" class="view-original-link">View Original</a>
+</div>
+</div>
+
+
+
+<div class="all-images">
+<a href="/img/eee84ff2e6a1f539d17f3caee50a90cf.png" id="img-link">
+    <img src="/img/eee84ff2e6a1f539d17f3caee50a90cf_hu_7fa8e8d53fdb0b44.webp" alt="Image posted by BlackPiratex" loading="lazy">
+</a>
+<div class="view-original-div">
+    <a href="/img/eee84ff2e6a1f539d17f3caee50a90cf.png" id="view-original-link" class="view-original-link">View Original</a>
+</div>
+</div>
+
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/meta" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#meta</span>
+                    </a>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#062</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>21 Aug 2022, 16:18 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                16:19 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>I&rsquo;m so bad at choosing colors. Anyway, my website uses hugo now.</p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/meta" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#meta</span>
+                    </a>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="card log-entry">
+                
+                
+                
+                <div class="post-number">#060</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>20 Aug 2022, 17:06 IST</time>
+                    </div>
+                    
+                    
+                    
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            
+                                17:07 IST
+                            
+                        </time>
+                    </div>
+                    
+                </div>
+
+                <div class="log-entry-content with-tag">
+                    <p>Website V3.0 is live now!! Consistent design and more minimal. Check: <a href="https://blackpiratex.com">https://blackpiratex.com</a></p>
+
+                </div>
+                
+                <div>
+                    
+                    <a href="/tags/meta" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#meta</span>
+                    </a>
+                    
+                    <a href="/tags/website" class="log-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#website</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+
+        
+        <div class="pagination">
+            
+            <span></span> 
+            
+            
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logEntries = document.querySelectorAll('.log-entry');
+            
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            logEntries.forEach(entry => {
+                observer.observe(entry);
+            });
+        });
+    </script>
 </body>
 </html>

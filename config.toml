@@ -36,3 +36,5 @@ home = [ "HTML", "RSS", "SearchIndex" ]
 
 # In your config.toml file
 
+[archives]
+  enabled = true

@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> | Status By BlackPirateX</title>
+<link rel="stylesheet" href="/css/theme.css">
 
-    <link rel="stylesheet" href="/css/main.css">
+<script>
+    
+    
+    (function() {
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
 
+        const docElement = document.documentElement;
+        
+        
+        const savedTheme = getCookie('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            docElement.classList.add('dark-mode');
+        }
 
-      <script src="/js/main.js"></script>
-
+        
+        const savedAccent = getCookie('accentColor');
+        if (savedAccent) {
+            docElement.classList.add(`accent-${savedAccent}`);
+        }
+    })();
+</script>
 
 </head>
 <body>
@@ -49,7 +76,49 @@ The taste is dense</p>
 
   </main>
   <footer>
-    <p>Copyright 2025. All rights reserved.</p>
+    <footer class="site-footer">
+    <div class="main-container">
+        <div class="tag-cloud">
+            <h3 class="footer-heading">Explore Tags</h3>
+            <div class="tag-list">
+                
+                    <a href="/tags/website/" class="tag-link">#Website (36)</a>
+                
+                    <a href="/tags/quotes/" class="tag-link">#Quotes (21)</a>
+                
+                    <a href="/tags/study/" class="tag-link">#Study (11)</a>
+                
+                    <a href="/tags/excited/" class="tag-link">#Excited (7)</a>
+                
+                    <a href="/tags/ideas/" class="tag-link">#Ideas (7)</a>
+                
+                    <a href="/tags/linux/" class="tag-link">#Linux (5)</a>
+                
+                    <a href="/tags/meta/" class="tag-link">#Meta (3)</a>
+                
+                    <a href="/tags/rant/" class="tag-link">#Rant (3)</a>
+                
+                    <a href="/tags/red/" class="tag-link">#Red (3)</a>
+                
+                    <a href="/tags/green/" class="tag-link">#Green (2)</a>
+                
+                    <a href="/tags/proud/" class="tag-link">#Proud (2)</a>
+                
+                    <a href="/tags/blue/" class="tag-link">#Blue (1)</a>
+                
+                    <a href="/tags/bookmarks/" class="tag-link">#Bookmarks (1)</a>
+                
+                    <a href="/tags/bored/" class="tag-link">#Bored (1)</a>
+                
+                    <a href="/tags/dreams/" class="tag-link">#Dreams (1)</a>
+                
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Status By BlackPirateX. All rights reserved.
+        </div>
+    </div>
+</footer>
 
   </footer>
 </body>
