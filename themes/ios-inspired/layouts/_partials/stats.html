@@ -68,15 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
     {{ $yearLabels := slice }}
     {{ $yearData := slice }}
     {{ range $postsByYear.Reverse }}
-        {{ $yearLabels = append $yearLabels .Key }}
-        {{ $yearData = append $yearData (len .Pages) }}
+        {{ $yearLabels = $yearLabels | append .Key }}
+        {{ $yearData = $yearData | append (len .Pages) }}
     {{ end }}
 
     {{ $monthLabels := slice }}
     {{ $monthData := slice }}
     {{ range $postsByMonth }}
-        {{ $monthLabels = append $monthLabels .Key }}
-        {{ $monthData = append $monthData (len .Pages) }}
+        {{ $monthLabels = $monthLabels | append .Key }}
+        {{ $monthData = $monthData | append (len .Pages) }}
     {{ end }}
 
     // Safely pass data from Hugo to JavaScript
