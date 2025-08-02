@@ -1,34 +1,16 @@
 {{ $allPosts := .Site.RegularPages }}
 {{ $totalPosts := len $allPosts }}
-
-<!-- FIX: Calculate total word count by ranging over pages -->
 {{ $totalWords := 0 }}
 {{ range $allPosts }}
     {{ $totalWords = add $totalWords .WordCount }}
 {{ end }}
 
-<!-- Logic to find top 5 words -->
-{{ $wordCounts := dict }}
-{{ $stopWords := slice "a" "an" "and" "are" "as" "at" "be" "by" "for" "from" "has" "he" "in" "is" "it" "its" "of" "on" "that" "the" "to" "was" "were" "will" "with" "i" "you" "your" "my" "me" "we" "our" "us" "have" "had" "do" "does" "did" "but" "or" "so" "if" "because" "what" "when" "where" "how" "which" "who" "whom" "this" "these" "those" "am" "can" "not" "no" "just" "very" "some" "any" "all" "about" "after" "again" "against" "then" "once" "here" "there" "all" "any" "both" "each" "few" "more" "most" "other" "such" "than" "too" }}
-{{ range $allPosts }}
-    {{ $words := findRE "[a-zA-Z]+" .Plain }}
-    {{ range $words }}
-        {{ $word := lower . }}
-        {{ if not (in $stopWords $word) }}
-            {{ $currentCount := index $wordCounts $word | default 0 }}
-            {{ $wordCounts = merge $wordCounts (dict $word (add $currentCount 1)) }}
-        {{ end }}
-    {{ end }}
-{{ end }}
-{{ $sortedWords := slice }}
-{{ range $word, $count := $wordCounts }}
-    {{ $sortedWords = $sortedWords | append (dict "word" $word "count" $count) }}
-{{ end }}
-{{ $topWords := sort $sortedWords "count" "desc" | first 5 }}
-
 <!-- Logic for charts -->
 {{ $postsByYear := $allPosts.GroupByDate "2006" }}
-{{ $postsByMonth := $allPosts.GroupByDate "January" }}
+
+{{ $currentYear := now.Format "2006" }}
+{{ $currentYearPosts := where $allPosts "Date.Format" "2006" $currentYear }}
+{{ $postsByMonthCurrentYear := $currentYearPosts.GroupByDate "January" }}
 
 <div class="stats-section">
     <h2 class="section-heading">Site Statistics</h2>
@@ -40,14 +22,6 @@
         <div class="stat-card">
             <div class="stat-value">{{ $totalWords }}</div>
             <div class="stat-label">Total Words</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Top 5 Words</div>
-            <ul class="top-words-list">
-                {{ range $topWords }}
-                    <li><strong>{{ .word }}</strong> ({{ .count }})</li>
-                {{ end }}
-            </ul>
         </div>
     </div>
 
@@ -74,9 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     {{ $monthLabels := slice }}
     {{ $monthData := slice }}
-    {{ range $postsByMonth }}
-        {{ $monthLabels = $monthLabels | append .Key }}
-        {{ $monthData = $monthData | append (len .Pages) }}
+    {{ $currentMonthIndex := sub now.Month 1 }}
+    {{ $allMonths := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
+    
+    {{ range $index, $monthName := $allMonths }}
+        {{ if le $index $currentMonthIndex }}
+            {{ $monthLabels = $monthLabels | append $monthName }}
+            {{ $found := false }}
+            {{ range $postsByMonthCurrentYear }}
+                {{ if eq .Key $monthName }}
+                    {{ $monthData = $monthData | append (len .Pages) }}
+                    {{ $found = true }}
+                {{ end }}
+            {{ end }}
+            {{ if not $found }}
+                {{ $monthData = $monthData | append 0 }}
+            {{ end }}
+        {{ end }}
     {{ end }}
 
     // Safely pass data from Hugo to JavaScript
@@ -147,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data: {
                 labels: monthLabelsData,
                 datasets: [{
-                    label: 'Posts per Month',
+                    label: 'Posts per Month ({{ $currentYear }})',
                     data: monthCountData,
                     backgroundColor: accentColor,
                     borderColor: accentColor,
