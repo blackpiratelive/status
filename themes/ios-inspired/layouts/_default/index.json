@@ -1,5 +1,26 @@
+{{- $allPosts := .Site.RegularPages.ByDate -}}
+{{- $totalPosts := len $allPosts -}}
+{{- $postNumbers := dict -}}
+{{- range $index, $page := $allPosts -}}
+    {{- $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) -}}
+{{- end -}}
+
 {{- $.Scratch.Add "index" slice -}}
 {{- range .Site.RegularPages -}}
-    {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "content" .Plain "permalink" .Permalink) -}}
+    {{- $logNumber := index $postNumbers .RelPermalink -}}
+    {{- $formattedNumber := printf (printf "%%0%dd" (len (string $totalPosts))) $logNumber -}}
+    {{- $.Scratch.Add "index" (dict 
+        "permalink" .Permalink 
+        "title" .Title
+        "content" .Content
+        "plainContent" .Plain
+        "tags" .Params.tags
+        "date" (.Date.Format "02 Jan 2006, 15:04 IST")
+        "lastmod" (.Lastmod.Format "02 Jan 2006, 15:04 IST")
+        "lastmodTime" (.Lastmod.Format "15:04 IST")
+        "isModified" (.Lastmod.After .Date)
+        "isModifiedOnSameDay" (eq (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02"))
+        "postNumber" $formattedNumber
+    ) -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
