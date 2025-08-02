@@ -17,6 +17,12 @@
                 <p class="subheading">{{ .Site.Params.description }}</p>
             </div>
             <div class="header-controls">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="search-input" placeholder="Search posts...">
+                </div>
+
                 <a href="{{ "/index.xml" | relURL }}" class="control-button rss-button" title="Subscribe to RSS">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
                 </a>
@@ -36,6 +42,9 @@
                 </div>
             </div>
         </header>
+
+        <!-- Search Results Container (Initially Hidden) -->
+        <div id="search-results"></div>
 
         <!-- Hugo logic to create permanent post numbers -->
         {{ $allPosts := .Site.RegularPages.ByDate }}
@@ -115,6 +124,8 @@
 
     {{ partial "footer.html" . }}
 
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+    <script src="/js/search.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const themeSwitcher = document.getElementById('theme-switcher');
