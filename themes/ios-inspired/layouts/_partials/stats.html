@@ -1,0 +1,156 @@
+{{ $allPosts := .Site.RegularPages }}
+{{ $totalPosts := len $allPosts }}
+{{ $totalWords := .Site.RegularPages.WordCount }}
+
+<!-- Logic to find top 5 words -->
+{{ $wordCounts := dict }}
+{{ $stopWords := slice "a" "an" "and" "are" "as" "at" "be" "by" "for" "from" "has" "he" "in" "is" "it" "its" "of" "on" "that" "the" "to" "was" "were" "will" "with" "i" "you" "your" "my" "me" "we" "our" "us" "have" "had" "do" "does" "did" "but" "or" "so" "if" "because" "what" "when" "where" "how" "which" "who" "whom" "this" "these" "those" "am" "can" "not" "no" "just" "very" "some" "any" "all" "about" "after" "again" "against" "then" "once" "here" "there" "all" "any" "both" "each" "few" "more" "most" "other" "such" "than" "too" }}
+{{ range $allPosts }}
+    {{ $words := findRE "[a-zA-Z]+" .Plain }}
+    {{ range $words }}
+        {{ $word := lower . }}
+        {{ if not (in $stopWords $word) }}
+            {{ $currentCount := index $wordCounts $word | default 0 }}
+            {{ $wordCounts = merge $wordCounts (dict $word (add $currentCount 1)) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ $sortedWords := slice }}
+{{ range $word, $count := $wordCounts }}
+    {{ $sortedWords = $sortedWords | append (dict "word" $word "count" $count) }}
+{{ end }}
+{{ $topWords := sort $sortedWords "count" "desc" | first 5 }}
+
+<!-- Logic for charts -->
+{{ $postsByYear := $allPosts.GroupByDate "2006" }}
+{{ $postsByMonth := $allPosts.GroupByDate "January" }}
+
+<div class="stats-section">
+    <h2 class="section-heading">Site Statistics</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">{{ $totalPosts }}</div>
+            <div class="stat-label">Total Posts</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ $totalWords }}</div>
+            <div class="stat-label">Total Words</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Top 5 Words</div>
+            <ul class="top-words-list">
+                {{ range $topWords }}
+                    <li><strong>{{ .word }}</strong> ({{ .count }})</li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+        <div class="chart-container">
+            <canvas id="postsByYearChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="postsByMonthChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Prepare data for charts using Hugo's templating
+    {{ $yearLabels := slice }}
+    {{ $yearData := slice }}
+    {{ range $postsByYear.Reverse }}
+        {{ $yearLabels = append $yearLabels .Key }}
+        {{ $yearData = append $yearData (len .Pages) }}
+    {{ end }}
+
+    {{ $monthLabels := slice }}
+    {{ $monthData := slice }}
+    {{ range $postsByMonth }}
+        {{ $monthLabels = append $monthLabels .Key }}
+        {{ $monthData = append $monthData (len .Pages) }}
+    {{ end }}
+
+    // Safely pass data from Hugo to JavaScript
+    const yearLabelsData = {{ $yearLabels | jsonify }};
+    const yearCountData = {{ $yearData | jsonify }};
+    const monthLabelsData = {{ $monthLabels | jsonify }};
+    const monthCountData = {{ $monthData | jsonify }};
+
+    const isDarkMode = document.documentElement.classList.contains('dark-mode');
+    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
+    const gridColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim();
+
+    const chartOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: textColor
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    color: textColor,
+                    precision: 0
+                },
+                grid: {
+                    color: gridColor
+                }
+            },
+            x: {
+                ticks: {
+                    color: textColor
+                },
+                grid: {
+                    color: 'transparent'
+                }
+            }
+        }
+    };
+
+    // Posts per Year Chart
+    const postsByYearCtx = document.getElementById('postsByYearChart');
+    if (postsByYearCtx) {
+        new Chart(postsByYearCtx, {
+            type: 'bar',
+            data: {
+                labels: yearLabelsData,
+                datasets: [{
+                    label: 'Posts per Year',
+                    data: yearCountData,
+                    backgroundColor: accentColor,
+                    borderColor: accentColor,
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+    }
+
+    // Posts per Month Chart
+    const postsByMonthCtx = document.getElementById('postsByMonthChart');
+    if (postsByMonthCtx) {
+        new Chart(postsByMonthCtx, {
+            type: 'bar',
+            data: {
+                labels: monthLabelsData,
+                datasets: [{
+                    label: 'Posts per Month',
+                    data: monthCountData,
+                    backgroundColor: accentColor,
+                    borderColor: accentColor,
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+    }
+});
+</script>
