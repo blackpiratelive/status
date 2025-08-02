@@ -1,13 +1,12 @@
-{{- $allPosts := where .Site.Pages ".IsPage" true | where . ".Kind" "ne" "section" -}}
-{{- $sortedPosts := $allPosts.ByDate -}}
-{{- $totalPosts := len $sortedPosts -}}
+{{- $allPosts := .Site.RegularPages.ByDate -}}
+{{- $totalPosts := len $allPosts -}}
 {{- $postNumbers := dict -}}
-{{- range $index, $page := $sortedPosts -}}
+{{- range $index, $page := $allPosts -}}
     {{- $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) -}}
 {{- end -}}
 
 {{- $.Scratch.Add "index" slice -}}
-{{- range $sortedPosts -}}
+{{- range .Site.RegularPages -}}
     {{- $logNumber := index $postNumbers .RelPermalink -}}
     {{- $formattedNumber := printf (printf "%%0%dd" (len (string $totalPosts))) $logNumber -}}
     {{- $.Scratch.Add "index" (dict 
