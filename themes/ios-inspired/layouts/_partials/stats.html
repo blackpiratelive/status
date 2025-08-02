@@ -1,6 +1,11 @@
 {{ $allPosts := .Site.RegularPages }}
 {{ $totalPosts := len $allPosts }}
-{{ $totalWords := .Site.RegularPages.WordCount }}
+
+<!-- FIX: Calculate total word count by ranging over pages -->
+{{ $totalWords := 0 }}
+{{ range $allPosts }}
+    {{ $totalWords = add $totalWords .WordCount }}
+{{ end }}
 
 <!-- Logic to find top 5 words -->
 {{ $wordCounts := dict }}
