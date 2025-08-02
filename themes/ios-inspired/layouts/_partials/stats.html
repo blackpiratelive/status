@@ -5,9 +5,8 @@
     {{ $totalWords = add $totalWords .WordCount }}
 {{ end }}
 
-<!-- Logic for charts -->
+<!-- Logic for post counts -->
 {{ $postsByYear := $allPosts.GroupByDate "2006" }}
-
 {{ $currentYear := now.Format "2006" }}
 {{ $currentYearPosts := where $allPosts "Date.Format" "2006" $currentYear }}
 {{ $postsByMonthCurrentYear := $currentYearPosts.GroupByDate "January" }}
@@ -25,125 +24,36 @@
         </div>
     </div>
 
-    <div class="charts-grid">
-        <div class="chart-container">
-            <canvas id="postsByYearChart"></canvas>
+    <div class="stats-text-grid">
+        <div class="stats-list-container">
+            <h3 class="stats-subheading">Posts per Year</h3>
+            <ul class="stats-list">
+                {{ range $postsByYear.Reverse }}
+                    <li class="stats-list-item">
+                        <span class="stats-list-label">{{ .Key }}</span>
+                        <span class="stats-list-value">{{ len .Pages }}</span>
+                    </li>
+                {{ end }}
+            </ul>
         </div>
-        <div class="chart-container">
-            <canvas id="postsByMonthChart"></canvas>
+        <div class="stats-list-container">
+            <h3 class="stats-subheading">Posts This Year ({{ $currentYear }})</h3>
+            <ul class="stats-list">
+                {{ $allMonths := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
+                {{ range $allMonths }}
+                    {{ $monthName := . }}
+                    {{ $count := 0 }}
+                    {{ range $postsByMonthCurrentYear }}
+                        {{ if eq .Key $monthName }}
+                            {{ $count = len .Pages }}
+                        {{ end }}
+                    {{ end }}
+                    <li class="stats-list-item">
+                        <span class="stats-list-label">{{ $monthName }}</span>
+                        <span class="stats-list-value">{{ $count }}</span>
+                    </li>
+                {{ end }}
+            </ul>
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Prepare data for charts using Hugo's templating
-    {{ $yearLabels := slice }}
-    {{ $yearData := slice }}
-    {{ range $postsByYear.Reverse }}
-        {{ $yearLabels = $yearLabels | append .Key }}
-        {{ $yearData = $yearData | append (len .Pages) }}
-    {{ end }}
-
-    {{ $monthLabels := slice }}
-    {{ $monthData := slice }}
-    {{ $currentMonthIndex := sub now.Month 1 }}
-    {{ $allMonths := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
-    
-    {{ range $index, $monthName := $allMonths }}
-        {{ if le $index $currentMonthIndex }}
-            {{ $monthLabels = $monthLabels | append $monthName }}
-            {{ $found := false }}
-            {{ range $postsByMonthCurrentYear }}
-                {{ if eq .Key $monthName }}
-                    {{ $monthData = $monthData | append (len .Pages) }}
-                    {{ $found = true }}
-                {{ end }}
-            {{ end }}
-            {{ if not $found }}
-                {{ $monthData = $monthData | append 0 }}
-            {{ end }}
-        {{ end }}
-    {{ end }}
-
-    // Safely pass data from Hugo to JavaScript
-    const yearLabelsData = {{ $yearLabels | jsonify }};
-    const yearCountData = {{ $yearData | jsonify }};
-    const monthLabelsData = {{ $monthLabels | jsonify }};
-    const monthCountData = {{ $monthData | jsonify }};
-
-    const isDarkMode = document.documentElement.classList.contains('dark-mode');
-    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
-    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
-    const gridColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim();
-
-    const chartOptions = {
-        plugins: {
-            legend: {
-                labels: {
-                    color: textColor
-                }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    color: textColor,
-                    precision: 0
-                },
-                grid: {
-                    color: gridColor
-                }
-            },
-            x: {
-                ticks: {
-                    color: textColor
-                },
-                grid: {
-                    color: 'transparent'
-                }
-            }
-        }
-    };
-
-    // Posts per Year Chart
-    const postsByYearCtx = document.getElementById('postsByYearChart');
-    if (postsByYearCtx) {
-        new Chart(postsByYearCtx, {
-            type: 'bar',
-            data: {
-                labels: yearLabelsData,
-                datasets: [{
-                    label: 'Posts per Year',
-                    data: yearCountData,
-                    backgroundColor: accentColor,
-                    borderColor: accentColor,
-                    borderWidth: 1
-                }]
-            },
-            options: chartOptions
-        });
-    }
-
-    // Posts per Month Chart
-    const postsByMonthCtx = document.getElementById('postsByMonthChart');
-    if (postsByMonthCtx) {
-        new Chart(postsByMonthCtx, {
-            type: 'bar',
-            data: {
-                labels: monthLabelsData,
-                datasets: [{
-                    label: 'Posts per Month ({{ $currentYear }})',
-                    data: monthCountData,
-                    backgroundColor: accentColor,
-                    borderColor: accentColor,
-                    borderWidth: 1
-                }]
-            },
-            options: chartOptions
-        });
-    }
-});
-</script>
