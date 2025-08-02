@@ -10,10 +10,12 @@
 {{ $currentYear := now.Format "2006" }}
 {{ $currentYearPosts := where $allPosts "Date.Format" "2006" $currentYear }}
 
-<!-- Correctly create a map of month counts for the current year -->
+<!-- CORRECTED LOGIC: Create a map of month counts for the current year -->
 {{ $monthCounts := dict }}
-{{ range $currentYearPosts.GroupByDate "Month" }}
-    {{ $monthCounts = merge $monthCounts (dict .Key (len .Pages)) }}
+{{ range $currentYearPosts }}
+    {{ $month := .Date.Format "January" }}
+    {{ $currentCount := index $monthCounts $month | default 0 }}
+    {{ $monthCounts = merge $monthCounts (dict $month (add $currentCount 1)) }}
 {{ end }}
 
 
