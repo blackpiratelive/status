@@ -32,7 +32,7 @@ isPlainText = true
 notAlternative = true
 
 [outputs]
-home = [ "HTML", "RSS", "SearchIndex" ]
+home = [ "HTML", "RSS", "SearchIndex", "JSON"]
 
 # In your config.toml file
 
