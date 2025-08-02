@@ -56,21 +56,69 @@ html.dark-mode .stat-card:hover {
     margin-top: 0.5rem;
 }
 
-.charts-grid {
+/* --- NEW: Text-based Stats List Styles --- */
+.stats-text-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+    margin-top: 3rem;
 }
 
 @media (min-width: 768px) {
-    .charts-grid {
+    .stats-text-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-.chart-container {
+.stats-list-container {
     background-color: var(--card-bg-color);
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 1.5rem;
+}
+
+.stats-subheading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.stats-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.stats-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stats-list-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.stats-list-item:first-child {
+    padding-top: 0;
+}
+
+.stats-list-label {
+    color: var(--text-secondary);
+}
+
+.stats-list-value {
+    font-weight: 700;
+    color: var(--accent-color);
+    background-color: var(--meta-bg-color);
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
 }
