@@ -2,7 +2,7 @@
 (function() {
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
-    const mainContent = document.querySelector('.main-container');
+    const mainContentArea = document.getElementById('main-content-area'); // Corrected selector
     let fuse;
     let posts = [];
 
@@ -34,17 +34,18 @@
         if (query.length > 1) {
             const results = fuse.search(query);
             displayResults(results);
-            mainContent.style.display = 'none'; // Hide main content
-            searchResults.style.display = 'block'; // Show search results
+            if(mainContentArea) mainContentArea.style.display = 'none'; // Hide main content
+            if(searchResults) searchResults.style.display = 'block'; // Show search results
         } else {
-            searchResults.innerHTML = '';
-            mainContent.style.display = 'block'; // Show main content
-            searchResults.style.display = 'none'; // Hide search results
+            if(searchResults) searchResults.innerHTML = '';
+            if(mainContentArea) mainContentArea.style.display = 'block'; // Show main content
+            if(searchResults) searchResults.style.display = 'none'; // Hide search results
         }
     }
 
     // 3. Render the search results to the page
     function displayResults(results) {
+        if(!searchResults) return;
         searchResults.innerHTML = ''; // Clear previous results
 
         if (results.length > 0) {
