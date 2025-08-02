@@ -56,18 +56,11 @@ html.dark-mode .stat-card:hover {
     margin-top: 0.5rem;
 }
 
-/* --- NEW: Text-based Stats List Styles --- */
+/* --- Text-based Stats List Styles --- */
 .stats-text-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
     margin-top: 3rem;
-}
-
-@media (min-width: 768px) {
-    .stats-text-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    display: flex;
+    justify-content: center;
 }
 
 .stats-list-container {
@@ -75,6 +68,8 @@ html.dark-mode .stat-card:hover {
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     padding: 1.5rem;
+    width: 100%;
+    max-width: 400px; /* Set a max-width for the container */
 }
 
 .stats-subheading {
