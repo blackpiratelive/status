@@ -7,17 +7,6 @@
 
 <!-- Logic for post counts -->
 {{ $postsByYear := $allPosts.GroupByDate "2006" }}
-{{ $currentYear := now.Format "2006" }}
-{{ $currentYearPosts := where $allPosts "Date.Format" "2006" $currentYear }}
-
-<!-- CORRECTED LOGIC: Create a map of month counts for the current year -->
-{{ $monthCounts := dict }}
-{{ range $currentYearPosts }}
-    {{ $month := .Date.Format "January" }}
-    {{ $currentCount := index $monthCounts $month | default 0 }}
-    {{ $monthCounts = merge $monthCounts (dict $month (add $currentCount 1)) }}
-{{ end }}
-
 
 <div class="stats-section">
     <h2 class="section-heading">Site Statistics</h2>
@@ -41,22 +30,6 @@
                         <span class="stats-list-label">{{ .Key }}</span>
                         <span class="stats-list-value">{{ len .Pages }}</span>
                     </li>
-                {{ end }}
-            </ul>
-        </div>
-        <div class="stats-list-container">
-            <h3 class="stats-subheading">Posts This Year ({{ $currentYear }})</h3>
-            <ul class="stats-list">
-                {{ $allMonths := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
-                {{ $currentMonthIndex := sub now.Month 1 }}
-                
-                {{ range $index, $monthName := $allMonths }}
-                    {{ if le $index $currentMonthIndex }}
-                        <li class="stats-list-item">
-                            <span class="stats-list-label">{{ $monthName }}</span>
-                            <span class="stats-list-value">{{ index $monthCounts $monthName | default 0 }}</span>
-                        </li>
-                    {{ end }}
                 {{ end }}
             </ul>
         </div>
