@@ -65,6 +65,10 @@ header {
     }
 }
 
+.title-group {
+    flex-shrink: 0;
+}
+
 header h1 {
     font-size: 1.875rem;
     font-weight: 700;
@@ -139,7 +143,7 @@ header h1.is-animating::before {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding-left: 40px;
-    padding-right: 12px;
+    padding-right: 40px; /* Space for clear button */
     color: var(--text-primary);
     width: 100%;
     transition: all 0.2s ease-in-out;
@@ -148,6 +152,27 @@ header h1.is-animating::before {
     outline: none;
     border-color: var(--accent-color);
     box-shadow: 0 0 0 3px var(--accent-color);
+}
+
+/* --- NEW: Clear Search Button --- */
+#clear-search-btn {
+    display: none; /* Hidden by default */
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 44px;
+    width: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+#clear-search-btn:hover {
+    color: var(--text-primary);
+}
+#clear-search-btn svg {
+    width: 18px;
+    height: 18px;
 }
 
 
@@ -247,29 +272,6 @@ header h1.is-animating::before {
 /* --- Search Results Styles --- */
 #search-results {
     display: none;
-}
-.search-results-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-.search-result-item a {
-    display: block;
-    padding: 1rem;
-    background-color: var(--card-bg-color);
-    color: var(--text-primary);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.2s;
-}
-.search-result-item:last-child a {
-    border-bottom: none;
-}
-.search-result-item a:hover {
-    background-color: var(--meta-bg-color);
 }
 .search-no-results {
     text-align: center;
