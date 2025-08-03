@@ -87,8 +87,8 @@
 
         /* --- Individual Entries --- */
         .print-entry {
-            margin-bottom: 1.5rem; /* Reduced margin */
-            padding-bottom: 1.5rem; /* Reduced padding */
+            margin-bottom: 0; /* Removed margin */
+            padding-bottom: 1rem; /* Reduced padding */
             border-bottom: 1px solid var(--border-color);
         }
         .print-entry:last-child {
@@ -105,6 +105,13 @@
         .print-entry-content {
             line-height: 1.6;
             font-size: 0.9rem; /* Reduced font size */
+        }
+        /* --- NEW: Small Image Styles --- */
+        .print-entry-content img {
+            max-width: 250px;
+            height: auto;
+            display: block;
+            margin: 0.5rem 0;
         }
         .print-entry-tags {
             margin-top: 0.75rem; /* Reduced margin */
