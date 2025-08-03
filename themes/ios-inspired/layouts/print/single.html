@@ -4,17 +4,27 @@
     {{ partial "head.html" . }}
     <style>
         /* --- Print Page Specific Styles --- */
+        @page {
+            size: A4;
+            margin: 0.75in;
+            @bottom-right {
+                content: "Page " counter(page);
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
         @media print {
             body {
-                font-size: 12pt;
+                font-size: 10pt; /* Smaller base font for print */
                 color: #000 !important;
                 background-color: #fff !important;
             }
             .main-container {
                 max-width: 100%;
-                padding: 1in;
+                padding: 0;
             }
-            .print-header, .print-index {
+            .print-header {
                 page-break-after: always;
             }
             .print-header h1, .print-header h2, .print-header p {
@@ -39,104 +49,71 @@
         .main-container {
             max-width: 48rem;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem; /* Reduced padding */
         }
         
         /* --- Print Header / Title Page --- */
         .print-header {
             text-align: center;
-            padding: 4rem 0;
+            padding: 2rem 0; /* Reduced padding */
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem; /* Reduced margin */
         }
         .print-header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem; /* Reduced font size */
             font-weight: 700;
             color: var(--text-primary);
         }
         .print-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.25rem; /* Reduced font size */
             color: var(--accent-color);
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
         }
         .print-header p {
             color: var(--text-secondary);
-            margin-top: 1rem;
-        }
-
-        /* --- Index / Table of Contents --- */
-        .print-index {
-            margin-bottom: 4rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .print-index h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
-        .index-list {
-            list-style: none;
-            padding: 0;
-            columns: 2;
-        }
-        @media (max-width: 640px) {
-            .index-list {
-                columns: 1;
-            }
-        }
-        .index-list a {
-            display: block;
-            padding: 0.5rem 0;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: color 0.2s;
-        }
-        .index-list a:hover {
-            color: var(--accent-color);
+            margin-top: 0.5rem;
         }
 
         /* --- Yearly Sections --- */
         .year-heading {
-            font-size: 2.5rem;
+            font-size: 2rem; /* Reduced font size */
             font-weight: 700;
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
+            margin-top: 2.5rem; /* Reduced margin */
+            margin-bottom: 1.5rem; /* Reduced margin */
+            padding-bottom: 0.5rem; /* Reduced padding */
             border-bottom: 2px solid var(--accent-color);
             color: var(--text-primary);
         }
 
         /* --- Individual Entries --- */
         .print-entry {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
+            margin-bottom: 1.5rem; /* Reduced margin */
+            padding-bottom: 1.5rem; /* Reduced padding */
             border-bottom: 1px solid var(--border-color);
         }
         .print-entry:last-child {
             border-bottom: none;
         }
         .print-entry-meta {
-            font-size: 0.875rem;
+            font-size: 0.8rem; /* Reduced font size */
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem; /* Reduced margin */
         }
         .print-entry-meta time {
             margin-right: 1rem;
         }
         .print-entry-content {
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 0.9rem; /* Reduced font size */
         }
         .print-entry-tags {
-            margin-top: 1rem;
-            font-size: 0.875rem;
+            margin-top: 0.75rem; /* Reduced margin */
+            font-size: 0.8rem; /* Reduced font size */
         }
         .print-entry-tags a {
             color: var(--text-secondary);
             text-decoration: none;
-            margin-right: 0.75rem;
+            margin-right: 0.5rem; /* Reduced margin */
         }
         .print-entry-tags a:hover {
             color: var(--accent-color);
@@ -153,18 +130,8 @@
             <p>Generated on {{ now.Format "January 2, 2006" }}</p>
         </div>
 
-        <!-- Index -->
-        {{ $postsByYear := .Site.RegularPages.ByDate.Reverse.GroupByDate "2006" }}
-        <div class="print-index">
-            <h3>Table of Contents</h3>
-            <ul class="index-list">
-                {{ range $postsByYear }}
-                    <li><a href="#year-{{ .Key }}">{{ .Key }}</a></li>
-                {{ end }}
-            </ul>
-        </div>
-
         <!-- Content -->
+        {{ $postsByYear := .Site.RegularPages.ByDate.Reverse.GroupByDate "2006" }}
         {{ range $postsByYear }}
             <h2 id="year-{{ .Key }}" class="year-heading">{{ .Key }}</h2>
             {{ range .Pages }}
