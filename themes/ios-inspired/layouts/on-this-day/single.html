@@ -115,7 +115,10 @@
                 {{ $onThisDayPosts = $onThisDayPosts | append . }}
             {{ end }}
         {{ end }}
-        {{ $groupedByYear := ($onThisDayPosts.ByDate).GroupByDate "2006" }}
+        
+        <!-- FIX: Use the 'sort' function which handles empty slices gracefully -->
+        {{ $sortedPosts := sort $onThisDayPosts "Date" }}
+        {{ $groupedByYear := $sortedPosts.GroupByDate "2006" }}
 
         <!-- Hugo logic for post numbers -->
         {{ $allPosts := .Site.RegularPages.ByDate }}
