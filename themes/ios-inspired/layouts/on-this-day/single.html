@@ -116,10 +116,6 @@
             {{ end }}
         {{ end }}
         
-        <!-- FIX: Use the 'sort' function which handles empty slices gracefully -->
-        {{ $sortedPosts := sort $onThisDayPosts "Date" }}
-        {{ $groupedByYear := $sortedPosts.GroupByDate "2006" }}
-
         <!-- Hugo logic for post numbers -->
         {{ $allPosts := .Site.RegularPages.ByDate }}
         {{ $totalPosts := len $allPosts }}
@@ -128,7 +124,11 @@
             {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
         {{ end }}
 
-        {{ if gt (len $groupedByYear) 0 }}
+        {{ if gt (len $onThisDayPosts) 0 }}
+            <!-- This block only runs if posts are found -->
+            {{ $sortedPosts := sort $onThisDayPosts "Date" }}
+            {{ $groupedByYear := $sortedPosts.GroupByDate "2006" }}
+
             {{ range $groupedByYear.Reverse }}
                 <h2 class="year-heading">{{ .Key }}</h2>
                 <div class="log-entries">
@@ -175,7 +175,7 @@
                 </div>
             {{ end }}
         {{ else }}
-            <p style="text-align: center; color: var(--text-secondary); padding: 4rem 0;">No memories from this day in the past.</p>
+            <p style="text-align: center; color: var(--text-secondary); padding: 4rem 0;">No memories from this day in the past. Come back tomorrow!</p>
         {{ end }}
     </div>
 
