@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{ partial "head.html" . }}
+    <style>
+        /* --- Embed Specific Styles --- */
+        body {
+            background-color: transparent !important;
+            padding: 0;
+            margin: 0;
+        }
+        .main-container {
+            padding: 0;
+            max-width: 100%;
+        }
+        .log-entry {
+            border-radius: 0 !important;
+            border-left: none;
+            border-right: none;
+        }
+        .log-entry:first-child {
+            border-top-left-radius: 0.5rem !important;
+            border-top-right-radius: 0.5rem !important;
+        }
+        .log-entry:last-child {
+            border-bottom-left-radius: 0.5rem !important;
+            border-bottom-right-radius: 0.5rem !important;
+            border-bottom: 1px solid var(--border-color) !important;
+        }
+        .embed-header, .embed-footer {
+            padding: 0.75rem 1rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+        }
+        .embed-header {
+            border-bottom: none;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+        .embed-footer {
+            border-top: none;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            text-align: center;
+        }
+        .embed-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .embed-footer a {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .embed-footer a:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="embed-header">
+            <h3>Latest Status Updates</h3>
+        </div>
+
+        <!-- Hugo logic for post numbers -->
+        {{ $allPosts := .Site.RegularPages.ByDate }}
+        {{ $totalPosts := len $allPosts }}
+        {{ $postNumbers := dict }}
+        {{ range $index, $page := $allPosts }}
+            {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
+        {{ end }}
+
+        <!-- Log Entries -->
+        <div class="log-entries">
+            {{ range first 5 .Site.RegularPages.ByDate.Reverse }}
+            <div class="card log-entry">
+                <!-- Post Number -->
+                {{ $logNumber := index $postNumbers .RelPermalink }}
+                {{ $formattedNumber := printf (printf "%%0%dd" (len (string $totalPosts))) $logNumber }}
+                <div class="post-number">#{{ $formattedNumber }}</div>
+
+                <div class="meta-wrapper">
+                    <div class="log-entry-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <time>{{ .Date.Format "02 Jan 2006, 15:04 IST" }}</time>
+                    </div>
+                    
+                    <!-- Last Modified Logic -->
+                    {{ if .Lastmod.After .Date }}
+                    <div class="log-entry-lastmod">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <time>
+                            {{ if eq (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}
+                                {{ .Lastmod.Format "15:04 IST" }}
+                            {{ else }}
+                                {{ .Lastmod.Format "02 Jan 2006, 15:04 IST" }}
+                            {{ end }}
+                        </time>
+                    </div>
+                    {{ end }}
+                </div>
+
+                <div class="log-entry-content {{ if .Params.tags }}with-tag{{ end }}">
+                    {{ .Content }}
+                </div>
+                {{ if .Params.tags }}
+                <div>
+                    {{ range .Params.tags }}
+                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="log-tag" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <span>#{{ . }}</span>
+                    </a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        <div class="embed-footer">
+            <a href="{{ .Site.BaseURL }}" target="_blank">View all updates &rarr;</a>
+        </div>
+    </div>
+
+    <script>
+        // Apply saved theme settings from cookies to maintain consistency
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = document.cookie.match(/theme=([^;]+)/)?.[1];
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+            const savedAccent = document.cookie.match(/accentColor=([^;]+)/)?.[1];
+            if (savedAccent) {
+                document.documentElement.classList.add(`accent-${savedAccent}`);
+            }
+        });
+    </script>
+</body>
+</html>
