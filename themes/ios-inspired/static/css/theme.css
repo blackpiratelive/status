@@ -43,6 +43,8 @@ html.accent-blue { --accent-color: var(--accent-color-blue); }
 /* Apply the font to body and p */
 body, p {
   font-family: 'SFUIText', sans-serif;
+    line-height: 1.6;
+  color: #d3d3d3;
    } 
 
 
