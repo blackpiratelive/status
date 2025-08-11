@@ -33,18 +33,7 @@ html.accent-yellow { --accent-color: var(--accent-color-yellow); }
 html.accent-blue { --accent-color: var(--accent-color-blue); }
 
 
-@font-face {
-  font-family: 'Lora';
-  src: url('/fonts/Lora-VariableFont_wght.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-body {
-    font-family: Lora, serif;
-} 
-p { 
-    font-family: Lora, serif;
-} 
+
 
 
 /* --- LAYOUT STYLES --- */
