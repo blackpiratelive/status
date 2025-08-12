@@ -33,21 +33,6 @@ html.accent-yellow { --accent-color: var(--accent-color-yellow); }
 html.accent-blue { --accent-color: var(--accent-color-blue); }
 
 
-@font-face {
-  font-family: 'SFUIText';
-  src: url('/fonts/SFUIText-Regular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* Apply the font to body and p */
-body, p {
-  font-family: 'SFUIText', sans-serif;
-    line-height: 1.6;
-  color: #d3d3d3;
-   } 
-
-
 /* --- LAYOUT STYLES --- */
 .main-container {
     max-width: 42rem;

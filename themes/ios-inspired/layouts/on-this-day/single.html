@@ -108,14 +108,14 @@
         {{ $now := now }}
         {{ $currentMonthDay := $now.Format "01-02" }}
         {{ $currentYear := $now.Format "2006" }}
-        
         {{ $onThisDayPosts := slice }}
         {{ range .Site.RegularPages }}
             {{ if and (eq (.Date.Format "01-02") $currentMonthDay) (ne (.Date.Format "2006") $currentYear) }}
                 {{ $onThisDayPosts = $onThisDayPosts | append . }}
             {{ end }}
         {{ end }}
-        
+        {{ $groupedByYear := ($onThisDayPosts.ByDate).GroupByDate "2006" }}
+
         <!-- Hugo logic for post numbers -->
         {{ $allPosts := .Site.RegularPages.ByDate }}
         {{ $totalPosts := len $allPosts }}
@@ -124,11 +124,7 @@
             {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
         {{ end }}
 
-        {{ if gt (len $onThisDayPosts) 0 }}
-            <!-- This block only runs if posts are found -->
-            {{ $sortedPosts := sort $onThisDayPosts "Date" }}
-            {{ $groupedByYear := $sortedPosts.GroupByDate "2006" }}
-
+        {{ if gt (len $groupedByYear) 0 }}
             {{ range $groupedByYear.Reverse }}
                 <h2 class="year-heading">{{ .Key }}</h2>
                 <div class="log-entries">
@@ -175,7 +171,7 @@
                 </div>
             {{ end }}
         {{ else }}
-            <p style="text-align: center; color: var(--text-secondary); padding: 4rem 0;">No memories from this day in the past. Come back tomorrow!</p>
+            <p style="text-align: center; color: var(--text-secondary); padding: 4rem 0;">No memories from this day in the past.</p>
         {{ end }}
     </div>
 
