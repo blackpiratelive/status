@@ -57,23 +57,21 @@
 </footer>
 
 <script>
-(function() {
+(async function() {
   try {
-    var endpoint = 'https://simpler-69bpx.vercel.app/api/bpx';
-    var payload = { data: { u: window.location.href, r: document.referrer } };
-    var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-
-    if (navigator.sendBeacon && navigator.sendBeacon(endpoint, blob)) {
-      return;
-    } else {
-      fetch(endpoint, {
-        method: 'POST',
-        body: blob,
-        headers: { 'Content-Type': 'application/json' },
-        mode: 'cors',
-        keepalive: true
-      });
-    }
+    const endpoint = 'https://simpler-69bpx.vercel.app/api/bpx';
+    const payload = {
+      data: {
+        u: window.location.href,
+        r: document.referrer
+      }
+    };
+    await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      mode: 'cors'
+    });
   } catch(e) {
     console.error('Analytics script failed:', e);
   }
