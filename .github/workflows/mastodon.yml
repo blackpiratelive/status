@@ -28,10 +28,14 @@ jobs:
           vercel-args: '--prod' # This flag ensures it's a production deployment
           scope: ${{ secrets.VERCEL_ORG_ID }}
 
-      - name: Wait for deployment to be ready (15 seconds)
-        run: sleep 15
+      - name: Wait for deployment to be ready (30 seconds)
+        run: sleep 30
         shell: bash
 
-      - name: Trigger Post to Mastodon
-        run: curl -X POST "${{ secrets.VERCEL_PRODUCTION_URL }}/api/post-to-mastodon"
+      - name: Verify Production URL and Trigger Post
+        env:
+          VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
+        run: |
+          echo "Pinging URL: $VERCEL_URL/api/post-to-mastodon"
+          curl --fail -X POST "$VERCEL_URL/api/post-to-mastodon"
         shell: bash
