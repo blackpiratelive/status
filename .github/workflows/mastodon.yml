@@ -1,38 +1,22 @@
-# .github/workflows/deploy.yml
+# .github/workflows/mastodon.yml
 
-name: Deploy to Vercel & Post to Mastodon
+name: Trigger Mastodon Post
 
 on:
   # Trigger on pushes to the main branch
   push:
     branches:
-      - main # Or master, or your main production branch
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+      - master # Or master, or your main production branch
 
 jobs:
-  deploy_and_post:
+  trigger_mastodon_post:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Deploy Project to Vercel
-        id: vercel_deploy
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod' # This flag ensures it's a production deployment
-          scope: ${{ secrets.VERCEL_ORG_ID }}
-
-      - name: Wait for deployment to be ready (30 seconds)
-        run: sleep 30
+      - name: Wait for 1 minute for deployment to settle
+        run: sleep 60
         shell: bash
 
-      - name: Verify Production URL and Trigger Post
+      - name: Trigger Post to Mastodon Function
         env:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
         run: |
