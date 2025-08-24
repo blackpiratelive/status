@@ -1,9 +1,6 @@
 // /api/post-to-mastodon.js
 
 import { createClient } from '@libsql/client';
-import fs from 'fs/promises';
-import path from 'path';
-import matter from 'gray-matter';
 
 // Main handler for the Vercel serverless function
 export default async function handler(request, response) {
@@ -12,11 +9,10 @@ export default async function handler(request, response) {
         TURSO_DATABASE_URL,
         TURSO_AUTH_TOKEN,
         MASTODON_ACCESS_TOKEN,
-        MASTODON_API_URL, // e.g., https://mastodon.social/api/v1/statuses
-        SITE_URL, // e.g., https://your-hugo-site.com
+        MASTODON_API_URL,
+        SITE_URL, // e.g., https://status.blackpiratex.com
     } = process.env;
 
-    // Validate that all required environment variables are set
     if (!TURSO_DATABASE_URL || !TURSO_AUTH_TOKEN || !MASTODON_ACCESS_TOKEN || !MASTODON_API_URL || !SITE_URL) {
         console.error('Missing required environment variables.');
         return response.status(500).json({ error: 'Server configuration error.' });
@@ -29,11 +25,11 @@ export default async function handler(request, response) {
     });
 
     try {
-        // Ensure the table for tracking posted files exists
+        // Updated table to store permalinks instead of filenames
         await db.execute(`
-            CREATE TABLE IF NOT EXISTS posted_files (
+            CREATE TABLE IF NOT EXISTS posted_permalinks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                filename TEXT NOT NULL UNIQUE,
+                permalink TEXT NOT NULL UNIQUE,
                 posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         `);
@@ -43,58 +39,52 @@ export default async function handler(request, response) {
     }
 
     try {
-        // --- 3. Find the Latest Hugo Post ---
-        // Vercel builds the project, so we look for the content directory relative to the function's location.
-        const contentDir = path.join(process.cwd(), 'content', 'posts');
-        const files = await fs.readdir(contentDir);
+        // --- 3. Fetch and Parse the Posts JSON file ---
+        const jsonUrl = `${SITE_URL}/index.json`;
+        console.log(`Fetching posts index from: ${jsonUrl}`);
 
-        // Filter for markdown files and sort them to find the most recent one.
-        // This assumes a naming convention like YYYY-MM-DD-slug.md
-        const latestPostFile = files
-            .filter(file => file.endsWith('.md') || file.endsWith('.markdown'))
-            .sort()
-            .pop(); // The last file in a sorted list is the most recent
+        const postsResponse = await fetch(jsonUrl);
+        if (!postsResponse.ok) {
+            throw new Error(`Failed to fetch index.json: ${postsResponse.statusText}`);
+        }
+        const posts = await postsResponse.json();
 
-        if (!latestPostFile) {
-            console.log('No posts found in content/posts.');
-            return response.status(200).json({ message: 'No posts found to process.' });
+        if (!posts || posts.length === 0) {
+            return response.status(200).json({ message: 'No posts found in the JSON file.' });
         }
 
-        // --- 4. Check if the Post Has Already Been Shared ---
+        // --- 4. Find the Latest Post ---
+        // Helper function to parse the custom date string
+        const parseDate = (dateString) => {
+            // Converts "23 Aug 2025, 19:34 IST" to a valid Date object
+            return new Date(dateString.replace(' IST', ''));
+        };
+
+        posts.sort((a, b) => parseDate(b.date) - parseDate(a.date));
+        const latestPost = posts[0];
+
+        if (!latestPost || !latestPost.permalink) {
+             throw new Error('Could not determine the latest post from the JSON data.');
+        }
+
+        // --- 5. Check if the Post Has Already Been Shared ---
         const checkResult = await db.execute({
-            sql: 'SELECT filename FROM posted_files WHERE filename = ?',
-            args: [latestPostFile],
+            sql: 'SELECT permalink FROM posted_permalinks WHERE permalink = ?',
+            args: [latestPost.permalink],
         });
 
         if (checkResult.rows.length > 0) {
-            const message = `Latest post "${latestPostFile}" has already been posted to Mastodon.`;
+            const message = `Latest post "${latestPost.permalink}" has already been posted.`;
             console.log(message);
             return response.status(200).json({ message });
         }
 
-        // --- 5. Prepare and Post to Mastodon ---
-        console.log(`New post found: "${latestPostFile}". Preparing to post to Mastodon.`);
+        // --- 6. Prepare and Post to Mastodon ---
+        console.log(`New post found: "${latestPost.permalink}". Preparing to post.`);
 
-        // Read the post file and parse its front matter
-        const filePath = path.join(contentDir, latestPostFile);
-        const fileContent = await fs.readFile(filePath, 'utf8');
-        const { data: frontMatter } = matter(fileContent);
+        // Use plainContent for the post body, as requested
+        const status = `${latestPost.plainContent}`;
 
-        const postTitle = frontMatter.title;
-        if (!postTitle) {
-            throw new Error(`Post "${latestPostFile}" is missing a 'title' in its front matter.`);
-        }
-
-        // Construct the post URL from the filename
-        const slug = latestPostFile.replace(/\.md$/, '');
-        const postUrl = `${SITE_URL}/posts/${slug}/`;
-
-        // Create the status message for Mastodon
-        const status = `New post: ${postTitle}\n\n${postUrl}`;
-
-        console.log('Posting status to Mastodon:', status);
-
-        // Make the API call to Mastodon
         const mastodonResponse = await fetch(MASTODON_API_URL, {
             method: 'POST',
             headers: {
@@ -109,20 +99,14 @@ export default async function handler(request, response) {
             throw new Error(`Mastodon API error: ${mastodonResponse.status} ${errorBody}`);
         }
 
-        console.log('Successfully posted to Mastodon.');
-
-        // --- 6. Record the Post in the Database ---
+        // --- 7. Record the Post in the Database ---
         await db.execute({
-            sql: 'INSERT INTO posted_files (filename) VALUES (?)',
-            args: [latestPostFile],
+            sql: 'INSERT INTO posted_permalinks (permalink) VALUES (?)',
+            args: [latestPost.permalink],
         });
 
-        console.log(`Recorded "${latestPostFile}" in the database.`);
-
-        return response.status(200).json({
-            success: true,
-            message: `Successfully posted "${postTitle}" to Mastodon.`,
-        });
+        console.log(`Successfully posted and recorded "${latestPost.permalink}".`);
+        return response.status(200).json({ success: true, message: `Posted: ${latestPost.permalink}` });
 
     } catch (error) {
         console.error('An unexpected error occurred:', error);
