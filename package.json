@@ -1,0 +1,16 @@
+{
+  "name": "hugo-mastodon-poster",
+  "version": "1.0.0",
+  "description": "Vercel function to post latest Hugo microblog entry to Mastodon.",
+  "main": "api/post-to-mastodon.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@libsql/client": "latest",
+    "gray-matter": "latest"
+  }
+}
