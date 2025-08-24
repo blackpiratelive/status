@@ -6,20 +6,36 @@ on:
   # Trigger on pushes to the main branch
   push:
     branches:
-      - master # Or master, or your main production branch
+      - main # Or master, or your main production branch
 
 jobs:
   trigger_mastodon_post:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for 1 minute for deployment to settle
-        run: sleep 60
-        shell: bash
-
-      - name: Trigger Post to Mastodon Function
+      - name: Wait for Deployment and Trigger Mastodon Post
         env:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
         run: |
-          echo "Pinging URL: $VERCEL_URL/api/post-to-mastodon"
-          curl --fail -X GET "$VERCEL_URL/api/post-to-mastodon"
+          echo "Waiting for deployment at $VERCEL_URL to be ready..."
+          
+          # We will try to contact the API endpoint for 3 minutes.
+          # The workflow will retry every 15 seconds until it gets a successful (2xx) response.
+          end_time=$(( $(date +%s) + 180 )) # 3 minutes from now
+          
+          while [ $(date +%s) -lt $end_time ]; do
+            # Use curl to check the HTTP status code of the POST request.
+            # -s (silent), -o /dev/null (discard output), -w "%{http_code}" (print status code)
+            status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
+            
+            if [ "$status_code" -eq 200 ]; then
+              echo "Successfully triggered Mastodon post! (Received Status: $status_code)"
+              exit 0
+            else
+              echo "Deployment not ready yet (Received Status: $status_code). Retrying in 15 seconds..."
+              sleep 15
+            fi
+          done
+          
+          echo "Error: Could not get a successful response from the API after 3 minutes."
+          exit 1
         shell: bash
