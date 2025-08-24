@@ -19,7 +19,10 @@ jobs:
         env:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
         run: |
-          echo "Waiting for deployment at $VERCEL_URL to be ready..."
+          echo "Initial 1-minute wait for Vercel deployment to propagate..."
+          sleep 60
+          
+          echo "Polling deployment at $VERCEL_URL to be ready..."
           
           # We will try to contact the API endpoint for 3 minutes.
           # The workflow will retry every 15 seconds until it gets a successful (2xx) response.
