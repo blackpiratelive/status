@@ -58,7 +58,6 @@ export default async function handler(request, response) {
         const xmlText = await rssResponse.text();
 
         // --- 4. Find the Latest Post ---
-        // RSS feeds list the newest item first, so we just need to grab the first <item> block.
         const firstItemMatch = xmlText.match(/<item>([\s\S]*?)<\/item>/);
         if (!firstItemMatch) {
             return response.status(200).json({ message: 'No items found in the RSS feed.' });
@@ -73,7 +72,7 @@ export default async function handler(request, response) {
         }
 
         const latestGuid = guidMatch[1];
-        const latestDescriptionHTML = descriptionMatch[1];
+        let descriptionContent = descriptionMatch[1];
 
         // --- 5. Check if the Post Has Already Been Shared ---
         const checkResult = await db.execute({
@@ -90,16 +89,21 @@ export default async function handler(request, response) {
         // --- 6. Prepare the Mastodon Post ---
         console.log(`New post found: "${latestGuid}". Preparing to post.`);
 
-        // Extract hyperlinks from the description
+        // Defensively remove CDATA wrapper if it exists, as Hugo sometimes adds it.
+        if (descriptionContent.startsWith('<![CDATA[') && descriptionContent.endsWith(']]>')) {
+            descriptionContent = descriptionContent.substring(9, descriptionContent.length - 3);
+        }
+
+        // Extract hyperlinks from the description HTML
         const linkRegex = /<a href="([^"]+)">/g;
         const links = [];
         let match;
-        while ((match = linkRegex.exec(latestDescriptionHTML)) !== null) {
+        while ((match = linkRegex.exec(descriptionContent)) !== null) {
             links.push(match[1]);
         }
 
-        // Get plain text by stripping all HTML tags
-        let plainText = latestDescriptionHTML.replace(/<[^>]+>/g, '');
+        // Get plain text by stripping ALL HTML tags (e.g., <p>, <a>, etc.)
+        let plainText = descriptionContent.replace(/<[^>]+>/g, '');
         plainText = decodeHtmlEntities(plainText).trim();
 
         // Construct the final status
