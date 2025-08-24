@@ -27,8 +27,8 @@ jobs:
           
           while [ $(date +%s) -lt $end_time ]; do
             # Use curl to check the HTTP status code of the POST request.
-            # -s (silent), -o /dev/null (discard output), -w "%{http_code}" (print status code)
-            status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
+            # -L (follow redirects), -s (silent), -o /dev/null (discard output), -w "%{http_code}" (print status code)
+            status_code=$(curl -L -s -o /dev/null -w "%{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
             
             if [ "$status_code" -eq 200 ]; then
               echo "Successfully triggered Mastodon post! (Received Status: $status_code)"
