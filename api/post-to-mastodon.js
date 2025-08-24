@@ -2,6 +2,15 @@
 
 import { createClient } from '@libsql/client';
 
+// A simple function to decode common HTML entities
+function decodeHtmlEntities(text) {
+    return text.replace(/&rsquo;/g, "'")
+               .replace(/&quot;/g, '"')
+               .replace(/&amp;/g, '&')
+               .replace(/&lt;/g, '<')
+               .replace(/&gt;/g, '>');
+}
+
 // Main handler for the Vercel serverless function
 export default async function handler(request, response) {
     // --- 1. Configuration & Environment Variables ---
@@ -10,7 +19,7 @@ export default async function handler(request, response) {
         TURSO_AUTH_TOKEN,
         MASTODON_ACCESS_TOKEN,
         MASTODON_API_URL,
-        SITE_URL, // e.g., https://status.blackpiratex.com
+        SITE_URL,
     } = process.env;
 
     if (!TURSO_DATABASE_URL || !TURSO_AUTH_TOKEN || !MASTODON_ACCESS_TOKEN || !MASTODON_API_URL || !SITE_URL) {
@@ -25,11 +34,10 @@ export default async function handler(request, response) {
     });
 
     try {
-        // Updated table to store permalinks instead of filenames
         await db.execute(`
-            CREATE TABLE IF NOT EXISTS posted_permalinks (
+            CREATE TABLE IF NOT EXISTS posted_guids (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                permalink TEXT NOT NULL UNIQUE,
+                guid TEXT NOT NULL UNIQUE,
                 posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         `);
@@ -39,59 +47,78 @@ export default async function handler(request, response) {
     }
 
     try {
-        // --- 3. Fetch and Parse the Posts JSON file ---
-        const jsonUrl = `${SITE_URL}/index.json`;
-        console.log(`Fetching posts index from: ${jsonUrl}`);
+        // --- 3. Fetch and Parse the RSS Feed ---
+        const rssUrl = `${SITE_URL}/index.xml`;
+        console.log(`Fetching RSS feed from: ${rssUrl}`);
 
-        const postsResponse = await fetch(jsonUrl);
-        if (!postsResponse.ok) {
-            throw new Error(`Failed to fetch index.json: ${postsResponse.statusText}`);
+        const rssResponse = await fetch(rssUrl);
+        if (!rssResponse.ok) {
+            throw new Error(`Failed to fetch index.xml: ${rssResponse.statusText}`);
         }
-        const posts = await postsResponse.json();
-
-        if (!posts || posts.length === 0) {
-            return response.status(200).json({ message: 'No posts found in the JSON file.' });
-        }
+        const xmlText = await rssResponse.text();
 
         // --- 4. Find the Latest Post ---
-        // Helper function to parse the custom date string
-        const parseDate = (dateString) => {
-            // Converts "23 Aug 2025, 19:34 IST" to a valid Date object
-            return new Date(dateString.replace(' IST', ''));
-        };
-
-        posts.sort((a, b) => parseDate(b.date) - parseDate(a.date));
-        const latestPost = posts[0];
-
-        if (!latestPost || !latestPost.permalink) {
-             throw new Error('Could not determine the latest post from the JSON data.');
+        // RSS feeds list the newest item first, so we just need to grab the first <item> block.
+        const firstItemMatch = xmlText.match(/<item>([\s\S]*?)<\/item>/);
+        if (!firstItemMatch) {
+            return response.status(200).json({ message: 'No items found in the RSS feed.' });
         }
+        const latestItemXML = firstItemMatch[1];
+
+        const guidMatch = latestItemXML.match(/<guid>([\s\S]*?)<\/guid>/);
+        const descriptionMatch = latestItemXML.match(/<description>([\s\S]*?)<\/description>/);
+
+        if (!guidMatch || !descriptionMatch) {
+            throw new Error('Could not parse guid or description from the latest RSS item.');
+        }
+
+        const latestGuid = guidMatch[1];
+        const latestDescriptionHTML = descriptionMatch[1];
 
         // --- 5. Check if the Post Has Already Been Shared ---
         const checkResult = await db.execute({
-            sql: 'SELECT permalink FROM posted_permalinks WHERE permalink = ?',
-            args: [latestPost.permalink],
+            sql: 'SELECT guid FROM posted_guids WHERE guid = ?',
+            args: [latestGuid],
         });
 
         if (checkResult.rows.length > 0) {
-            const message = `Latest post "${latestPost.permalink}" has already been posted.`;
+            const message = `Latest post with GUID "${latestGuid}" has already been posted.`;
             console.log(message);
             return response.status(200).json({ message });
         }
 
-        // --- 6. Prepare and Post to Mastodon ---
-        console.log(`New post found: "${latestPost.permalink}". Preparing to post.`);
+        // --- 6. Prepare the Mastodon Post ---
+        console.log(`New post found: "${latestGuid}". Preparing to post.`);
 
-        // Use plainContent for the post body, as requested
-        const status = `${latestPost.plainContent}`;
+        // Extract hyperlinks from the description
+        const linkRegex = /<a href="([^"]+)">/g;
+        const links = [];
+        let match;
+        while ((match = linkRegex.exec(latestDescriptionHTML)) !== null) {
+            links.push(match[1]);
+        }
 
+        // Get plain text by stripping all HTML tags
+        let plainText = latestDescriptionHTML.replace(/<[^>]+>/g, '');
+        plainText = decodeHtmlEntities(plainText).trim();
+
+        // Construct the final status
+        let status = plainText;
+        if (links.length > 0) {
+            status += '\n\n'; // Add space before the list of links
+            links.forEach((link, index) => {
+                status += `${index + 1}. ${link}\n`;
+            });
+        }
+
+        // --- 7. Post to Mastodon ---
         const mastodonResponse = await fetch(MASTODON_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${MASTODON_ACCESS_TOKEN}`,
             },
-            body: JSON.stringify({ status }),
+            body: JSON.stringify({ status: status.trim() }),
         });
 
         if (!mastodonResponse.ok) {
@@ -99,14 +126,14 @@ export default async function handler(request, response) {
             throw new Error(`Mastodon API error: ${mastodonResponse.status} ${errorBody}`);
         }
 
-        // --- 7. Record the Post in the Database ---
+        // --- 8. Record the Post in the Database ---
         await db.execute({
-            sql: 'INSERT INTO posted_permalinks (permalink) VALUES (?)',
-            args: [latestPost.permalink],
+            sql: 'INSERT INTO posted_guids (guid) VALUES (?)',
+            args: [latestGuid],
         });
 
-        console.log(`Successfully posted and recorded "${latestPost.permalink}".`);
-        return response.status(200).json({ success: true, message: `Posted: ${latestPost.permalink}` });
+        console.log(`Successfully posted and recorded "${latestGuid}".`);
+        return response.status(200).json({ success: true, message: `Posted: ${latestGuid}` });
 
     } catch (error) {
         console.error('An unexpected error occurred:', error);
