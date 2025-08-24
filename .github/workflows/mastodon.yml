@@ -6,7 +6,10 @@ on:
   # Trigger on pushes to the main branch
   push:
     branches:
-      - main # Or master, or your main production branch
+      - master # Or master, or your main production branch
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   trigger_mastodon_post:
