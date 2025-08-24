@@ -1,0 +1,32 @@
+# .github/workflows/deploy.yml
+
+name: Deploy to Vercel & Post to Mastodon
+
+on:
+  push:
+    branches:
+      - main # Or master, or your main production branch
+
+jobs:
+  deploy_and_post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Deploy Project to Vercel
+        id: vercel_deploy
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod' # This flag ensures it's a production deployment
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+      - name: Wait for 15 seconds
+        run: sleep 15
+
+      - name: Trigger Post to Mastodon
+        run: curl -X POST "${{ steps.vercel_deploy.outputs.url }}/api/post-to-mastodon"
+
