@@ -3,9 +3,13 @@
 name: Deploy to Vercel & Post to Mastodon
 
 on:
+  # Trigger on pushes to the main branch
   push:
     branches:
       - main # Or master, or your main production branch
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   deploy_and_post:
@@ -24,9 +28,10 @@ jobs:
           vercel-args: '--prod' # This flag ensures it's a production deployment
           scope: ${{ secrets.VERCEL_ORG_ID }}
 
-      - name: Wait for 15 seconds
+      - name: Wait for deployment to be ready (15 seconds)
         run: sleep 15
+        shell: bash
 
       - name: Trigger Post to Mastodon
         run: curl -X POST "${{ steps.vercel_deploy.outputs.url }}/api/post-to-mastodon"
-
+        shell: bash
