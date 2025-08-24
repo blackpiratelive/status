@@ -33,5 +33,5 @@ jobs:
         shell: bash
 
       - name: Trigger Post to Mastodon
-        run: curl -X POST "${{ steps.vercel_deploy.outputs.url }}/api/post-to-mastodon"
+        run: curl -X POST "${{ secrets.VERCEL_PRODUCTION_URL }}/api/post-to-mastodon"
         shell: bash
