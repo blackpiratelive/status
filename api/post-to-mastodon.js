@@ -1,15 +1,7 @@
 // /api/post-to-mastodon.js
 
 import { createClient } from '@libsql/client';
-
-// A simple function to decode common HTML entities
-function decodeHtmlEntities(text) {
-    return text.replace(/&rsquo;/g, "'")
-               .replace(/&quot;/g, '"')
-               .replace(/&amp;/g, '&')
-               .replace(/&lt;/g, '<')
-               .replace(/&gt;/g, '>');
-}
+import * as cheerio from 'cheerio';
 
 // Main handler for the Vercel serverless function
 export default async function handler(request, response) {
@@ -86,25 +78,28 @@ export default async function handler(request, response) {
             return response.status(200).json({ message });
         }
 
-        // --- 6. Prepare the Mastodon Post ---
-        console.log(`New post found: "${latestGuid}". Preparing to post.`);
+        // --- 6. Prepare the Mastodon Post using Cheerio ---
+        console.log(`New post found: "${latestGuid}". Preparing to post with Cheerio.`);
 
-        // Defensively remove CDATA wrapper if it exists, as Hugo sometimes adds it.
+        // Defensively remove CDATA wrapper if it exists
         if (descriptionContent.startsWith('<![CDATA[') && descriptionContent.endsWith(']]>')) {
             descriptionContent = descriptionContent.substring(9, descriptionContent.length - 3);
         }
 
-        // Extract hyperlinks from the description HTML
-        const linkRegex = /<a href="([^"]+)">/g;
-        const links = [];
-        let match;
-        while ((match = linkRegex.exec(descriptionContent)) !== null) {
-            links.push(match[1]);
-        }
+        // Load the HTML content into Cheerio
+        const $ = cheerio.load(descriptionContent);
 
-        // Get plain text by stripping ALL HTML tags (e.g., <p>, <a>, etc.)
-        let plainText = descriptionContent.replace(/<[^>]+>/g, '');
-        plainText = decodeHtmlEntities(plainText).trim();
+        const links = [];
+        // Find all anchor tags and extract their href attribute
+        $('a').each((i, link) => {
+            const href = $(link).attr('href');
+            if (href) {
+                links.push(href);
+            }
+        });
+
+        // Get the clean, plain text content, stripped of all HTML tags
+        const plainText = $.text().trim();
 
         // Construct the final status
         let status = plainText;
