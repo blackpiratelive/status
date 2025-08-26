@@ -3,9 +3,17 @@
 import { createClient } from '@libsql/client';
 import * as cheerio from 'cheerio';
 
+// A simple function to decode common HTML entities
+function decodeHtmlEntities(text) {
+    return text.replace(/&rsquo;/g, "'")
+               .replace(/&quot;/g, '"')
+               .replace(/&amp;/g, '&')
+               .replace(/&lt;/g, '<')
+               .replace(/&gt;/g, '>');
+}
+
 // Main handler for the Vercel serverless function
 export default async function handler(request, response) {
-    // --- 1. Configuration & Environment Variables ---
     const {
         TURSO_DATABASE_URL,
         TURSO_AUTH_TOKEN,
@@ -19,7 +27,7 @@ export default async function handler(request, response) {
         return response.status(500).json({ error: 'Server configuration error.' });
     }
 
-    // --- 2. Database Connection & Setup ---
+    // --- 1. Database Connection ---
     const db = createClient({
         url: TURSO_DATABASE_URL,
         authToken: TURSO_AUTH_TOKEN,
@@ -39,7 +47,7 @@ export default async function handler(request, response) {
     }
 
     try {
-        // --- 3. Fetch and Parse the RSS Feed ---
+        // --- 2. Fetch RSS ---
         const rssUrl = `${SITE_URL}/index.xml`;
         console.log(`Fetching RSS feed from: ${rssUrl}`);
 
@@ -49,7 +57,7 @@ export default async function handler(request, response) {
         }
         const xmlText = await rssResponse.text();
 
-        // --- 4. Find the Latest Post ---
+        // --- 3. Find the Latest Item ---
         const firstItemMatch = xmlText.match(/<item>([\s\S]*?)<\/item>/);
         if (!firstItemMatch) {
             return response.status(200).json({ message: 'No items found in the RSS feed.' });
@@ -66,7 +74,7 @@ export default async function handler(request, response) {
         const latestGuid = guidMatch[1];
         let descriptionContent = descriptionMatch[1];
 
-        // --- 5. Check if the Post Has Already Been Shared ---
+        // --- 4. Check DB if already posted ---
         const checkResult = await db.execute({
             sql: 'SELECT guid FROM posted_guids WHERE guid = ?',
             args: [latestGuid],
@@ -78,39 +86,39 @@ export default async function handler(request, response) {
             return response.status(200).json({ message });
         }
 
-        // --- 6. Prepare the Mastodon Post using Cheerio ---
-        console.log(`New post found: "${latestGuid}". Preparing to post with Cheerio.`);
+        console.log(`New post found: "${latestGuid}". Preparing to post.`);
 
-        // Defensively remove CDATA wrapper if it exists
+        // Remove CDATA wrapper if present
         if (descriptionContent.startsWith('<![CDATA[') && descriptionContent.endsWith(']]>')) {
             descriptionContent = descriptionContent.substring(9, descriptionContent.length - 3);
         }
 
-        // Load the HTML content into Cheerio
+        // --- 5. Parse with Cheerio ---
         const $ = cheerio.load(descriptionContent);
 
-        const links = [];
-        // Find all anchor tags and extract their href attribute
-        $('a').each((i, link) => {
-            const href = $(link).attr('href');
+        let links = [];
+        $('a').each((i, el) => {
+            const href = $(el).attr('href');
             if (href) {
                 links.push(href);
+                // replace link text with numbered footnote marker
+                $(el).replaceWith(`${$(el).text()} [${links.length}]`);
             }
         });
 
-        // Get the clean, plain text content, stripped of all HTML tags
-        const plainText = $.text().trim();
+        // Get cleaned text
+        let plainText = decodeHtmlEntities($.text().trim());
 
-        // Construct the final status
+        // Build final toot
         let status = plainText;
         if (links.length > 0) {
-            status += '\n\n'; // Add space before the list of links
+            status += '\n\n';
             links.forEach((link, index) => {
-                status += `${index + 1}. ${link}\n`;
+                status += `[${index + 1}] ${link}\n`;
             });
         }
 
-        // --- 7. Post to Mastodon ---
+        // --- 6. Post to Mastodon ---
         const mastodonResponse = await fetch(MASTODON_API_URL, {
             method: 'POST',
             headers: {
@@ -125,7 +133,7 @@ export default async function handler(request, response) {
             throw new Error(`Mastodon API error: ${mastodonResponse.status} ${errorBody}`);
         }
 
-        // --- 8. Record the Post in the Database ---
+        // --- 7. Record Post in DB ---
         await db.execute({
             sql: 'INSERT INTO posted_guids (guid) VALUES (?)',
             args: [latestGuid],
