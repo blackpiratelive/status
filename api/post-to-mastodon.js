@@ -74,6 +74,11 @@ export default async function handler(request, response) {
         const latestGuid = guidMatch[1];
         let descriptionContent = descriptionMatch[1];
 
+        // Remove CDATA wrapper if present
+        if (descriptionContent.startsWith('<![CDATA[') && descriptionContent.endsWith(']]>')) {
+            descriptionContent = descriptionContent.substring(9, descriptionContent.length - 3);
+        }
+
         // --- 4. Check DB if already posted ---
         const checkResult = await db.execute({
             sql: 'SELECT guid FROM posted_guids WHERE guid = ?',
@@ -81,17 +86,37 @@ export default async function handler(request, response) {
         });
 
         if (checkResult.rows.length > 0) {
-            const message = `Latest post with GUID "${latestGuid}" has already been posted.`;
-            console.log(message);
-            return response.status(200).json({ message });
+            console.log(`GUID "${latestGuid}" already posted, returning debug content...`);
+
+            // Build "would-have-posted" content
+            const $ = cheerio.load(descriptionContent);
+            let links = [];
+            $('a').each((i, el) => {
+                const href = $(el).attr('href');
+                if (href) {
+                    links.push(href);
+                    $(el).replaceWith(`${$(el).text()} [${links.length}]`);
+                }
+            });
+
+            let plainText = decodeHtmlEntities($.text().trim());
+
+            let debugStatus = plainText;
+            if (links.length > 0) {
+                debugStatus += '\n\n';
+                links.forEach((link, index) => {
+                    debugStatus += `[${index + 1}] ${link}\n`;
+                });
+            }
+
+            return response.status(200).json({
+                alreadyPosted: true,
+                guid: latestGuid,
+                wouldHavePosted: debugStatus.trim(),
+            });
         }
 
         console.log(`New post found: "${latestGuid}". Preparing to post.`);
-
-        // Remove CDATA wrapper if present
-        if (descriptionContent.startsWith('<![CDATA[') && descriptionContent.endsWith(']]>')) {
-            descriptionContent = descriptionContent.substring(9, descriptionContent.length - 3);
-        }
 
         // --- 5. Parse with Cheerio ---
         const $ = cheerio.load(descriptionContent);
@@ -101,12 +126,10 @@ export default async function handler(request, response) {
             const href = $(el).attr('href');
             if (href) {
                 links.push(href);
-                // replace link text with numbered footnote marker
                 $(el).replaceWith(`${$(el).text()} [${links.length}]`);
             }
         });
 
-        // Get cleaned text
         let plainText = decodeHtmlEntities($.text().trim());
 
         // Build final toot
@@ -140,7 +163,11 @@ export default async function handler(request, response) {
         });
 
         console.log(`Successfully posted and recorded "${latestGuid}".`);
-        return response.status(200).json({ success: true, message: `Posted: ${latestGuid}` });
+        return response.status(200).json({
+            success: true,
+            guid: latestGuid,
+            postedContent: status.trim(),
+        });
 
     } catch (error) {
         console.error('An unexpected error occurred:', error);
