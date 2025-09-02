@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{ partial "head.html" . }}
+    <title>On This Day - {{ .Site.Title }}</title>
+    <style>
+        /* General Body & Typography Styles */
+        body {
+            font: 16px/1.6 system-ui, -apple-system, sans-serif;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 1rem;
+            background: #fff;
+            color: #222;
+        }
+        
+        /* Header Section */
+        header {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .tagline {
+            color: #666;
+            font-size: 1rem;
+            margin: 0 0 0.75rem 0;
+        }
+        
+        /* Navigation Menu */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        nav a.active {
+            font-weight: 700;
+            text-decoration: underline;
+        }
+        
+        /* Article & Post Styles */
+        article {
+            margin: 0;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        article:last-of-type {
+            border-bottom: none;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .post-number {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        p {
+            margin: 0.25rem 0 0.5rem 0;
+        }
+        
+        .post-footer {
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .tag {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .tag:hover {
+            text-decoration: underline;
+        }
+        
+        .post-time {
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+        }
+        
+        .edited {
+            font-style: italic;
+            color: #555;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 0.75rem 0;
+        }
+        
+        /* Footer Section */
+        footer {
+            margin-top: 1.5rem;
+            padding: 1rem 0;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>On This Day</h1>
+        <p class="tagline">A look back at posts from the past.</p>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{ $now := now }}
+        {{ $currentMonthDay := $now.Format "01-02" }}
+        {{ $currentYear := $now.Format "2006" }}
+        
+        {{ $onThisDayPosts := slice }}
+        {{ range .Site.RegularPages }}
+            {{ if and (eq (.Date.Format "01-02") $currentMonthDay) (ne (.Date.Format "2006") $currentYear) }}
+                {{ $onThisDayPosts = $onThisDayPosts | append . }}
+            {{ end }}
+        {{ end }}
+        
+        {{ if gt (len $onThisDayPosts) 0 }}
+            {{ $sortedPosts := sort $onThisDayPosts "Date" "desc" }}
+            {{ range $sortedPosts }}
+            <article>
+                <div class="post-meta">
+                    <span class="post-number">#{{ .File.BaseFileName }}</span>
+                    <span>{{ .Date.Format "Jan 02, 2006" }}</span>
+                </div>
+                {{ .Content }}
+                <div class="post-footer">
+                    <div class="tags">
+                        {{ range .Params.tags }}
+                        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">#{{ . }}</a>
+                        {{ end }}
+                    </div>
+                </div>
+            </article>
+            {{ end }}
+        {{ else }}
+            <p style="text-align: center; padding: 2rem 0; color: #777;">No memories from this day in the past. Come back tomorrow!</p>
+        {{ end }}
+    </main>
+
+    <footer>
+        <p>&copy; {{ now.Year }} {{ .Site.Title }}.</p>
+    </footer>
+
+</body>
+</html>
