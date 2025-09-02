@@ -9,7 +9,7 @@
 
 {{ with resources.Get $path }}
     {{ $original := . }}
-    {{ $thumbnail := .Resize "250x webp q75" }}
+    {{ $thumbnail := .Resize "100x webp q50" }}
 
     <div class="image-container" style="display: inline-block; margin: 0.5rem 0.5rem 1rem 0;">
         <div class="image-info" style="font-size: 0.8rem; color: var(--secondary-text-color); margin-bottom: 0.25rem; font-family: monospace;">
