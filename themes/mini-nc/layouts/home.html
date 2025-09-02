@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {{ partial "head.html" . }}
     <title>{{ .Site.Title }}</title>
     <style>
         /* General Body & Typography Styles */
@@ -149,17 +150,10 @@
             text-decoration: underline;
         }
         
-        .post-time {
-            color: #888;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-        }
-        
         .edited {
             font-style: italic;
             color: #555;
+            margin-left: 0.5rem;
         }
         
         img {
@@ -232,23 +226,30 @@
     </header>
 
     <main>
-        {{ $paginator := .Paginator }}
-        {{ range $paginator.Pages }}
+        <!-- Logic to create sequential post numbers -->
+        {{ $allPosts := .Site.RegularPages.ByDate }} <!-- Sorts oldest to newest -->
+        {{ $postNumbers := dict }}
+        {{ range $index, $page := $allPosts }}
+            {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
+        {{ end }}
+
+        {{ $paginator := .Paginator 50 }}
+        {{ range $paginator.Pages }} <!-- .Pages is newest to oldest by default -->
         <article>
             <div class="post-meta">
-                <span class="post-number">#{{ .File.BaseFileName }}</span>
-                <span>{{ .Date.Format "Jan 02, 2006" }}</span>
+                <span class="post-number">#{{ index $postNumbers .RelPermalink }}</span>
+                <span>
+                    <time>{{ .Date.Format "Jan 02, 2006 at 15:04" }}</time>
+                    {{ if .Lastmod.After .Date }}
+                        <span class="edited">(edited: {{ .Lastmod.Format "Jan 02, 15:04" }})</span>
+                    {{ end }}
+                </span>
             </div>
             {{ .Content }}
             <div class="post-footer">
                 <div class="tags">
                     {{ range .Params.tags }}
                     <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">#{{ . }}</a>
-                    {{ end }}
-                </div>
-                <div class="post-time">
-                    {{ if .Lastmod.After .Date }}
-                        <span class="edited">edited</span>
                     {{ end }}
                 </div>
             </div>
@@ -266,3 +267,4 @@
 
 </body>
 </html>
+
