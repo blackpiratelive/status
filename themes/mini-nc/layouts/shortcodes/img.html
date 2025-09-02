@@ -10,13 +10,11 @@
 {{ with resources.Get $path }}
     {{ $original := . }}
     {{ $thumbnail := .Resize "250x webp q75" }}
-    {{/* Correctly calculate file size in KB using .Data.Size */}}
-    {{ $fileSize := div .Data.Size 1024.0 }}
 
     <div class="image-container" style="display: inline-block; margin: 0.5rem 0.5rem 1rem 0;">
         <div class="image-info" style="font-size: 0.8rem; color: var(--secondary-text-color); margin-bottom: 0.25rem; font-family: monospace;">
             File: <a href="{{ $original.RelPermalink }}" target="_blank" rel="noopener noreferrer" title="Click to open full image">{{ .Name }}</a>
-            <span style="color: #999;">({{ lang.NumFmt 2 $fileSize }} KB, {{ $original.Width }}x{{ $original.Height }})</span>
+            <span style="color: #999;">({{ $original.Width }}x{{ $original.Height }})</span>
         </div>
         <a href="{{ $original.RelPermalink }}" target="_blank" rel="noopener noreferrer">
             <img 
