@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Status</title>
+    <style>
+        /* --- Self-Contained Barebones Embed Styles --- */
+        body {
+            font: 14px/1.6 system-ui, -apple-system, sans-serif;
+            background-color: transparent !important;
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+        .embed-container {
+            border: 1px solid #ccc;
+        }
+        .embed-header, .embed-footer {
+            padding: 0.75rem 1rem;
+        }
+        .embed-header {
+            border-bottom: 1px solid #ccc;
+        }
+        .embed-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        .log-entry {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-entry-meta {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+        .log-entry-content p {
+            margin: 0;
+        }
+        .tags-container {
+            margin-top: 0.5rem;
+        }
+        .log-tag {
+            display: inline-block;
+            margin-right: 0.8rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #555;
+            text-decoration: none;
+        }
+        .log-tag:hover {
+            text-decoration: underline;
+        }
+        .embed-footer {
+            border-top: 1px solid #ccc;
+            text-align: center;
+        }
+        .embed-footer a {
+            font-size: 0.9rem;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .embed-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="embed-container">
+        <div class="embed-header">
+            <h3>Latest Status Updates</h3>
+        </div>
+
+        <!-- Log Entries -->
+        <div class="log-entries">
+            {{ range first 5 .Site.RegularPages.ByDate.Reverse }}
+            <div class="log-entry">
+                <div class="log-entry-meta">
+                    <time>{{ .Date.Format "02 Jan 2006, 15:04" }}</time>
+                </div>
+                <div class="log-entry-content">
+                    {{ .Content }}
+                </div>
+                {{ if .Params.tags }}
+                <div class="tags-container">
+                    {{ range .Params.tags }}
+                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="log-tag" target="_top">
+                        #{{ . }}
+                    </a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        <div class="embed-footer">
+            <a href="{{ .Site.BaseURL }}" target="_top">View all updates &rarr;</a>
+        </div>
+    </div>
+
+    <script>
+        // This script sends the height of the content to the parent page
+        const container = document.querySelector('.embed-container');
+        const sendHeight = () => {
+            if (container) {
+                const height = container.offsetHeight;
+                window.parent.postMessage({ frameHeight: height, source: 'hugo-embed' }, '*');
+            }
+        };
+        window.onload = sendHeight;
+        const resizeObserver = new ResizeObserver(sendHeight);
+        if(container) {
+            resizeObserver.observe(container);
+        }
+    </script>
+
+</body>
+</html>
