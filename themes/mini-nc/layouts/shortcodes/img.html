@@ -1,9 +1,13 @@
 {{/*
     4chan-Style Image Shortcode for Hugo
-    Usage: {{< img src="path/to/your/image.jpg" >}}
+    Usage: {{< img src="/img/your-image-name.jpg" >}}
+    Looks for the image inside the /assets folder.
 */}}
 {{ $src := .Get "src" }}
-{{ with .Page.Resources.GetMatch $src }}
+{{/* Remove leading slash if it exists to make the path relative to /assets */}}
+{{ $path := strings.TrimPrefix "/" $src }}
+
+{{ with resources.Get $path }}
     {{ $original := . }}
     {{ $thumbnail := .Resize "250x webp q75" }}
     {{ $fileSize := div .Content 1024.0 }}
@@ -25,5 +29,6 @@
         </a>
     </div>
 {{ else }}
-    <p style="color: red;">Image not found: {{ $src }}</p>
+    <p style="color: red;">Image not found at /assets/{{ $path }}</p>
 {{ end }}
+
