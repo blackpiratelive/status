@@ -5,299 +5,321 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Site.Title }}</title>
     <style>
-        /* CSS Variables for Theming */
+        /* --- Base Styles & Theme Variables from Demo --- */
         :root {
-            --bg-color: #fff;
-            --text-color: #222;
-            --secondary-text-color: #666;
-            --border-color: #ccc;
-            --subtle-border-color: #eee;
-            --link-color: #333;
-            --tag-color: #555;
+            --bg-color: #ffffff; /* Pure White */
+            --text-color: #1f2937; /* Darker for better contrast */
+            --secondary-text-color: #4b5563; /* Darkened for accessibility */
+            --border-color: #e5e7eb;
+            --accent-color: #2563eb; /* A richer, accessible blue */
         }
 
-        body.dark-mode {
-            --bg-color: #121212;
-            --text-color: #eee;
-            --secondary-text-color: #999;
-            --border-color: #444;
-            --subtle-border-color: #222;
-            --link-color: #eee;
-            --tag-color: #bbb;
+        :root.dark-mode {
+            --bg-color: #121212; /* Softer, off-black for comfort */
+            --text-color: #f9fafb; /* Brighter white for clarity */
+            --secondary-text-color: #9ca3af; /* Lighter gray for contrast */
+            --border-color: #374151;
+            --accent-color: #38bdf8; /* A vibrant, accessible light blue */
         }
 
-        /* General Body & Typography Styles */
         body {
-            font: 16px/1.6 system-ui, -apple-system, sans-serif;
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 1rem;
-            background: var(--bg-color);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
             color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 1rem;
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        /* Header Section */
-        header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-            text-align: center;
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
         }
-        
-        h1 {
-            margin: 0 0 0.25rem 0;
-            font-size: 1.8rem;
+
+        /* --- Header --- */
+        header {
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
             font-weight: 600;
         }
         
-        .tagline {
-            color: var(--secondary-text-color);
-            font-size: 1rem;
-            margin: 0 0 1rem 0;
-        }
-        
-        /* Navigation Menu */
+        /* --- Navigation Menu --- */
         nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
             justify-content: center;
-            gap: 1.2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
         
         nav a {
-            color: var(--link-color);
+            color: var(--secondary-text-color);
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
         }
         
         nav a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Article & Post Styles */
-        article {
-            margin: 0;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--subtle-border-color);
+            color: var(--accent-color);
         }
 
-        article:last-of-type {
-            border-bottom: none;
-        }
-        
-        .post-meta {
+        #theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 9999px;
+            width: 40px;
+            height: 40px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.8rem;
-            font-size: 0.85rem;
-            color: var(--secondary-text-color);
-        }
-        
-        .post-number {
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #888;
-        }
-        
-        p {
-            margin: 0.25rem 0 0.5rem 0;
-        }
-        
-        .post-footer {
-            margin-top: 0.5rem;
-        }
-        
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        
-        .tag {
-            color: var(--tag-color);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .tag:hover {
-            text-decoration: underline;
-        }
-        
-        .edited {
-            font-style: italic;
-            color: var(--tag-color);
-            margin-left: 0.5rem;
-        }
-        
-        img {
-            max-width: 100%;
-            height: auto;
-            margin: 0.75rem 0;
+            justify-content: center;
         }
 
-        /* Pagination */
+        #theme-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- Timeline & Post Styling --- */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem; /* Space for the timeline line and dots */
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        article.post {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        article.post::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            z-index: 1;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .post-meta {
+            font-size: 0.875rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta .post-number {
+            font-weight: 600;
+            color: var(--accent-color);
+            transition: color 0.3s;
+        }
+
+        .post-content p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        /* --- Added Styles for Tags & Pagination --- */
+        .post-content a {
+            color: var(--accent-color);
+        }
         .pagination {
             display: flex;
             justify-content: space-between;
             margin-top: 2rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--subtle-border-color);
         }
         .pagination a {
-            color: var(--link-color);
+            color: var(--accent-color);
             text-decoration: none;
             font-weight: 500;
         }
-        .pagination a:hover {
-            text-decoration: underline;
-        }
-        
-        /* All Tags Section */
         .all-tags-section {
-            margin-top: 2rem;
-            padding-top: 1rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
             border-top: 1px solid var(--border-color);
         }
         .all-tags-section h2 {
-            text-align: center;
             font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
             margin-bottom: 1rem;
         }
-        .all-tags-section .tags {
-             justify-content: center;
+        .all-tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1rem;
+            list-style: none;
+            padding: 0;
         }
-
-        /* Theme Toggle Button */
-        #theme-toggle {
-            background: none;
-            border: 1px solid var(--border-color);
+        .all-tags-list a {
             color: var(--secondary-text-color);
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-        
-        /* Footer Section */
-        footer {
-            margin-top: 1.5rem;
-            padding: 1rem 0;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: #888;
+            text-decoration: none;
             font-size: 0.9rem;
         }
+        .all-tags-list a:hover {
+            color: var(--accent-color);
+        }
         
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            border-top: 1px solid var(--border-color);
+        }
     </style>
 </head>
 <body>
-    
-    <header>
-        <h1>{{ .Site.Title }}</h1>
-        <p class="tagline">{{ .Site.Params.description }}</p>
-        <nav>
-            <ul>
-                <li><a href="https://blackpiratex.com">Frontpage</a></li>
-                <li><a href="https://blog.blackpiratex.com">Blog</a></li>
-                <li><a href="https://gallery.blackpiratex.com">Gallery</a></li>
-                <li><a href="https://guestbook.blackpiratex.com">Guestbook</a></li>
-                <li><a href="{{ "/tags/" | relURL }}">Tags</a></li>
-            </ul>
-        </nav>
-        <button id="theme-toggle">Toggle Theme</button>
-    </header>
 
-    <main>
-        <!-- Logic to create sequential post numbers -->
-        {{ $allPosts := .Site.RegularPages.ByDate }} <!-- Sorts oldest to newest -->
-        {{ $postNumbers := dict }}
-        {{ range $index, $page := $allPosts }}
-            {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
-        {{ end }}
-
-        {{ $paginator := .Paginator 50 }}
-        {{ range $paginator.Pages }} <!-- .Pages is newest to oldest by default -->
-        <article>
-            <div class="post-meta">
-                <span class="post-number">#{{ index $postNumbers .RelPermalink }}</span>
-                <span>
-                    <time>{{ .Date.Format "Jan 02, 2006 at 15:04" }}</time>
-                    {{ if .Lastmod.After .Date }}
-                        <span class="edited">(edited: {{ .Lastmod.Format "Jan 02, 15:04" }})</span>
-                    {{ end }}
-                </span>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>{{ .Site.Title }}</h1>
+                <button id="theme-toggle" title="Toggle theme">
+                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg id="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
             </div>
-            {{ .Content }}
-            <div class="post-footer">
-                <div class="tags">
-                    {{ range .Params.tags }}
-                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">#{{ . }}</a>
+            <nav>
+                <ul>
+                    <li><a href="https://blackpiratex.com">Frontpage</a></li>
+                    <li><a href="https://blog.blackpiratex.com">Blog</a></li>
+                    <li><a href="https://gallery.blackpiratex.com">Gallery</a></li>
+                    <li><a href="https://guestbook.blackpiratex.com">Guestbook</a></li>
+                    <li><a href="{{ "/tags/" | relURL }}">Tags</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="timeline">
+            <!-- Logic to create sequential post numbers -->
+            {{ $allPosts := .Site.RegularPages.ByDate }}
+            {{ $postNumbers := dict }}
+            {{ range $index, $page := $allPosts }}
+                {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
+            {{ end }}
+
+            {{ $paginator := .Paginator 50 }}
+            {{ range $paginator.Pages }}
+            <article class="post">
+                <div class="post-meta">
+                    <span class="post-number">#{{ index $postNumbers .RelPermalink }}</span> &mdash; 
+                    <time>{{ .Date.Format "Jan 02, 2006" }}</time>
+                    {{ if .Lastmod.After .Date }}
+                        <span>(edited)</span>
                     {{ end }}
                 </div>
-            </div>
-        </article>
-        {{ end }}
-    </main>
-    
-    <!-- Pagination -->
-    <nav class="pagination">
-        {{ if .Paginator.HasPrev }}
-            <a href="{{ .Paginator.Prev.URL }}">&larr; Newer Posts</a>
-        {{ else }}
-            <span></span>
-        {{ end }}
-        {{ if .Paginator.HasNext }}
-            <a href="{{ .Paginator.Next.URL }}">Older Posts &rarr;</a>
-        {{ end }}
-    </nav>
-    
-    <!-- All Tags List -->
-    <section class="all-tags-section">
-        <h2>All Tags</h2>
-        <div class="tags">
-            {{ $tags := .Site.Taxonomies.tags.ByCount }}
-            {{ range $tags.Reverse }}
-                <a href="{{ .Page.Permalink }}" class="tag">#{{ .Page.Title }} ({{ .Count }})</a>
+                <div class="post-content">
+                    {{ .Content }}
+                </div>
+            </article>
             {{ end }}
-        </div>
-    </section>
+        </main>
+        
+        <!-- Pagination -->
+        <nav class="pagination">
+            {{ if .Paginator.HasPrev }}
+                <a href="{{ .Paginator.Prev.URL }}">&larr; Newer Posts</a>
+            {{ else }}
+                <span></span>
+            {{ end }}
+            {{ if .Paginator.HasNext }}
+                <a href="{{ .Paginator.Next.URL }}">Older Posts &rarr;</a>
+            {{ end }}
+        </nav>
 
-    <footer>
-        <p>&copy; {{ now.Year }} {{ .Site.Title }}. | <a href="{{ "/index.xml" | relURL }}">RSS Feed</a></p>
-    </footer>
+        <!-- All Tags List -->
+        <section class="all-tags-section">
+            <h2>All Tags</h2>
+            <div class="all-tags-list">
+                {{ $tags := .Site.Taxonomies.tags.ByCount }}
+                {{ range $tags.Reverse }}
+                    <a href="{{ .Page.Permalink }}">#{{ .Page.Title }} ({{ .Count }})</a>
+                {{ end }}
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; {{ now.Year }} {{ .Site.Title }}.</p>
+        </footer>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
+        // --- THEME TOGGLE SCRIPT ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
 
-            const applyTheme = (theme) => {
-                if (theme === 'dark') {
-                    body.classList.add('dark-mode');
-                } else {
-                    body.classList.remove('dark-mode');
-                }
-            };
-
-            // Check for saved theme in localStorage or system preference
-            let savedTheme = localStorage.getItem('theme');
-            if (!savedTheme) {
-                savedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
             }
-            applyTheme(savedTheme);
+        };
 
-            // Handle toggle click
-            themeToggle.addEventListener('click', () => {
-                let newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
-                applyTheme(newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
+        // Set initial theme
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else if (userPrefersDark) {
+            applyTheme('dark');
+        } else {
+            applyTheme('light');
+        }
+
+        // Add event listener
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.contains('dark-mode');
+            if (isDark) {
+                applyTheme('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                applyTheme('dark');
+                localStorage.setItem('theme', 'dark');
+            }
         });
     </script>
 </body>
