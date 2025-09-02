@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Site.Title }}</title>
     <style>
+        /* CSS Variables for Theming */
+        :root {
+            --bg-color: #fff;
+            --text-color: #222;
+            --secondary-text-color: #666;
+            --border-color: #ccc;
+            --subtle-border-color: #eee;
+            --link-color: #333;
+            --tag-color: #555;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #eee;
+            --secondary-text-color: #999;
+            --border-color: #444;
+            --subtle-border-color: #222;
+            --link-color: #eee;
+            --tag-color: #bbb;
+        }
+
         /* General Body & Typography Styles */
         body {
             font: 16px/1.6 system-ui, -apple-system, sans-serif;
             max-width: 650px;
             margin: 0 auto;
             padding: 1rem;
-            background: #fff;
-            color: #222;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
         
         /* Header Section */
         header {
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 1rem;
             margin-bottom: 1rem;
             text-align: center;
@@ -28,9 +52,9 @@
         }
         
         .tagline {
-            color: #666;
+            color: var(--secondary-text-color);
             font-size: 1rem;
-            margin: 0 0 0.75rem 0;
+            margin: 0 0 1rem 0;
         }
         
         /* Navigation Menu */
@@ -40,12 +64,12 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1.2rem;
             flex-wrap: wrap;
         }
         
         nav a {
-            color: #333;
+            color: var(--link-color);
             text-decoration: none;
             font-weight: 500;
         }
@@ -54,49 +78,11 @@
             text-decoration: underline;
         }
         
-        nav a.active {
-            font-weight: 700;
-            text-decoration: underline;
-        }
-        
-        /* Stats Section */
-        .stats-section {
-            margin: 1rem 0;
-            padding: 0.75rem 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .stats-grid {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            text-align: center;
-            flex-wrap: wrap;
-        }
-        
-        .stat-card {
-            min-width: 90px;
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #222;
-        }
-        
-        .stat-label {
-            font-size: 0.8rem;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
         /* Article & Post Styles */
         article {
             margin: 0;
             padding: 1rem 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--subtle-border-color);
         }
 
         article:last-of-type {
@@ -109,7 +95,7 @@
             align-items: center;
             margin-bottom: 0.8rem;
             font-size: 0.85rem;
-            color: #666;
+            color: var(--secondary-text-color);
         }
         
         .post-number {
@@ -124,12 +110,6 @@
         
         .post-footer {
             margin-top: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            font-size: 0.9rem;
         }
         
         .tags {
@@ -139,7 +119,7 @@
         }
         
         .tag {
-            color: #555;
+            color: var(--tag-color);
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
@@ -151,7 +131,7 @@
         
         .edited {
             font-style: italic;
-            color: #555;
+            color: var(--tag-color);
             margin-left: 0.5rem;
         }
         
@@ -160,54 +140,60 @@
             height: auto;
             margin: 0.75rem 0;
         }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--subtle-border-color);
+        }
+        .pagination a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+        
+        /* All Tags Section */
+        .all-tags-section {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .all-tags-section h2 {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .all-tags-section .tags {
+             justify-content: center;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-text-color);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
         
         /* Footer Section */
         footer {
             margin-top: 1.5rem;
             padding: 1rem 0;
-            border-top: 1px solid #ccc;
+            border-top: 1px solid var(--border-color);
             text-align: center;
             color: #888;
             font-size: 0.9rem;
         }
         
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Responsive Adjustments */
-        @media (max-width: 640px) {
-            body {
-                padding: 0.8rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            nav ul {
-                gap: 1rem;
-            }
-            
-            .post-footer {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
     </style>
 </head>
 <body>
@@ -217,11 +203,14 @@
         <p class="tagline">{{ .Site.Params.description }}</p>
         <nav>
             <ul>
-                <li><a href="/" class="active">Home</a></li>
-                <!-- You can add other main navigation links here -->
-                <li><a href="/on-this-day/">On This Day</a></li>
+                <li><a href="https://blackpiratex.com">Frontpage</a></li>
+                <li><a href="https://blog.blackpiratex.com">Blog</a></li>
+                <li><a href="https://gallery.blackpiratex.com">Gallery</a></li>
+                <li><a href="https://guestbook.blackpiratex.com">Guestbook</a></li>
+                <li><a href="{{ "/tags/" | relURL }}">Tags</a></li>
             </ul>
         </nav>
+        <button id="theme-toggle">Toggle Theme</button>
     </header>
 
     <main>
@@ -256,14 +245,61 @@
         {{ end }}
     </main>
     
-    <footer>
-        <div class="footer-links">
-            <!-- Add footer links here if needed -->
-            <a href="{{ "/index.xml" | relURL }}">RSS Feed</a>
+    <!-- Pagination -->
+    <nav class="pagination">
+        {{ if .Paginator.HasPrev }}
+            <a href="{{ .Paginator.Prev.URL }}">&larr; Newer Posts</a>
+        {{ else }}
+            <span></span>
+        {{ end }}
+        {{ if .Paginator.HasNext }}
+            <a href="{{ .Paginator.Next.URL }}">Older Posts &rarr;</a>
+        {{ end }}
+    </nav>
+    
+    <!-- All Tags List -->
+    <section class="all-tags-section">
+        <h2>All Tags</h2>
+        <div class="tags">
+            {{ $tags := .Site.Taxonomies.tags.ByCount }}
+            {{ range $tags.Reverse }}
+                <a href="{{ .Page.Permalink }}" class="tag">#{{ .Page.Title }} ({{ .Count }})</a>
+            {{ end }}
         </div>
-        <p>&copy; {{ now.Year }} {{ .Site.Title }}.</p>
+    </section>
+
+    <footer>
+        <p>&copy; {{ now.Year }} {{ .Site.Title }}. | <a href="{{ "/index.xml" | relURL }}">RSS Feed</a></p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+            };
+
+            // Check for saved theme in localStorage or system preference
+            let savedTheme = localStorage.getItem('theme');
+            if (!savedTheme) {
+                savedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            applyTheme(savedTheme);
+
+            // Handle toggle click
+            themeToggle.addEventListener('click', () => {
+                let newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        });
+    </script>
 </body>
 </html>
 
