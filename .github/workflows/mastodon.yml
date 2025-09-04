@@ -20,7 +20,7 @@ jobs:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
         run: |
           echo "Initial 1-minute wait for Vercel deployment to propagate..."
-          sleep 60
+          sleep 180
           
           echo "Polling deployment at $VERCEL_URL to be ready..."
           
