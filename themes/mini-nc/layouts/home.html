@@ -12,9 +12,9 @@
             {{ range ($paginator.Pages).GroupByDate "2006-01-02" }}
             <div class="day-group">
                 <div class="day-marker">
-                    <span class="day-month">{{ .Key.Format "Jan" }}</span>
-                    <span class="day-number">{{ .Key.Format "02" }}</span>
-                    <span class="day-year">{{ .Key.Format "2006" }}</span>
+                    <span class="day-month">{{ (time .Key).Format "Jan" }}</span>
+                    <span class="day-number">{{ (time .Key).Format "02" }}</span>
+                    <span class="day-year">{{ (time .Key).Format "2006" }}</span>
                 </div>
 
                 <div class="post-cluster">
@@ -70,4 +70,5 @@
     </div>
 </body>
 </html>
+
 
