@@ -219,3 +219,41 @@ footer {
     color: var(--secondary-text-color);
     border-top: 1px solid var(--border-color);
 }
+
+/* --- Responsive Styles for Mobile --- */
+@media (max-width: 640px) {
+    body {
+        padding: 0.75rem;
+    }
+
+    .site-header {
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .site-title {
+        font-size: 1.1rem;
+    }
+
+    /* Hide text on nav pills, leaving only icons */
+    .nav-link-pill span {
+        display: none;
+    }
+
+    .nav-link-pill {
+        padding: 0.5rem; /* Make it a circle */
+    }
+
+    .timeline {
+        padding-left: 2rem;
+    }
+
+    article.post::before {
+        left: -2rem;
+    }
+
+    .post-content {
+        font-size: 0.95rem;
+    }
+}
+
