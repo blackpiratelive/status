@@ -121,6 +121,7 @@ article.post:last-child { margin-bottom: 0; }
 .post-meta { font-size: 0.875rem; color: var(--secondary-text-color); margin-bottom: 0.5rem; }
 .post-time { font-weight: 600; color: var(--text-color); }
 .post-number { font-weight: 500; color: var(--accent-color); transition: color 0.3s; }
+.post-content { overflow-wrap: break-word; word-break: break-word; }
 .post-content p, .post-content ul, .post-content ol { margin-top: 0; margin-bottom: 0; }
 .post-content a { color: var(--accent-color); }
 
@@ -142,14 +143,38 @@ footer { text-align: center; margin-top: 3rem; padding-top: 1.5rem; font-size: 0
 .page-subtitle { font-size: 1rem; color: var(--secondary-text-color); margin: 0 0 1rem 0; }
 .back-link { color: var(--accent-color); text-decoration: none; font-weight: 500; }
 
-@media (max-width: 720px) {
-    .header-controls { gap: 0.25rem; }
-    .accent-picker-popup { right: 40px; }
-    .timeline::before { left: 2.5rem; }
-    .day-group { padding-left: 5rem; }
-    .day-marker { left: 2.5rem; width: 3.5rem; height: 3.5rem; }
-    .day-number { font-size: 1.25rem; }
-    .day-month, .day-year { font-size: 0.65rem; }
-    .page-title { font-size: 1.5rem; }
+@media (max-width: 640px) {
+    body {
+        padding: 0.75rem;
+    }
+    .site-title {
+        font-size: 1.1rem;
+    }
+    .header-controls {
+        gap: 0.25rem;
+    }
+    .accent-picker-popup {
+        right: 40px;
+    }
+    .timeline::before {
+        left: 2.25rem;
+    }
+    .day-group {
+        padding-left: 4.5rem;
+    }
+    .day-marker {
+        left: 2.25rem;
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+    .day-number {
+        font-size: 1.1rem;
+    }
+    .day-month, .day-year {
+        font-size: 0.6rem;
+    }
+    .page-title {
+        font-size: 1.5rem;
+    }
 }
 
