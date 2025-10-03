@@ -1,0 +1,14 @@
+<footer>
+    <h2>Links</h2>
+    <ul class="footer-list">
+        <li><a href="/about">About</a></li>
+        <li><a href="/archive">Archive</a></li>
+        {{ if .Site.Params.github }}
+        <li><a href="{{ .Site.Params.github }}">GitHub</a></li>
+        {{ end }}
+        {{ if .Site.Params.email }}
+        <li><a href="mailto:{{ .Site.Params.email }}">Email</a></li>
+        {{ end }}
+        <li><a href="/index.xml">RSS Feed</a></li>
+    </ul>
+</footer>
