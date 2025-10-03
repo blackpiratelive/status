@@ -61,24 +61,35 @@ article {
     padding-left: 0.25rem;
 }
 
-.post-permalink {
-    font-family: 'Verdana', sans-serif;
-    font-size: 0.75rem;
-    color: #0052cc;
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    transition: color 0.2s ease;
-}
-
-.post-permalink:hover {
-    color: #ee0000;
-}
-
 .post-meta {
     font-family: 'Verdana', sans-serif;
     font-size: 0.75rem;
     margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.post-meta-item {
+    margin-bottom: 0;
+}
+
+.post-permalink {
+    font-size: 1.125rem;
+    color: #0052cc;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.post-permalink:hover {
+    color: #ee0000;
 }
 
 .meta-label {

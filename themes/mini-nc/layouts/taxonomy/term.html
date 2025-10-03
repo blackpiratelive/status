@@ -17,20 +17,24 @@
             <div class="post-content">
                 {{ .Content }}
             </div>
-            <a href="{{ .Permalink }}" class="post-permalink">→ Permalink</a>
             <div class="post-meta">
-                <span class="meta-label">Date:</span> <time class="post-date">{{ .Date.Format "January 2, 2006 at 3:04 PM" }}</time>
-            </div>
-            {{ if .Params.tags }}
-            <div class="post-meta">
-                <span class="meta-label">Tags:</span>
-                <span class="post-tags">
-                    {{ range .Params.tags }}
-                    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+                <div class="post-meta-left">
+                    <div class="post-meta-item">
+                        <span class="meta-label">Date:</span> <time class="post-date">{{ .Date.Format "January 2, 2006 at 3:04 PM" }}</time>
+                    </div>
+                    {{ if .Params.tags }}
+                    <div class="post-meta-item">
+                        <span class="meta-label">Tags:</span>
+                        <span class="post-tags">
+                            {{ range .Params.tags }}
+                            <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+                            {{ end }}
+                        </span>
+                    </div>
                     {{ end }}
-                </span>
+                </div>
+                <a href="{{ .Permalink }}" class="post-permalink">→</a>
             </div>
-            {{ end }}
         </article>
         
         {{ if not (eq . (index $paginator.Pages (sub (len $paginator.Pages) 1))) }}
