@@ -1,14 +1,29 @@
 <footer>
-    <h2>Links</h2>
-    <ul class="footer-list">
-        <li><a href="/about">About</a></li>
-        <li><a href="/archive">Archive</a></li>
-        {{ if .Site.Params.github }}
-        <li><a href="{{ .Site.Params.github }}">GitHub</a></li>
-        {{ end }}
-        {{ if .Site.Params.email }}
-        <li><a href="mailto:{{ .Site.Params.email }}">Email</a></li>
-        {{ end }}
-        <li><a href="/index.xml">RSS Feed</a></li>
-    </ul>
+    <h2>Browse</h2>
+    <div class="footer-grid">
+        <a href="https://blog.blackpiratex.com/" target="_blank" rel="noopener noreferrer">Blog 🖊️</a>
+        <a href="https://gallery.blackpiratex.com" target="_blank" rel="noopener noreferrer">Gallery 📸</a>
+        <a href="https://music.blackpiratex.com" target="_blank" rel="noopener noreferrer">Music 🎧</a>
+        <a href="https://notes.blackpiratex.com" target="_blank" rel="noopener noreferrer">Notes 📚</a>
+        <a href="https://status.blackpiratex.com" target="_blank" rel="noopener noreferrer">Status 🎯</a>
+        <a href="https://blackpiratex.com/bookmarks/" target="_blank" rel="noopener noreferrer">Bookmarks 📑</a>
+        <a href="https://blackpiratex.com/contact/" target="_blank" rel="noopener noreferrer">Contact 💌</a>
+        <a href="https://blackpiratex.com/credits/" target="_blank" rel="noopener noreferrer">Credits 🤝</a>
+        <a href="https://blackpiratex.com/about/" target="_blank" rel="noopener noreferrer">About 🙋‍♂️</a>
+    </div>
+    
+    <h2 class="mt-2">Follow</h2>
+    <div class="footer-list-inline">
+        <a href="https://links.blackpiratex.com/github" target="_blank" rel="noopener noreferrer">Github 💻</a>
+        <a href="https://links.blackpiratex.com/pixelfed" target="_blank" rel="noopener noreferrer">PixelFed 📷</a>
+        <a href="https://links.blackpiratex.com/yt" target="_blank" rel="noopener noreferrer">Youtube 🎥</a>
+        <a href="https://links.blackpiratex.com/mastodon" target="_blank" rel="noopener noreferrer">Mastodon 🌑</a>
+        <a href="https://links.blackpiratex.com/wa" target="_blank" rel="noopener noreferrer">WhatsApp 🗨️</a>
+        <a href="https://links.blackpiratex.com/last.fm" target="_blank" rel="noopener noreferrer">Last.fm 🎵</a>
+    </div>
+    
+    <p class="footer-note">
+        Want your own book tracker? Here's the 
+        <a href="https://github.com/blackpirateapps/book-tracker.git" target="_blank" rel="noopener noreferrer">source code</a>.
+    </p>
 </footer>

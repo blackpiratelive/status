@@ -141,27 +141,70 @@ footer h2 {
     margin-bottom: 0.5rem;
 }
 
-.footer-list {
+footer h2.mt-2 {
+    margin-top: 1.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.375rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-grid a {
     font-family: 'Verdana', sans-serif;
-    list-style-type: disc;
-    padding-left: 2rem;
-}
-
-.footer-list li {
-    margin-bottom: 0.375rem;
-}
-
-.footer-list a {
+    font-size: 0.75rem;
     color: #0052cc;
     text-decoration: underline;
     transition: color 0.2s ease;
 }
 
-.footer-list a:visited {
+.footer-grid a:visited {
     color: #5a3a7a;
 }
 
-.footer-list a:hover {
+.footer-grid a:hover {
+    color: #ee0000;
+}
+
+.footer-list-inline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.footer-list-inline a {
+    font-family: 'Verdana', sans-serif;
+    font-size: 0.75rem;
+    color: #0052cc;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.footer-list-inline a:visited {
+    color: #5a3a7a;
+}
+
+.footer-list-inline a:hover {
+    color: #ee0000;
+}
+
+.footer-note {
+    font-family: 'Verdana', sans-serif;
+    font-size: 0.6875rem;
+    color: #555;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer-note a {
+    color: #0052cc;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.footer-note a:hover {
     color: #ee0000;
 }
 
@@ -185,5 +228,9 @@ footer h2 {
 @media (max-width: 768px) {
     body {
         padding: 0.75rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
     }
 }
