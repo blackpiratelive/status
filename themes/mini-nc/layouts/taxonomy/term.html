@@ -4,67 +4,53 @@
     {{ partial "head.html" . }}
 </head>
 <body>
-
-    <div class="container">
-        {{ partial "site-header.html" . }}
-
-        <header class="page-specific-header">
-            <p class="page-subtitle">Posts Tagged</p>
-            <h1 class="page-title">#{{ .Title }}</h1>
-            <a href="{{ .Site.BaseURL }}" class="back-link">&larr; Back to All Posts</a>
-        </header>
-
-        <main class="timeline">
-            {{ $paginator := .Paginator 50 }}
-            {{ range ($paginator.Pages).GroupByDate "2006-01-02" }}
-            <div class="day-group">
-                 <div class="day-marker">
-                    <span class="day-month">{{ (time .Key).Format "Jan" }}</span>
-                    <span class="day-number">{{ (time .Key).Format "02" }}</span>
-                    <span class="day-year">{{ (time .Key).Format "2006" }}</span>
-                </div>
-
-                <div class="post-cluster">
-                     <!-- Logic to create sequential post numbers -->
-                    {{ $allPosts := $.Site.RegularPages.ByDate }}
-                    {{ $postNumbers := dict }}
-                    {{ range $index, $page := $allPosts }}
-                        {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
+    <header>
+        <h1>{{ .Site.Title }}</h1>
+        <p class="subtitle">Posts tagged with <strong>#{{ .Title }}</strong></p>
+        <a href="{{ .Site.BaseURL }}" class="back-link">&larr; Back to All Posts</a>
+    </header>
+    
+    <main>
+        {{ $paginator := .Paginator 50 }}
+        {{ range ($paginator.Pages) }}
+        <article>
+            <div class="post-content">
+                {{ .Content }}
+            </div>
+            <a href="{{ .Permalink }}" class="post-permalink">→ Permalink</a>
+            <div class="post-meta">
+                <span class="meta-label">Date:</span> <time class="post-date">{{ .Date.Format "January 2, 2006 at 3:04 PM" }}</time>
+            </div>
+            {{ if .Params.tags }}
+            <div class="post-meta">
+                <span class="meta-label">Tags:</span>
+                <span class="post-tags">
+                    {{ range .Params.tags }}
+                    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
                     {{ end }}
-
-                    {{ range .Pages }}
-                    <article class="post">
-                        <div class="post-meta">
-                            <span class="post-time">{{ .Date.Format "15:04" }}</span> &mdash;
-                            <span class="post-number">#{{ index $postNumbers .RelPermalink }}</span>
-                        </div>
-                        <div class="post-content">
-                            {{ .Content }}
-                        </div>
-                    </article>
-                    {{ end }}
-                </div>
+                </span>
             </div>
             {{ end }}
-        </main>
-
-        <!-- Pagination -->
-        <nav class="pagination">
-            {{ if .Paginator.HasPrev }}
-                <a href="{{ .Paginator.Prev.URL }}">&larr; Newer Posts</a>
-            {{ else }}
-                <span></span>
-            {{ end }}
-            {{ if .Paginator.HasNext }}
-                <a href="{{ .Paginator.Next.URL }}">Older Posts &rarr;</a>
-            {{ end }}
-        </nav>
+        </article>
         
-        <footer>
-            <p>&copy; {{ now.Year }} {{ .Site.Title }}.</p>
-        </footer>
-    </div>
+        {{ if not (eq . (index $paginator.Pages (sub (len $paginator.Pages) 1))) }}
+        <hr>
+        {{ end }}
+        {{ end }}
+    </main>
+
+    <!-- Pagination -->
+    <nav class="pagination">
+        {{ if .Paginator.HasPrev }}
+            <a href="{{ .Paginator.Prev.URL }}">&larr; Newer Posts</a>
+        {{ else }}
+            <span></span>
+        {{ end }}
+        {{ if .Paginator.HasNext }}
+            <a href="{{ .Paginator.Next.URL }}">Older Posts &rarr;</a>
+        {{ end }}
+    </nav>
+    
+    {{ partial "footer.html" . }}
 </body>
 </html>
-
-
