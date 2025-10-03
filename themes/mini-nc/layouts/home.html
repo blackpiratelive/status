@@ -6,12 +6,12 @@
 <body>
     <header>
         <h1>{{ .Site.Title }}</h1>
-        <p class="subtitle">{{ .Site.Params.description }}</p>
+        <p class="subtitle">
+            {{ .Site.Params.description }}
+            <span class="separator">·</span>
+            <a href="/on-this-day" class="on-this-day-link">On This Day</a>
+        </p>
     </header>
-    
-    <div class="on-this-day-container">
-        <a href="/on-this-day" class="on-this-day-btn">📅 On This Day</a>
-    </div>
     
     <main>
         {{ $paginator := .Paginator 50 }}

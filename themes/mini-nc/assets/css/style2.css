@@ -36,6 +36,23 @@ h1 {
     display: block;
 }
 
+.separator {
+    margin: 0 0.375rem;
+    color: #555;
+}
+
+.on-this-day-link {
+    font-family: 'Verdana', sans-serif;
+    font-size: 0.8125rem;
+    color: #0052cc;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.on-this-day-link:hover {
+    color: #ee0000;
+}
+
 .back-link {
     font-family: 'Verdana', sans-serif;
     font-size: 0.75rem;
@@ -47,41 +64,6 @@ h1 {
 
 .back-link:hover {
     color: #ee0000;
-}
-
-/* On This Day Button */
-.on-this-day-container {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.on-this-day-btn {
-    display: inline-block;
-    font-family: 'Verdana', sans-serif;
-    font-size: 0.875rem;
-    color: #0052cc;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 2px solid #0052cc;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.on-this-day-btn:hover {
-    color: #fff;
-    background-color: #ee0000;
-    border-color: #ee0000;
-    animation: none;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
 }
 
 /* Year Section Styling */
