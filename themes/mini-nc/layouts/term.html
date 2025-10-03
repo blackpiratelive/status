@@ -2,69 +2,219 @@
 <html lang="en">
 <head>
     {{ partial "head.html" . }}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            line-height: 1.65;
+            color: #1a1a1a;
+            background: #fff;
+            padding: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        h1 {
+            font-family: 'Georgia', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-family: 'Verdana', sans-serif;
+            font-size: 0.8125rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        
+        .back-link {
+            font-family: 'Verdana', sans-serif;
+            font-size: 0.75rem;
+            color: #0052cc;
+            text-decoration: underline;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        
+        .back-link:hover {
+            color: #ee0000;
+        }
+        
+        article {
+            margin-bottom: 1rem;
+        }
+        
+        .post-content {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            padding-left: 0.25rem;
+        }
+        
+        .post-meta {
+            font-family: 'Verdana', sans-serif;
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .meta-label {
+            color: #a0522d;
+            font-weight: bold;
+        }
+        
+        .post-date {
+            color: #1a1a1a;
+        }
+        
+        .post-tags {
+            display: inline;
+        }
+        
+        .tag {
+            color: #0052cc;
+            text-decoration: underline;
+            margin-right: 0.25rem;
+            transition: color 0.2s ease, background-color 0.2s ease;
+            padding: 1px 2px;
+        }
+        
+        .tag:hover {
+            color: #003d99;
+            background-color: #f5f5f5;
+        }
+        
+        .tag:visited {
+            color: #5a3a7a;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 1rem 0;
+        }
+        
+        footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+        }
+        
+        footer h2 {
+            font-family: 'Georgia', serif;
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-list {
+            font-family: 'Verdana', sans-serif;
+            list-style-type: disc;
+            padding-left: 2rem;
+        }
+        
+        .footer-list li {
+            margin-bottom: 0.375rem;
+        }
+        
+        .footer-list a {
+            color: #0052cc;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-list a:visited {
+            color: #5a3a7a;
+        }
+        
+        .footer-list a:hover {
+            color: #ee0000;
+        }
+        
+        .pagination {
+            font-family: 'Verdana', sans-serif;
+            font-size: 0.875rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .pagination a {
+            color: #0052cc;
+            text-decoration: underline;
+        }
+        
+        .pagination a:hover {
+            color: #ee0000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <div class="container">
-        {{ partial "site-header.html" . }}
-
-        <header class="page-specific-header">
-            <p class="page-subtitle">Posts Tagged</p>
-            <h1 class="page-title">#{{ .Title }}</h1>
-            <a href="{{ .Site.BaseURL }}" class="back-link">&larr; Back to All Posts</a>
-        </header>
-
-        <main class="timeline">
-            {{ $paginator := .Paginator 50 }}
-            {{ range ($paginator.Pages).GroupByDate "2006-01-02" }}
-            <div class="day-group">
-                 <div class="day-marker">
-                    <span class="day-month">{{ (time .Key).Format "Jan" }}</span>
-                    <span class="day-number">{{ (time .Key).Format "02" }}</span>
-                    <span class="day-year">{{ (time .Key).Format "2006" }}</span>
-                </div>
-
-                <div class="post-cluster">
-                     <!-- Logic to create sequential post numbers -->
-                    {{ $allPosts := $.Site.RegularPages.ByDate }}
-                    {{ $postNumbers := dict }}
-                    {{ range $index, $page := $allPosts }}
-                        {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
+    <header>
+        <h1>{{ .Site.Title }}</h1>
+        <p class="subtitle">Posts tagged with <strong>#{{ .Title }}</strong></p>
+        <a href="{{ .Site.BaseURL }}" class="back-link">&larr; Back to All Posts</a>
+    </header>
+    
+    <main>
+        {{ $paginator := .Paginator 50 }}
+        {{ range ($paginator.Pages) }}
+        <article>
+            <div class="post-content">
+                {{ .Content }}
+            </div>
+            <div class="post-meta">
+                <span class="meta-label">Date:</span> <time class="post-date">{{ .Date.Format "January 2, 2006 at 3:04 PM" }}</time>
+            </div>
+            {{ if .Params.tags }}
+            <div class="post-meta">
+                <span class="meta-label">Tags:</span>
+                <span class="post-tags">
+                    {{ range .Params.tags }}
+                    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
                     {{ end }}
-
-                    {{ range .Pages }}
-                    <article class="post">
-                        <div class="post-meta">
-                            <span class="post-time">{{ .Date.Format "15:04" }}</span> &mdash;
-                            <span class="post-number">#{{ index $postNumbers .RelPermalink }}</span>
-                        </div>
-                        <div class="post-content">
-                            {{ .Content }}
-                        </div>
-                    </article>
-                    {{ end }}
-                </div>
+                </span>
             </div>
             {{ end }}
-        </main>
-
-        <!-- Pagination -->
-        <nav class="pagination">
-            {{ if .Paginator.HasPrev }}
-                <a href="{{ .Paginator.Prev.URL }}">&larr; Newer Posts</a>
-            {{ else }}
-                <span></span>
-            {{ end }}
-            {{ if .Paginator.HasNext }}
-                <a href="{{ .Paginator.Next.URL }}">Older Posts &rarr;</a>
-            {{ end }}
-        </nav>
+        </article>
         
-        <footer>
-            <p>&copy; {{ now.Year }} {{ .Site.Title }}.</p>
-        </footer>
-    </div>
+        {{ if not (eq . (index $paginator.Pages (sub (len $paginator.Pages) 1))) }}
+        <hr>
+        {{ end }}
+        {{ end }}
+    </main>
+
+    <!-- Pagination -->
+    <nav class="pagination">
+        {{ if .Paginator.HasPrev }}
+            <a href="{{ .Paginator.Prev.URL }}">&larr; Newer Posts</a>
+        {{ else }}
+            <span></span>
+        {{ end }}
+        {{ if .Paginator.HasNext }}
+            <a href="{{ .Paginator.Next.URL }}">Older Posts &rarr;</a>
+        {{ end }}
+    </nav>
+    
+    {{ partial "footer.html" . }}
 </body>
 </html>
-
-
