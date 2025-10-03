@@ -1,280 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ partial "head.html" . }}
     <title>On This Day - {{ .Site.Title }}</title>
-    <style>
-        /* --- Base Styles & Theme Variables (Matches home.html) --- */
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #1f2937;
-            --secondary-text-color: #4b5563;
-            --border-color: #e5e7eb;
-            --accent-color: #2563eb;
-        }
-
-        :root.dark-mode {
-            --bg-color: #121212;
-            --text-color: #f9fafb;
-            --secondary-text-color: #9ca3af;
-            --border-color: #374151;
-            --accent-color: #38bdf8;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 1rem;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* --- New Loading Animation --- */
-        #loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-color);
-            z-index: 10001;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease-out;
-        }
-        .loader-text {
-            font-size: 1.2rem;
-            color: var(--secondary-text-color);
-            margin-bottom: 1.5rem;
-        }
-        .loader-icon {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--border-color);
-            border-top-color: var(--accent-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        #loader-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-
-        /* --- Header --- */
-        header {
-            text-align: center;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-        header p {
-            color: var(--secondary-text-color);
-        }
-        .back-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        /* --- Timeline & Post Styling --- */
-        .timeline {
-            position: relative;
-            padding-left: 2.5rem;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 1rem;
-            bottom: 1rem;
-            width: 2px;
-            background-color: var(--border-color);
-        }
-        .year-group {
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        .year-heading {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin: 0 0 1.5rem 0;
-            position: relative;
-            /* Animation */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .year-group.is-visible .year-heading {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .year-heading::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0.8rem;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: var(--bg-color);
-            border: 3px solid var(--accent-color);
-            z-index: 1;
-        }
-        
-        article.post {
-            margin-bottom: 2.5rem;
-            padding-left: 1rem;
-            border-left: 2px solid var(--border-color);
-             /* Animation */
-            opacity: 0;
-            transform: translateX(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .year-group.is-visible article.post {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        /* Staggered animation for posts within a year */
-        {{ range seq 1 10 }}
-        .year-group.is-visible article.post:nth-child({{ . }}) {
-            transition-delay: {{ mul . 0.1 }}s;
-        }
-        {{ end }}
-
-
-        .post-meta {
-            font-size: 0.875rem;
-            color: var(--secondary-text-color);
-            margin-bottom: 0.5rem;
-        }
-        .post-number {
-            font-weight: 600;
-            color: var(--accent-color);
-        }
-        .post-content a {
-            color: var(--accent-color);
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--secondary-text-color);
-            border-top: 1px solid var(--border-color);
-        }
-    </style>
 </head>
 <body>
+    <header>
+        <h1>On This Day</h1>
+        <p class="subtitle">A look back at memories from the past</p>
+        <a href="/" class="back-link">&larr; Back to Latest Posts</a>
+    </header>
 
-    <!-- Loading Animation -->
-    <div id="loader-overlay">
-        <p class="loader-text">Unearthing memories...</p>
-        <div class="loader-icon"></div>
-    </div>
-
-    <div class="container">
-        <header>
-            <h1>On This Day</h1>
-            <p>A look back at memories from the past.</p>
-            <a href="/" class="back-link">&larr; Back to Latest Posts</a>
-        </header>
-
-        <main class="timeline">
-            <!-- Hugo logic to find and group posts -->
-            {{ $now := now }}
-            {{ $currentMonthDay := $now.Format "01-02" }}
-            {{ $currentYear := $now.Format "2006" }}
-            
-            {{ $onThisDayPosts := slice }}
-            {{ range .Site.RegularPages }}
-                {{ if and (eq (.Date.Format "01-02") $currentMonthDay) (ne (.Date.Format "2006") $currentYear) }}
-                    {{ $onThisDayPosts = $onThisDayPosts | append . }}
-                {{ end }}
-            {{ end }}
-            
-            <!-- Hugo logic for post numbers -->
-            {{ $allPosts := .Site.RegularPages.ByDate }}
-            {{ $postNumbers := dict }}
-            {{ range $index, $page := $allPosts }}
-                {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
-            {{ end }}
-
-            {{ if gt (len $onThisDayPosts) 0 }}
-                {{ $sortedPosts := sort $onThisDayPosts "Date" "desc" }}
-                {{ $groupedByYear := $sortedPosts.GroupByDate "2006" }}
-
-                {{ range $groupedByYear }}
-                    <div class="year-group">
-                        <h2 class="year-heading">{{ .Key }}</h2>
-                        {{ range .Pages }}
-                        <article class="post">
-                            <div class="post-meta">
-                                <span class="post-number">#{{ index $postNumbers .RelPermalink }}</span> &mdash;
-                                <time>{{ .Date.Format "Jan 02, 15:04" }}</time>
-                            </div>
-                            <div class="post-content">
-                                {{ .Content }}
-                            </div>
-                        </article>
-                        {{ end }}
-                    </div>
-                {{ end }}
-            {{ else }}
-                <p style="text-align: center; color: var(--secondary-text-color); padding: 4rem 0;">No memories from this day in the past. Come back tomorrow!</p>
-            {{ end }}
-        </main>
+    <main>
+        {{ $now := now }}
+        {{ $currentMonthDay := $now.Format "01-02" }}
+        {{ $currentYear := $now.Format "2006" }}
         
-        <footer>
-            <p>&copy; {{ now.Year }} {{ .Site.Title }}.</p>
-        </footer>
-    </div>
+        {{ $onThisDayPosts := slice }}
+        {{ range .Site.RegularPages }}
+            {{ if and (eq (.Date.Format "01-02") $currentMonthDay) (ne (.Date.Format "2006") $currentYear) }}
+                {{ $onThisDayPosts = $onThisDayPosts | append . }}
+            {{ end }}
+        {{ end }}
+        
+        {{ $allPosts := .Site.RegularPages.ByDate }}
+        {{ $postNumbers := dict }}
+        {{ range $index, $page := $allPosts }}
+            {{ $postNumbers = merge $postNumbers (dict $page.RelPermalink (add $index 1)) }}
+        {{ end }}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Loading Animation ---
-            const loaderOverlay = document.getElementById('loader-overlay');
-            // Hide the loader after a short delay to show the animation
-            setTimeout(() => {
-                loaderOverlay.classList.add('hidden');
-            }, 1500); // 1.5 seconds
+        {{ if gt (len $onThisDayPosts) 0 }}
+            {{ $sortedPosts := sort $onThisDayPosts "Date" "desc" }}
+            {{ $groupedByYear := $sortedPosts.GroupByDate "2006" }}
 
-            // --- Scroll Animations ---
-            const animatedElements = document.querySelectorAll('.year-group');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15 });
-
-            animatedElements.forEach(el => observer.observe(el));
-        });
-    </script>
+            {{ range $groupedByYear }}
+                <div class="year-section">
+                    <h2 class="year-heading">{{ .Key }}</h2>
+                    {{ range .Pages }}
+                    <article>
+                        <div class="post-content">
+                            {{ .Content }}
+                        </div>
+                        <div class="post-meta">
+                            <div class="post-meta-left">
+                                <div class="post-meta-item">
+                                    <span class="meta-label">Date:</span> <time class="post-date">{{ .Date.Format "January 2, 2006 at 3:04 PM" }}</time>
+                                </div>
+                            </div>
+                            <a href="{{ .Permalink }}" class="post-permalink">→</a>
+                        </div>
+                    </article>
+                    {{ if not (eq . (index $.Pages (sub (len $.Pages) 1))) }}
+                    <hr>
+                    {{ end }}
+                    {{ end }}
+                </div>
+            {{ end }}
+        {{ else }}
+            <p class="no-memories">No memories from this day in the past. Come back tomorrow!</p>
+        {{ end }}
+    </main>
+    
+    {{ partial "footer.html" . }}
 </body>
 </html>
-

@@ -49,6 +49,64 @@ h1 {
     color: #ee0000;
 }
 
+/* On This Day Button */
+.on-this-day-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.on-this-day-btn {
+    display: inline-block;
+    font-family: 'Verdana', sans-serif;
+    font-size: 0.875rem;
+    color: #0052cc;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid #0052cc;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.on-this-day-btn:hover {
+    color: #fff;
+    background-color: #ee0000;
+    border-color: #ee0000;
+    animation: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Year Section Styling */
+.year-section {
+    margin-bottom: 3rem;
+}
+
+.year-heading {
+    font-family: 'Georgia', serif;
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #0052cc;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.no-memories {
+    font-family: 'Verdana', sans-serif;
+    font-size: 0.875rem;
+    color: #555;
+    text-align: center;
+    padding: 3rem 0;
+}
+
 article {
     margin-bottom: 1rem;
     position: relative;
