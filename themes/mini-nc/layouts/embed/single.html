@@ -5,116 +5,343 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latest Status</title>
     <style>
-        /* --- Self-Contained Barebones Embed Styles --- */
-        body {
-            font: 14px/1.6 system-ui, -apple-system, sans-serif;
-            background-color: transparent !important;
+        * {
             margin: 0;
             padding: 0;
-            color: #222;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: Times New Roman, serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
         .embed-container {
-            border: 1px solid #ccc;
+            border: 3px solid black;
+            background: white;
+            box-shadow: 6px 6px 0 #1E90FF;
         }
-        .embed-header, .embed-footer {
+
+        /* Skeleton Loader */
+        #skeleton {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .skeleton-header {
             padding: 0.75rem 1rem;
+            border-bottom: 3px solid black;
+            background: #FFE66D;
         }
+
+        .skeleton-title {
+            height: 20px;
+            background: #FF6B6B;
+            border: 2px solid black;
+            width: 180px;
+        }
+
+        .skeleton-entry {
+            padding: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .skeleton-entry:last-child {
+            border-bottom: none;
+        }
+
+        .skeleton-meta {
+            height: 14px;
+            background: #4ECDC4;
+            border: 2px solid black;
+            width: 150px;
+            margin-bottom: 0.5rem;
+        }
+
+        .skeleton-text {
+            height: 12px;
+            background: #95E1D3;
+            border: 2px solid black;
+            margin-bottom: 0.4rem;
+        }
+
+        .skeleton-text.line1 {
+            width: 100%;
+        }
+
+        .skeleton-text.line2 {
+            width: 85%;
+        }
+
+        .skeleton-text.line3 {
+            width: 60%;
+        }
+
+        .skeleton-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .skeleton-tag {
+            height: 16px;
+            background: #FFE66D;
+            border: 2px solid black;
+            width: 60px;
+        }
+
+        .skeleton-footer {
+            padding: 0.75rem 1rem;
+            border-top: 3px solid black;
+            text-align: center;
+        }
+
+        .skeleton-footer-link {
+            height: 16px;
+            background: #FF6B6B;
+            border: 2px solid black;
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        /* Actual Content Styles */
         .embed-header {
-            border-bottom: 1px solid #ccc;
+            padding: 0.75rem 1rem;
+            border-bottom: 3px solid black;
+            background: #FFE66D;
         }
+
         .embed-header h3 {
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: bold;
             margin: 0;
+            color: #FF6B6B;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
+
+        .log-entries {
+            background: white;
+        }
+
         .log-entry {
             padding: 1rem;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px dotted #ccc;
+            transition: background 0.2s ease;
         }
+
         .log-entry:last-child {
             border-bottom: none;
         }
+
+        .log-entry:hover {
+            background: #FFFACD;
+        }
+
         .log-entry-meta {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 0.25rem;
+            font-size: 0.75rem;
+            color: white;
+            background: #1E90FF;
+            padding: 0.3rem 0.6rem;
+            border: 2px solid black;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            box-shadow: 2px 2px 0 black;
         }
+
+        .log-entry-content {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
         .log-entry-content p {
-            margin: 0;
+            margin: 0 0 0.5rem 0;
         }
+
+        .log-entry-content p:last-child {
+            margin-bottom: 0;
+        }
+
         .tags-container {
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
+
         .log-tag {
             display: inline-block;
-            margin-right: 0.8rem;
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: #555;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: black;
             text-decoration: none;
+            background: #4ECDC4;
+            padding: 0.25rem 0.6rem;
+            border: 2px solid black;
+            box-shadow: 2px 2px 0 black;
+            transition: all 0.2s ease;
         }
+
         .log-tag:hover {
-            text-decoration: underline;
+            background: #95E1D3;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 black;
         }
+
         .embed-footer {
-            border-top: 1px solid #ccc;
+            border-top: 3px solid black;
             text-align: center;
+            padding: 0.75rem 1rem;
+            background: #FF6B6B;
         }
+
         .embed-footer a {
             font-size: 0.9rem;
-            color: #333;
+            color: white;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            display: inline-block;
         }
+
         .embed-footer a:hover {
-            text-decoration: underline;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 640px) {
+            .embed-container {
+                box-shadow: 3px 3px 0 #1E90FF;
+            }
+
+            .log-entry {
+                padding: 0.75rem;
+            }
+
+            .log-entry-meta {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .log-tag {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="embed-container">
-        <div class="embed-header">
-            <h3>Latest Status Updates</h3>
+        <!-- Skeleton Loader -->
+        <div id="skeleton">
+            <div class="skeleton-header">
+                <div class="skeleton-title"></div>
+            </div>
+            
+            <div class="log-entries">
+                <div class="skeleton-entry">
+                    <div class="skeleton-meta"></div>
+                    <div class="skeleton-text line1"></div>
+                    <div class="skeleton-text line2"></div>
+                    <div class="skeleton-text line3"></div>
+                    <div class="skeleton-tags">
+                        <div class="skeleton-tag"></div>
+                        <div class="skeleton-tag"></div>
+                    </div>
+                </div>
+                
+                <div class="skeleton-entry">
+                    <div class="skeleton-meta"></div>
+                    <div class="skeleton-text line1"></div>
+                    <div class="skeleton-text line2"></div>
+                    <div class="skeleton-tags">
+                        <div class="skeleton-tag"></div>
+                    </div>
+                </div>
+                
+                <div class="skeleton-entry">
+                    <div class="skeleton-meta"></div>
+                    <div class="skeleton-text line1"></div>
+                    <div class="skeleton-text line2"></div>
+                    <div class="skeleton-text line3"></div>
+                </div>
+            </div>
+            
+            <div class="skeleton-footer">
+                <div class="skeleton-footer-link"></div>
+            </div>
         </div>
 
-        <!-- Log Entries -->
-        <div class="log-entries">
-            {{ range first 5 .Site.RegularPages.ByDate.Reverse }}
-            <div class="log-entry">
-                <div class="log-entry-meta">
-                    <time>{{ .Date.Format "02 Jan 2006, 15:04" }}</time>
-                </div>
-                <div class="log-entry-content">
-                    {{ .Content }}
-                </div>
-                {{ if .Params.tags }}
-                <div class="tags-container">
-                    {{ range .Params.tags }}
-                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="log-tag" target="_top">
-                        #{{ . }}
-                    </a>
+        <!-- Actual Content -->
+        <div id="content" class="hidden">
+            <div class="embed-header">
+                <h3>Latest Status Updates</h3>
+            </div>
+
+            <div class="log-entries">
+                {{ range first 5 .Site.RegularPages.ByDate.Reverse }}
+                <div class="log-entry">
+                    <div class="log-entry-meta">
+                        <time>{{ .Date.Format "02 Jan 2006, 15:04" }}</time>
+                    </div>
+                    <div class="log-entry-content">
+                        {{ .Content }}
+                    </div>
+                    {{ if .Params.tags }}
+                    <div class="tags-container">
+                        {{ range .Params.tags }}
+                        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="log-tag" target="_top">
+                            #{{ . }}
+                        </a>
+                        {{ end }}
+                    </div>
                     {{ end }}
                 </div>
                 {{ end }}
             </div>
-            {{ end }}
-        </div>
-        <div class="embed-footer">
-            <a href="{{ .Site.BaseURL }}" target="_top">View all updates &rarr;</a>
+            
+            <div class="embed-footer">
+                <a href="{{ .Site.BaseURL }}" target="_top">View all updates &rarr;</a>
+            </div>
         </div>
     </div>
 
     <script>
         // This script sends the height of the content to the parent page
         const container = document.querySelector('.embed-container');
+        const skeletonEl = document.getElementById('skeleton');
+        const contentEl = document.getElementById('content');
+        
         const sendHeight = () => {
             if (container) {
                 const height = container.offsetHeight;
                 window.parent.postMessage({ frameHeight: height, source: 'hugo-embed' }, '*');
             }
         };
-        window.onload = sendHeight;
+
+        // Show content after a brief delay to simulate loading
+        window.onload = () => {
+            setTimeout(() => {
+                skeletonEl.classList.add('hidden');
+                contentEl.classList.remove('hidden');
+                sendHeight();
+            }, 500);
+        };
+
         const resizeObserver = new ResizeObserver(sendHeight);
         if(container) {
             resizeObserver.observe(container);
