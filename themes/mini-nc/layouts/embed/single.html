@@ -1,12 +1,10 @@
-<!-- single.html (status site themed to match current aesthetics) -->
+<!-- status site: layouts/_default/embed.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>{{ .Title }}</title>
+  <title>Status Updates</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Theme styles: centered container, serif type, green accents, light/dark -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -24,10 +22,7 @@
       --blockquote-dark: #4bb583;
       --card-bg: #ffffff;
       --card-bg-dark: #1a1a1a;
-      --shadow: none;
     }
-
-    html, body { height: 100%; }
 
     body{
       font-family: "Times New Roman", serif;
@@ -36,50 +31,21 @@
       line-height: 1.6;
       margin: 0;
       transition: background 0.3s, color 0.3s;
-      overflow-x: hidden;
     }
 
     .container{
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding: 1rem;
     }
 
-    header.site-header{
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 1.5rem;
-    }
-    .nav{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 0;
-      flex-wrap: wrap;
-    }
-    .nav-links{
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    a{ color: var(--accent); text-decoration: underline; }
-    a:visited{ color: var(--accent-visited); }
-
-    main.container{
-      padding-top: 0.75rem;
-      padding-bottom: 2rem;
-    }
-
-    /* Status card */
     .status-card{
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 2px;
       padding: 1rem;
       margin-bottom: 1rem;
-      box-shadow: var(--shadow);
     }
 
     .status-meta{
@@ -120,64 +86,20 @@
       background: #fff;
     }
 
-    hr{
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 1.5rem 0;
-    }
-
-    /* Reply/composer (if present) */
-    .reply-box{
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 0.75rem;
-      margin-top: 1rem;
-    }
-    .reply-box textarea{
-      width: 100%;
-      min-height: 90px;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 0.5rem;
-      font-family: inherit;
-      font-size: 1rem;
-      background: transparent;
-      color: inherit;
-    }
-    .reply-actions{
-      margin-top: 0.5rem;
-      display: flex;
-      gap: 0.5rem;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-    }
-    .btn{
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.35rem 0.75rem;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.95rem;
-      border-radius: 2px;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .btn:hover{
-      background: var(--accent);
-      color: #fff;
-    }
-
-    footer.site-footer{
-      border-top: 1px solid var(--border);
-      margin-top: 2rem;
-      padding: 1rem 0;
-      font-size: 0.9rem;
-      color: var(--muted);
+    .view-all{
+      display: block;
       text-align: center;
+      margin-top: 1rem;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 2px;
+      transition: background .2s, color .2s;
     }
+    .view-all:hover{ background: var(--accent); color: #fff; }
 
-    /* Dark mode */
     @media (prefers-color-scheme: dark){
       :root{
         --bg: #1a1a1a;
@@ -188,106 +110,53 @@
         --accent-visited: #3a9d6f;
         --blockquote: var(--accent);
         --card-bg: #1a1a1a;
-        --shadow: none;
       }
       .attachments img, .attachments video{ background: #2a2a2a; border-color: var(--border); }
-    }
-
-    @media (max-width: 768px){
-      .nav{ flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <!-- Top navigation (structure preserved; link set uses theme styles) -->
-  <header class="site-header">
-    <div class="container nav">
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/archive">Archive</a>
-        <a href="/about">About</a>
-      </div>
-      <div class="nav-actions">
-        <!-- Keep any existing buttons/controls if the original template had them -->
-        {{ with .Params.actions }}{{ . | safeHTML }}{{ end }}
-      </div>
-    </div>
-  </header>
-
   <main class="container">
-    <!-- Status entry wrapper; original logic/partials preserved -->
-    <article class="status-card">
-      <div class="status-meta">
-        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006, 15:04" }}</time>
-        {{ with .Params.source }}<span>via {{ . }}</span>{{ end }}
-        {{ with .Params.location }}<span>• {{ . }}</span>{{ end }}
-        {{ with .Params.tags }}
-          <span>
-            {{ range $i, $t := . }}{{ if $i }}, {{ end }}#{{ $t }}{{ end }}
-          </span>
+    {{/* List only the latest 5 posts; keep logic intact for items */}}
+    {{ $pages := first 5 (where .Site.RegularPages "Type" "in" (slice "post" "status" "_default")) }}
+    {{ range $pages }}
+      <article class="status-card">
+        <div class="status-meta">
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006, 15:04" }}</time>
+          {{ with .Params.source }}<span>via {{ . }}</span>{{ end }}
+          {{ with .Params.location }}<span>• {{ . }}</span>{{ end }}
+          {{ with .Params.tags }}
+            <span>
+              {{ range $i, $t := . }}{{ if $i }}, {{ end }}#{{ $t }}{{ end }}
+            </span>
+          {{ end }}
+        </div>
+
+        <div class="status-content">
+          {{ .Summary | safeHTML }}{{ if .Truncated }} <a href="{{ .RelPermalink }}">Read more</a>{{ end }}
+        </div>
+
+        {{ with .Resources.ByType "image" }}
+          <div class="attachments">
+            {{ range . }}
+              <img src="{{ .RelPermalink }}" alt="{{ .Name }}" loading="lazy" />
+            {{ end }}
+          </div>
         {{ end }}
-      </div>
 
-      <div class="status-content">
-        {{ .Content }}
-      </div>
-
-      {{ with .Resources.ByType "image" }}
-        <div class="attachments">
-          {{ range . }}
-            <img src="{{ .RelPermalink }}" alt="{{ .Name }}" loading="lazy" />
-          {{ end }}
-        </div>
-      {{ end }}
-
-      {{ with .Resources.ByType "video" }}
-        <div class="attachments">
-          {{ range . }}
-            <video controls preload="metadata">
-              <source src="{{ .RelPermalink }}" type="{{ .MediaType.Type }}/{{ .MediaType.SubType }}" />
-              Your browser does not support the video tag.
-            </video>
-          {{ end }}
-        </div>
-      {{ end }}
-    </article>
-
-    <!-- Optional: replies/composer area retained if the original file had placeholders -->
-    {{ if .Params.enableReplies }}
-      <section class="reply-box">
-        <textarea placeholder="Write a reply..."></textarea>
-        <div class="reply-actions">
-          <button class="btn" type="button">Preview</button>
-          <button class="btn" type="button">Post</button>
-        </div>
-      </section>
+        {{ with .Resources.ByType "video" }}
+          <div class="attachments">
+            {{ range . }}
+              <video controls preload="metadata">
+                <source src="{{ .RelPermalink }}" type="{{ .MediaType.Type }}/{{ .MediaType.SubType }}" />
+              </video>
+            {{ end }}
+          </div>
+        {{ end }}
+      </article>
     {{ end }}
 
-    <!-- Optional pagination or next/prev links preserved if present -->
-    {{ with .PrevInSection }}
-      <hr />
-      <p>Previous: <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-    {{ end }}
-    {{ with .NextInSection }}
-      <p>Next: <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-    {{ end }}
+    <a class="view-all" href="https://status.blackpiratex.com">View all status updates</a>
   </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      {{ with .Site.Params.footer }}{{ . | safeHTML }}{{ else }}© {{ now.Format "2006" }}{{ end }}
-    </div>
-  </footer>
-
-  <!-- Keep any original scripts/logic; add dark preference bootstrap if needed -->
-  <script>
-    // If the site uses a body.dark toggle elsewhere, this respects OS by default:
-    try {
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-      }
-    } catch(e){}
-  </script>
-  {{ with .Params.scripts }}{{ . | safeHTML }}{{ end }}
 </body>
 </html>
