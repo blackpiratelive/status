@@ -3,45 +3,88 @@
 name: Trigger Mastodon Post
 
 on:
-  # Trigger on pushes to the main branch
   push:
     branches:
-      - master # Or master, or your main production branch
-
-  # Allows you to run this workflow manually from the Actions tab
+      - master
   workflow_dispatch:
 
 jobs:
   trigger_mastodon_post:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Wait for Deployment and Trigger Mastodon Post
+        id: mastodon_post
         env:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
         run: |
-          echo "Initial 1-minute wait for Vercel deployment to propagate..."
+          echo "Initial 3-minute wait for Vercel deployment to propagate..."
           sleep 180
           
           echo "Polling deployment at $VERCEL_URL to be ready..."
           
-          # We will try to contact the API endpoint for 3 minutes.
-          # The workflow will retry every 15 seconds until it gets a successful (2xx) response.
-          end_time=$(( $(date +%s) + 180 )) # 3 minutes from now
+          end_time=$(( $(date +%s) + 180 ))
           
           while [ $(date +%s) -lt $end_time ]; do
-            # Use curl to check the HTTP status code of the POST request.
-            # -L (follow redirects), -s (silent), -o /dev/null (discard output), -w "%{http_code}" (print status code)
-            status_code=$(curl -L -s -o /dev/null -w "%{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
+            response=$(curl -L -s -w "
+%{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
+            
+            status_code=$(echo "$response" | tail -n1)
+            body=$(echo "$response" | sed '$d')
             
             if [ "$status_code" -eq 200 ]; then
-              echo "Successfully triggered Mastodon post! (Received Status: $status_code)"
+              echo "Successfully triggered Mastodon post! (Status: $status_code)"
+              echo "Response: $body"
+              
+              # Save response for next step
+              echo "$body" > mastodon_response.json
               exit 0
             else
-              echo "Deployment not ready yet (Received Status: $status_code). Retrying in 15 seconds..."
+              echo "Deployment not ready yet (Status: $status_code). Retrying in 15 seconds..."
               sleep 15
             fi
           done
           
           echo "Error: Could not get a successful response from the API after 3 minutes."
           exit 1
-        shell: bash
+
+      - name: Install yq
+        run: |
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Update Frontmatter with Mastodon Info
+        run: |
+          # Parse the response from your API
+          # Adjust these based on what your API returns
+          MASTODON_ID=$(jq -r '.id' mastodon_response.json)
+          MASTODON_URL=$(jq -r '.url' mastodon_response.json)
+          POST_PATH=$(jq -r '.post_path' mastodon_response.json)
+          
+          # Extract host and username from URL if your API provides them
+          # Example URL: https://mastodon.social/@username/123456789
+          MASTODON_HOST=$(echo "$MASTODON_URL" | sed -E 's|https?://([^/]+).*|\u0001|')
+          MASTODON_USERNAME=$(echo "$MASTODON_URL" | sed -E 's|.*/@([^/]+)/.*|\u0001|')
+          
+          echo "Updating $POST_PATH with Mastodon ID: $MASTODON_ID"
+          
+          # Update the markdown file with yq (supports frontmatter)
+          yq eval -i --front-matter="process" ".mastodon.id = "$MASTODON_ID"" "$POST_PATH"
+          yq eval -i --front-matter="process" ".mastodon.host = "$MASTODON_HOST"" "$POST_PATH"
+          yq eval -i --front-matter="process" ".mastodon.username = "$MASTODON_USERNAME"" "$POST_PATH"
+          yq eval -i --front-matter="process" ".mastodon.url = "$MASTODON_URL"" "$POST_PATH"
+          
+          echo "Frontmatter updated successfully!"
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Add Mastodon post ID to frontmatter [skip ci]"
+          file_pattern: "content/**/*.md"
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"

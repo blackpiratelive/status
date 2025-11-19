@@ -40,16 +40,18 @@ export default async function handler(request, response) {
         const rssResponse = await fetch(rssUrl);
         const xmlText = await rssResponse.text();
 
-        const firstItemMatch = xmlText.match(/<item>([\s\S]*?)<\/item>/);
+        const firstItemMatch = xmlText.match(/<item>([sS]*?)</item>/);
         if (!firstItemMatch) {
             return response.status(200).json({ message: 'No items found in RSS feed.' });
         }
         const latestItemXML = firstItemMatch[1];
 
-        const guidMatch = latestItemXML.match(/<guid>([\s\S]*?)<\/guid>/);
-        const descriptionMatch = latestItemXML.match(/<description>([\s\S]*?)<\/description>/);
+        const guidMatch = latestItemXML.match(/<guid>([sS]*?)</guid>/);
+        const linkMatch = latestItemXML.match(/<link>([sS]*?)</link>/);
+        const descriptionMatch = latestItemXML.match(/<description>([sS]*?)</description>/);
 
         const latestGuid = guidMatch?.[1];
+        const postLink = linkMatch?.[1];
         let descriptionContent = descriptionMatch?.[1];
 
         // Remove CDATA
@@ -57,7 +59,7 @@ export default async function handler(request, response) {
             descriptionContent = descriptionContent.slice(9, -3);
         }
 
-        // 🔥 DECODE HTML so <p> and <a> become real tags
+        // Decode HTML so <p> and <a> become real tags
         descriptionContent = decodeHtmlEntities(descriptionContent);
 
         // Check DB
@@ -82,9 +84,12 @@ export default async function handler(request, response) {
 
         let finalText = plainText;
         if (links.length > 0) {
-            finalText += '\n\n';
+            finalText += '
+
+';
             links.forEach((link, index) => {
-                finalText += `[${index + 1}] ${link}\n`;
+                finalText += `[${index + 1}] ${link}
+`;
             });
         }
 
@@ -111,6 +116,22 @@ export default async function handler(request, response) {
             throw new Error(`Mastodon API error: ${mastodonResponse.status} ${errorBody}`);
         }
 
+        // Parse Mastodon response
+        const mastodonData = await mastodonResponse.json();
+
+        // Extract host and username from Mastodon API URL
+        // e.g., "https://mastodon.social/api/v1/statuses"
+        const mastodonHost = new URL(MASTODON_API_URL).hostname;
+        
+        // Extract markdown file path from the post link
+        // e.g., "https://yoursite.com/posts/2025-11-19-post/" -> "content/posts/2025-11-19-post.md"
+        let postPath = '';
+        if (postLink) {
+            const urlPath = new URL(postLink).pathname.replace(/^/|/$/g, '');
+            postPath = `content/${urlPath}.md`;
+        }
+
+        // Store in DB
         await db.execute({
             sql: 'INSERT INTO posted_guids (guid) VALUES (?)',
             args: [latestGuid],
@@ -120,6 +141,13 @@ export default async function handler(request, response) {
             success: true,
             guid: latestGuid,
             postedContent: finalText.trim(),
+            // Mastodon post details for GitHub Action
+            id: mastodonData.id,
+            url: mastodonData.url,
+            post_path: postPath,
+            mastodon_host: mastodonHost,
+            mastodon_username: mastodonData.account?.username || '',
+            created_at: mastodonData.created_at,
         });
     } catch (error) {
         return response.status(500).json({ error: error.message });
