@@ -119,12 +119,10 @@ export default async function handler(request, response) {
         // Parse Mastodon response
         const mastodonData = await mastodonResponse.json();
 
-        // Extract host and username from Mastodon API URL
-        // e.g., "https://mastodon.social/api/v1/statuses"
+        // Extract host from Mastodon API URL
         const mastodonHost = new URL(MASTODON_API_URL).hostname;
         
         // Extract markdown file path from the post link
-        // e.g., "https://yoursite.com/posts/2025-11-19-post/" -> "content/posts/2025-11-19-post.md"
         let postPath = '';
         if (postLink) {
             const urlPath = new URL(postLink).pathname.replace(/^/|/$/g, '');
