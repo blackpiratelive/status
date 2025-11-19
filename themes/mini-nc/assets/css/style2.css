@@ -307,3 +307,29 @@ footer {
 .stat-value {
     font-weight: 500;
 }
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.nav-item {
+    flex: 1;
+}
+
+.nav-item:last-child {
+    text-align: right;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
