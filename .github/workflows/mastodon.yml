@@ -35,13 +35,12 @@ jobs:
 %{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
             
             status_code=$(echo "$response" | tail -n1)
-            body=$(echo "$response" | sed '$d')
+            body=$(echo "$response" | head -n -1)
             
-            if [ "$status_code" -eq 200 ]; then
+            if [ "$status_code" = "200" ]; then
               echo "Successfully triggered Mastodon post! (Status: $status_code)"
               echo "Response: $body"
               
-              # Save response for next step
               echo "$body" > mastodon_response.json
               exit 0
             else
@@ -60,20 +59,14 @@ jobs:
 
       - name: Update Frontmatter with Mastodon Info
         run: |
-          # Parse the response from your API
-          # Adjust these based on what your API returns
           MASTODON_ID=$(jq -r '.id' mastodon_response.json)
           MASTODON_URL=$(jq -r '.url' mastodon_response.json)
           POST_PATH=$(jq -r '.post_path' mastodon_response.json)
-          
-          # Extract host and username from URL if your API provides them
-          # Example URL: https://mastodon.social/@username/123456789
-          MASTODON_HOST=$(echo "$MASTODON_URL" | sed -E 's|https?://([^/]+).*|\u0001|')
-          MASTODON_USERNAME=$(echo "$MASTODON_URL" | sed -E 's|.*/@([^/]+)/.*|\u0001|')
+          MASTODON_HOST=$(jq -r '.mastodon_host' mastodon_response.json)
+          MASTODON_USERNAME=$(jq -r '.mastodon_username' mastodon_response.json)
           
           echo "Updating $POST_PATH with Mastodon ID: $MASTODON_ID"
           
-          # Update the markdown file with yq (supports frontmatter)
           yq eval -i --front-matter="process" ".mastodon.id = "$MASTODON_ID"" "$POST_PATH"
           yq eval -i --front-matter="process" ".mastodon.host = "$MASTODON_HOST"" "$POST_PATH"
           yq eval -i --front-matter="process" ".mastodon.username = "$MASTODON_USERNAME"" "$POST_PATH"
