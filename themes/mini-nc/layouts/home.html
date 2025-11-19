@@ -58,6 +58,43 @@
         {{ end }}
     </nav>
     
+    
+   <!-- Statistics Section -->
+<section class="stats-section">
+    <h2>Statistics</h2>
+    
+    {{ $postsByYear := dict }}
+    {{ $wordsByYear := dict }}
+    
+    {{ range site.RegularPages }}
+        {{ $year := .Date.Format "2006" }}
+        {{ $currentCount := index $postsByYear $year | default 0 }}
+        {{ $postsByYear = merge $postsByYear (dict $year (add $currentCount 1)) }}
+        
+        {{ $currentWords := index $wordsByYear $year | default 0 }}
+        {{ $wordsByYear = merge $wordsByYear (dict $year (add $currentWords .WordCount)) }}
+    {{ end }}
+    
+    <div class="stats-grid">
+        {{ range $year, $count := $postsByYear }}
+        {{ $words := index $wordsByYear $year }}
+        <div class="stat-item">
+            <div class="stat-year">{{ $year }}</div>
+            <div class="stat-details">
+                <div class="stat-meta-item">
+                    <span class="meta-label">Posts:</span> <span class="stat-value">{{ $count }}</span>
+                </div>
+                <div class="stat-meta-item">
+                    <span class="meta-label">Words:</span> <span class="stat-value">{{ $words }}</span>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</section>
+    
+    
+    
     {{ partial "footer.html" . }}
 </body>
 </html>

@@ -263,3 +263,47 @@ footer {
         padding: 0.75rem;
     }
 }
+.stats-section {
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.stats-section h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-item {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.stat-year {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.stat-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-meta-item {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.stat-value {
+    font-weight: 500;
+}
