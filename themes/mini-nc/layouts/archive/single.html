@@ -15,8 +15,8 @@
     
     <main>
         {{ $year := int .Title }}
-        {{ $posts := where .Site.RegularPages "Date.Year" $year }}
-        {{ $posts = where $posts "Type" "in" (slice "posts" "post") }}
+        {{ $allPages := where site.Pages "Kind" "page" }}
+        {{ $posts := where $allPages "Date.Year" $year }}
         
         {{ if gt (len $posts) 0 }}
         <div class="year-stats">
