@@ -49,25 +49,24 @@
             </div>
         </article>
 
-        <!-- Navigation to prev/next posts -->
-        {{ if or .NextInSection .PrevInSection }}
-        <nav class="post-navigation">
-            {{ with .PrevInSection }}
-            <div class="nav-item">
-                <a href="{{ .Permalink }}" class="nav-link">
-                    ← Newer: {{ if .Title }}{{ .Title }}{{ else }}{{ .Date.Format "January 2, 2006" }}{{ end }}
-                </a>
-            </div>
-            {{ end }}
-            {{ with .NextInSection }}
-            <div class="nav-item">
-                <a href="{{ .Permalink }}" class="nav-link">
-                    Older: {{ if .Title }}{{ .Title }}{{ else }}{{ .Date.Format "January 2, 2006" }}{{ end }} →
-                </a>
-            </div>
-            {{ end }}
-        </nav>
-        {{ end }}
+       <!-- Navigation to prev/next posts -->
+{{ if or .NextInSection .PrevInSection }}
+<nav class="post-navigation">
+    {{ with .PrevInSection }}
+    <div class="nav-item">
+        <a href="{{ .Permalink }}" class="nav-link">← Previous</a>
+    </div>
+    {{ else }}
+    <div class="nav-item"></div>
+    {{ end }}
+    
+    {{ with .NextInSection }}
+    <div class="nav-item">
+        <a href="{{ .Permalink }}" class="nav-link">Next →</a>
+    </div>
+    {{ end }}
+</nav>
+{{ end }}
 {{ partial "footer.html" . }}
 </body>
 </html>
