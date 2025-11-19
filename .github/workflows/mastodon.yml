@@ -31,8 +31,7 @@ jobs:
           end_time=$(( $(date +%s) + 180 ))
           
           while [ $(date +%s) -lt $end_time ]; do
-            response=$(curl -L -s -w "
-%{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
+            response=$(curl -L -s -w " \n %{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
             
             status_code=$(echo "$response" | tail -n1)
             body=$(echo "$response" | head -n -1)
