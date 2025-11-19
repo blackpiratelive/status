@@ -40,15 +40,17 @@ export default async function handler(request, response) {
         const rssResponse = await fetch(rssUrl);
         const xmlText = await rssResponse.text();
 
-        const firstItemMatch = xmlText.match(/<item>([sS]*?)</item>/);
+        // FIXED REGEX
+        const firstItemMatch = xmlText.match(/<item>([\s\S]*?)<\/item>/);
         if (!firstItemMatch) {
             return response.status(200).json({ message: 'No items found in RSS feed.' });
         }
         const latestItemXML = firstItemMatch[1];
 
-        const guidMatch = latestItemXML.match(/<guid>([sS]*?)</guid>/);
-        const linkMatch = latestItemXML.match(/<link>([sS]*?)</link>/);
-        const descriptionMatch = latestItemXML.match(/<description>([sS]*?)</description>/);
+        // FIXED REGEXES
+        const guidMatch = latestItemXML.match(/<guid>([\s\S]*?)<\/guid>/);
+        const linkMatch = latestItemXML.match(/<link>([\s\S]*?)<\/link>/);
+        const descriptionMatch = latestItemXML.match(/<description>([\s\S]*?)<\/description>/);
 
         const latestGuid = guidMatch?.[1];
         const postLink = linkMatch?.[1];
@@ -59,7 +61,7 @@ export default async function handler(request, response) {
             descriptionContent = descriptionContent.slice(9, -3);
         }
 
-        // Decode HTML so <p> and <a> become real tags
+        // Decode HTML
         descriptionContent = decodeHtmlEntities(descriptionContent);
 
         // Check DB
@@ -84,12 +86,9 @@ export default async function handler(request, response) {
 
         let finalText = plainText;
         if (links.length > 0) {
-            finalText += '
-
-';
+            finalText += '\n\n';
             links.forEach((link, index) => {
-                finalText += `[${index + 1}] ${link}
-`;
+                finalText += `[${index + 1}] ${link}\n`;
             });
         }
 
@@ -116,16 +115,14 @@ export default async function handler(request, response) {
             throw new Error(`Mastodon API error: ${mastodonResponse.status} ${errorBody}`);
         }
 
-        // Parse Mastodon response
         const mastodonData = await mastodonResponse.json();
 
-        // Extract host from Mastodon API URL
         const mastodonHost = new URL(MASTODON_API_URL).hostname;
-        
-        // Extract markdown file path from the post link
+
+        // FIXED BROKEN REGEX FOR TRIMMING SLASHES
         let postPath = '';
         if (postLink) {
-            const urlPath = new URL(postLink).pathname.replace(/^/|/$/g, '');
+            const urlPath = new URL(postLink).pathname.replace(/^\/|\/$/g, '');
             postPath = `content/${urlPath}.md`;
         }
 
@@ -139,7 +136,6 @@ export default async function handler(request, response) {
             success: true,
             guid: latestGuid,
             postedContent: finalText.trim(),
-            // Mastodon post details for GitHub Action
             id: mastodonData.id,
             url: mastodonData.url,
             post_path: postPath,
