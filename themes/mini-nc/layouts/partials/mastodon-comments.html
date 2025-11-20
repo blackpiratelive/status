@@ -6,44 +6,41 @@
 </div>
 
 <script>
-  document.getElementById("show-comments-btn-{{ .Permalink | urlquery }}").addEventListener("click", async function() {
-    const btn = this;
-    const container = document.getElementById("comments-container-{{ .Permalink | urlquery }}");
-    btn.style.display = "none";
-    container.style.display = "block";
-    container.innerHTML = "Loading...";
+document.getElementById("show-comments-btn-{{ .Permalink | urlquery }}").addEventListener("click", async function() {
+  const btn = this;
+  const container = document.getElementById("comments-container-{{ .Permalink | urlquery }}");
+  btn.style.display = "none";
+  container.style.display = "block";
+  container.innerHTML = "Loading...";
 
-    try {
-      const response = await fetch("/api/mastodon-comments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          url: window.location.href
-        })
-      });
+  try {
+    const response = await fetch("/api/mastodon-comments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: window.location.href })
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.error) {
-        container.innerHTML = "Error: " + data.error;
-        return;
-      }
-
-      // Render counts
-      container.innerHTML = `
-        <p>Boosts: ${data.boosts}</p>
-        <p>Quotes: ${data.quotes}</p>
-        <p>Favourites: ${data.favourites}</p>
-        <h4>Replies:</h4>
-        <ul>
-          ${data.replies.map(r => `<li>@${r.account}: ${r.content}</li>`).join("")}
-        </ul>
-      `;
-    } catch (err) {
-      container.innerHTML = "Error fetching comments.";
-      console.error(err);
+    if (data.error) {
+      container.innerHTML = "Error: " + data.error;
+      return;
     }
-  });
+
+    // Render counts
+    container.innerHTML = `
+      <p>Boosts: ${data.boosts}</p>
+      <p>Quotes: ${data.quotes}</p>
+      <p>Favourites: ${data.favourites}</p>
+      <h4>Replies:</h4>
+      <ul>
+        ${data.replies.map(r => `<li>@${r.account}: ${r.content}</li>`).join("")}
+      </ul>
+      <p><a href="${data.mastodon_url}" target="_blank" rel="noopener noreferrer">Reply on Mastodon</a></p>
+    `;
+  } catch (err) {
+    container.innerHTML = "Error fetching comments.";
+    console.error(err);
+  }
+});
 </script>

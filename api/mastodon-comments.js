@@ -13,11 +13,9 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    // Parse JSON body (Vercel serverless)
+    // Parse JSON body
     let body = "";
-    for await (const chunk of req) {
-      body += chunk;
-    }
+    for await (const chunk of req) body += chunk;
     const { url } = JSON.parse(body);
 
     if (!url) return res.status(400).json({ error: "Missing URL" });
@@ -37,13 +35,13 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: "Mastodon URL is empty." });
     }
 
-    // Extract instance and post ID from Mastodon URL
+    // Extract instance and post ID
     const match = mastodonUrl.match(/^https?:\/\/([^/]+)\/@[^/]+\/(\d+)/);
     if (!match) return res.status(400).json({ error: "Invalid Mastodon URL." });
 
     const [_, instance, postId] = match;
 
-    // Fetch post info (boosts, quotes, favourites)
+    // Fetch post info
     const statusResp = await fetch(`https://${instance}/api/v1/statuses/${postId}`, {
       headers: { Authorization: `Bearer ${MASTODON_ACCESS_TOKEN}` }
     });
@@ -55,7 +53,7 @@ export default async function handler(req, res) {
 
     const toot = await statusResp.json();
 
-    // Fetch conversation context to get replies
+    // Fetch conversation context for replies
     const contextResp = await fetch(`https://${instance}/api/v1/statuses/${postId}/context`, {
       headers: { Authorization: `Bearer ${MASTODON_ACCESS_TOKEN}` }
     });
@@ -66,18 +64,18 @@ export default async function handler(req, res) {
     }
 
     const context = await contextResp.json();
-
     const replies = context.descendants.map(r => ({
       account: r.account.acct,
       content: r.content
     }));
 
-    // Return response
+    // Return all data
     return res.status(200).json({
       boosts: toot.reblogs_count,
       quotes: toot.reblogged_by_count || 0,
       favourites: toot.favourites_count,
-      replies
+      replies,
+      mastodon_url: mastodonUrl
     });
 
   } catch (err) {
