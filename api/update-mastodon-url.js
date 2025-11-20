@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     // ---- Update row ----
     await db.execute({
       sql: `
-          UPDATE mastodon_posts
+          UPDATE posted_guids
           SET mastodon_url = ?
           WHERE slug = ?
       `,
