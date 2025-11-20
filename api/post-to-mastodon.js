@@ -35,6 +35,12 @@ export default async function handler(request, response) {
             mastodon_url TEXT
         );
     `);
+    
+   try {
+    await db.execute("ALTER TABLE posted_guids ADD COLUMN mastodon_url TEXT;");
+} catch (err) {
+    // Column already exists → ignore
+}
 
     try {
         // Fetch RSS feed
