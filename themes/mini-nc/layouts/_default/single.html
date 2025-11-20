@@ -48,6 +48,8 @@
                 <a href="{{ .Permalink }}" class="post-permalink">→</a>
             </div>
         </article>
+{{ partial "mastodon-comments.html" . }}
+
 
        <!-- Navigation to prev/next posts -->
 {{ if or .NextInSection .PrevInSection }}
