@@ -79,6 +79,7 @@
         {{ range $year, $count := $postsByYear }}
         {{ $words := index $wordsByYear $year }}
         <div class="stat-item">
+        <a href="/archive/{{ $year}}
             <div class="stat-year">{{ $year }}</div>
             <div class="stat-details">
                 <div class="stat-meta-item">
@@ -88,6 +89,7 @@
                     <span class="meta-label">Words:</span> <span class="stat-value">{{ $words }}</span>
                 </div>
             </div>
+           </a>
         </div>
         {{ end }}
     </div>
