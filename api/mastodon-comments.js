@@ -9,11 +9,20 @@ export default async function handler(req, res) {
   });
 
   try {
-    const { url } = await req.json();
+    if (req.method !== "POST") {
+      return res.status(405).json({ error: "Method not allowed" });
+    }
+
+    // Parse JSON body correctly
+    let body = "";
+    for await (const chunk of req) {
+      body += chunk;
+    }
+    const { url } = JSON.parse(body);
 
     if (!url) return res.status(400).json({ error: "Missing URL" });
 
-    // Find Mastodon post URL from DB
+    // Lookup Mastodon URL in DB
     const queryResult = await db.execute({
       sql: "SELECT mastodon_url FROM posted_guids WHERE guid = ?",
       args: [url]
@@ -28,7 +37,7 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: "Mastodon URL is empty." });
     }
 
-    // Extract domain and ID from URL
+    // Extract instance and post ID from Mastodon URL
     const match = mastodonUrl.match(/^https?:\/\/([^/]+)\/@[^/]+\/(\d+)/);
     if (!match) return res.status(400).json({ error: "Invalid Mastodon URL." });
 
@@ -47,15 +56,13 @@ export default async function handler(req, res) {
 
     const toot = await mastodonResp.json();
 
-    // Return relevant info
-    const response = {
+    // Return counts and replies
+    return res.status(200).json({
       boosts: toot.reblogs_count,
-      quotes: toot.reblogged_by_count || 0, // Mastodon API may vary by instance
+      quotes: toot.reblogged_by_count || 0,
       favourites: toot.favourites_count,
       replies: toot.replies?.map(r => ({ account: r.account.acct, content: r.content })) || []
-    };
-
-    return res.status(200).json(response);
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: err.message });
