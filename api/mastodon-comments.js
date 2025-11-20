@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    // Parse JSON body correctly
+    // Parse JSON body (Vercel serverless)
     let body = "";
     for await (const chunk of req) {
       body += chunk;
@@ -43,26 +43,43 @@ export default async function handler(req, res) {
 
     const [_, instance, postId] = match;
 
-    // Fetch post info from Mastodon API
-    const apiUrl = `https://${instance}/api/v1/statuses/${postId}`;
-    const mastodonResp = await fetch(apiUrl, {
+    // Fetch post info (boosts, quotes, favourites)
+    const statusResp = await fetch(`https://${instance}/api/v1/statuses/${postId}`, {
       headers: { Authorization: `Bearer ${MASTODON_ACCESS_TOKEN}` }
     });
 
-    if (!mastodonResp.ok) {
-      const body = await mastodonResp.text();
+    if (!statusResp.ok) {
+      const body = await statusResp.text();
       return res.status(500).json({ error: "Mastodon API error", body });
     }
 
-    const toot = await mastodonResp.json();
+    const toot = await statusResp.json();
 
-    // Return counts and replies
+    // Fetch conversation context to get replies
+    const contextResp = await fetch(`https://${instance}/api/v1/statuses/${postId}/context`, {
+      headers: { Authorization: `Bearer ${MASTODON_ACCESS_TOKEN}` }
+    });
+
+    if (!contextResp.ok) {
+      const body = await contextResp.text();
+      return res.status(500).json({ error: "Mastodon context API error", body });
+    }
+
+    const context = await contextResp.json();
+
+    const replies = context.descendants.map(r => ({
+      account: r.account.acct,
+      content: r.content
+    }));
+
+    // Return response
     return res.status(200).json({
       boosts: toot.reblogs_count,
       quotes: toot.reblogged_by_count || 0,
       favourites: toot.favourites_count,
-      replies: toot.replies?.map(r => ({ account: r.account.acct, content: r.content })) || []
+      replies
     });
+
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: err.message });
