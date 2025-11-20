@@ -1,6 +1,6 @@
-baseURL = 'https://status.blackpiratex.com/'
+baseURL = 'https://now.blackpiratex.com/'
 languageCode = 'en-us'
-title = 'Status By BlackPirateX'
+title = 'Now'
 theme = 'mini-nc'
 
 
@@ -20,7 +20,7 @@ theme = 'mini-nc'
 
 [params]
   author = 'BlackPirateX'
-  description = "Quick one liner thoughts, that comes to my mind."
+  description = "Brief thoughts — posted as they happen."
   tags = 'tags'
   catagories = 'catagories'
 
