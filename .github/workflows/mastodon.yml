@@ -71,9 +71,10 @@ jobs:
           echo "DB Update Response:"
           echo "$update_response"
 
-          success=$(echo "$update_response" | jq -r '.success // empty')
+          # Check 'ok' field instead of 'success'
+          ok=$(echo "$update_response" | jq -r '.ok // empty')
 
-          if [ "$success" != "true" ]; then
+          if [ "$ok" != "true" ]; then
             echo "❌ Failed to update DB."
             exit 1
           fi
