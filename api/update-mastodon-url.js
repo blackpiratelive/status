@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       sql: `
           UPDATE posted_guids
           SET mastodon_url = ?
-          WHERE slug = ?
+          WHERE guid = ?
       `,
       args: [mastodonUrl, slug]
     });
