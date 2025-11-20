@@ -16,56 +16,41 @@ jobs:
 
       - name: Wait for Deployment to Propagate
         run: |
-          echo "Waiting for Vercel deployment to propagate (3 minutes)..."
+          echo "Waiting for Vercel deployment to propagate (1 min)..."
           sleep 60
 
       - name: Trigger Mastodon Post API
+        id: post
         env:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
         run: |
           echo "Calling API: $VERCEL_URL/api/post-to-mastodon"
 
           response=$(curl -s -L -X POST "$VERCEL_URL/api/post-to-mastodon")
-
           echo "Response received:"
           echo "$response"
 
-          # Validate basic fields
           guid=$(echo "$response" | jq -r '.guid // empty')
           mastodon_url=$(echo "$response" | jq -r '.mastodon_url // empty')
           success=$(echo "$response" | jq -r '.success // empty')
           already=$(echo "$response" | jq -r '.alreadyPosted // empty')
 
-          # Stop if API failed
-          if [ -z "$guid" ]; then
-            echo "❌ Error: Missing GUID in response. Response was:"
-            echo "$response"
-            exit 1
-          fi
-
-          if [ "$already" = "true" ]; then
-            echo "ℹ️ Already posted to Mastodon. No update needed."
-            exit 0
-          fi
-
-          if [ "$success" != "true" ]; then
-            echo "❌ Mastodon post failed. Response:"
-            echo "$response"
-            exit 1
-          fi
-
-          echo "✔ GUID: $guid"
-          echo "✔ Mastodon URL: $mastodon_url"
-
-          if [ -z "$mastodon_url" ] || [ "$mastodon_url" = "null" ]; then
-            echo "❌ Error: mastodon_url missing in response."
-            exit 1
-          fi
-
           echo "guid=$guid" >> $GITHUB_ENV
           echo "mastodon_url=$mastodon_url" >> $GITHUB_ENV
+          echo "already_posted=$already" >> $GITHUB_ENV
+          echo "post_success=$success" >> $GITHUB_ENV
+
+          if [ "$already" = "true" ]; then
+            echo "ℹ️ Already posted to Mastodon. Skipping DB update."
+          elif [ "$success" != "true" ] || [ -z "$mastodon_url" ] || [ "$mastodon_url" = "null" ]; then
+            echo "❌ Mastodon post failed or mastodon_url missing. Exiting."
+            exit 1
+          else
+            echo "✔ New Mastodon post created: $mastodon_url"
+          fi
 
       - name: Update Turso Database With Mastodon URL
+        if: ${{ env.already_posted != 'true' }}
         env:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
           guid: ${{ env.guid }}
