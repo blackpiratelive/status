@@ -1,0 +1,15 @@
+{{- /* layouts/_default/list.json.json */ -}}
+[
+{{- $pages := sort .Site.RegularPages "Date" "desc" -}}
+{{- range $index, $page := $pages -}}
+  {{- if $index }},{{ end -}}
+  {
+    "title": {{ $page.Title | jsonify }},
+    "url": {{ $page.RelPermalink | jsonify }},
+    "date": {{ $page.Date | time.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+    "lastmod": {{ $page.Lastmod | time.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+    "content": {{ $page.Content | plainify | jsonify }},
+    "tags": {{ $page.Params.tags | jsonify }}
+  }
+{{- end -}}
+]
