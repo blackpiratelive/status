@@ -62,7 +62,7 @@ jobs:
 
           update_response=$(curl -s -L -X POST "$VERCEL_URL/api/update-mastodon-url" \
             -H "Content-Type: application/json" \
-            -d "{\"guid\":\"$guid\",\"mastodon_url\":\"$mastodon_url\"}")
+           -d "{\"slug\":\"$guid\",\"mastodonUrl\":\"$mastodon_url\"}"
 
           echo "DB Update Response:"
           echo "$update_response"
