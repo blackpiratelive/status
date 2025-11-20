@@ -1,5 +1,3 @@
-# .github/workflows/mastodon.yml
-
 name: Trigger Mastodon Post
 
 on:
@@ -11,72 +9,84 @@ on:
 jobs:
   trigger_mastodon_post:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Wait for Deployment and Trigger Mastodon Post
-        id: mastodon_post
+    steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Wait for Deployment to Propagate
+        run: |
+          echo "Waiting for Vercel deployment to propagate (3 minutes)..."
+          sleep 60
+
+      - name: Trigger Mastodon Post API
         env:
           VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
         run: |
-          echo "Initial 3-minute wait for Vercel deployment to propagate..."
-          sleep 180
-          
-          echo "Polling deployment at $VERCEL_URL to be ready..."
-          
-          end_time=$(( $(date +%s) + 180 ))
-          
-          while [ $(date +%s) -lt $end_time ]; do
-            response=$(curl -L -s -w " \n %{http_code}" -X POST "$VERCEL_URL/api/post-to-mastodon")
-            
-            status_code=$(echo "$response" | tail -n1)
-            body=$(echo "$response" | head -n -1)
-            
-            if [ "$status_code" = "200" ]; then
-              echo "Successfully triggered Mastodon post! (Status: $status_code)"
-              echo "Response: $body"
-              
-              echo "$body" > mastodon_response.json
-              exit 0
-            else
-              echo "Deployment not ready yet (Status: $status_code). Retrying in 15 seconds..."
-              sleep 15
-            fi
-          done
-          
-          echo "Error: Could not get a successful response from the API after 3 minutes."
-          exit 1
+          echo "Calling API: $VERCEL_URL/api/post-to-mastodon"
 
-      - name: Install yq
+          response=$(curl -s -L -X POST "$VERCEL_URL/api/post-to-mastodon")
+
+          echo "Response received:"
+          echo "$response"
+
+          # Validate basic fields
+          guid=$(echo "$response" | jq -r '.guid // empty')
+          mastodon_url=$(echo "$response" | jq -r '.mastodon_url // empty')
+          success=$(echo "$response" | jq -r '.success // empty')
+          already=$(echo "$response" | jq -r '.alreadyPosted // empty')
+
+          # Stop if API failed
+          if [ -z "$guid" ]; then
+            echo "❌ Error: Missing GUID in response. Response was:"
+            echo "$response"
+            exit 1
+          fi
+
+          if [ "$already" = "true" ]; then
+            echo "ℹ️ Already posted to Mastodon. No update needed."
+            exit 0
+          fi
+
+          if [ "$success" != "true" ]; then
+            echo "❌ Mastodon post failed. Response:"
+            echo "$response"
+            exit 1
+          fi
+
+          echo "✔ GUID: $guid"
+          echo "✔ Mastodon URL: $mastodon_url"
+
+          if [ -z "$mastodon_url" ] || [ "$mastodon_url" = "null" ]; then
+            echo "❌ Error: mastodon_url missing in response."
+            exit 1
+          fi
+
+          echo "guid=$guid" >> $GITHUB_ENV
+          echo "mastodon_url=$mastodon_url" >> $GITHUB_ENV
+
+      - name: Update Turso Database With Mastodon URL
+        env:
+          VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
+          guid: ${{ env.guid }}
+          mastodon_url: ${{ env.mastodon_url }}
         run: |
-          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
+          echo "Updating DB..."
+          echo "GUID: $guid"
+          echo "Mastodon URL: $mastodon_url"
 
-      - name: Update Frontmatter with Mastodon Info
-        run: |
-          MASTODON_ID=$(jq -r '.id' mastodon_response.json)
-          MASTODON_URL=$(jq -r '.url' mastodon_response.json)
-          POST_PATH=$(jq -r '.post_path' mastodon_response.json)
-          MASTODON_HOST=$(jq -r '.mastodon_host' mastodon_response.json)
-          MASTODON_USERNAME=$(jq -r '.mastodon_username' mastodon_response.json)
-          
-          echo "Updating $POST_PATH with Mastodon ID: $MASTODON_ID"
-          
-          yq eval -i --front-matter="process" ".mastodon.id = "$MASTODON_ID"" "$POST_PATH"
-          yq eval -i --front-matter="process" ".mastodon.host = "$MASTODON_HOST"" "$POST_PATH"
-          yq eval -i --front-matter="process" ".mastodon.username = "$MASTODON_USERNAME"" "$POST_PATH"
-          yq eval -i --front-matter="process" ".mastodon.url = "$MASTODON_URL"" "$POST_PATH"
-          
-          echo "Frontmatter updated successfully!"
+          update_response=$(curl -s -L -X POST "$VERCEL_URL/api/update-mastodon-url" \
+            -H "Content-Type: application/json" \
+            -d "{\"guid\":\"$guid\",\"mastodon_url\":\"$mastodon_url\"}")
 
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Add Mastodon post ID to frontmatter [skip ci]"
-          file_pattern: "content/**/*.md"
-          commit_user_name: "GitHub Actions Bot"
-          commit_user_email: "actions@github.com"
+          echo "DB Update Response:"
+          echo "$update_response"
+
+          success=$(echo "$update_response" | jq -r '.success // empty')
+
+          if [ "$success" != "true" ]; then
+            echo "❌ Failed to update DB."
+            exit 1
+          fi
+
+          echo "✔ Turso DB successfully updated with Mastodon URL!"
