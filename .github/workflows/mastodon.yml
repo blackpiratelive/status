@@ -30,16 +30,19 @@ jobs:
           echo "Response received:"
           echo "$response"
 
+          # Extract fields
           guid=$(echo "$response" | jq -r '.guid // empty')
           mastodon_url=$(echo "$response" | jq -r '.mastodon_url // empty')
           success=$(echo "$response" | jq -r '.success // empty')
           already=$(echo "$response" | jq -r '.alreadyPosted // empty')
 
+          # Save to GitHub env
           echo "guid=$guid" >> $GITHUB_ENV
           echo "mastodon_url=$mastodon_url" >> $GITHUB_ENV
           echo "already_posted=$already" >> $GITHUB_ENV
           echo "post_success=$success" >> $GITHUB_ENV
 
+          # Handle different cases
           if [ "$already" = "true" ]; then
             echo "ℹ️ Already posted to Mastodon. Skipping DB update."
           elif [ "$success" != "true" ] || [ -z "$mastodon_url" ] || [ "$mastodon_url" = "null" ]; then
@@ -57,12 +60,13 @@ jobs:
           mastodon_url: ${{ env.mastodon_url }}
         run: |
           echo "Updating DB..."
-          echo "GUID: $guid"
+          echo "Slug (guid): $guid"
           echo "Mastodon URL: $mastodon_url"
 
+          # Safe JSON payload to avoid EOF/quote issues
           update_response=$(curl -s -L -X POST "$VERCEL_URL/api/update-mastodon-url" \
             -H "Content-Type: application/json" \
-           -d "{\"slug\":\"$guid\",\"mastodonUrl\":\"$mastodon_url\"}"
+            -d '{"slug":"'"$guid"'","mastodonUrl":"'"$mastodon_url"'"}')
 
           echo "DB Update Response:"
           echo "$update_response"
