@@ -11,9 +11,19 @@
             <span class="separator">·</span>
             <a href="/on-this-day" class="on-this-day-link">On This Day</a>
         </p>
+        
     </header>
     
     <main>
+    
+    <iframe 
+    src="https://guestbook.blackpiratex.com/widget.html" 
+    width="100%" 
+    height="60" 
+    style="border:none; max-width: 468px; display:block; margin: 0 auto;" 
+    title="Sudip's Guestbook Banner">
+</iframe>
+<br>
         {{ $paginator := .Paginator 50 }}
         {{ range ($paginator.Pages) }}
         <article>
