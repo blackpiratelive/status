@@ -1,14 +1,9 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "build": {
-    "env": {
-      "TZ": "Asia/Kolkata"
-    }
-  },
-  "crons": [
+  "redirects": [
     {
-      "path": "/api/rebuild",
-      "schedule": "0 0 * * *"
+      "source": "/(.*)",
+      "destination": "https://blackpiratex.com/thoughts/$1",
+      "permanent": true
     }
   ]
 }
